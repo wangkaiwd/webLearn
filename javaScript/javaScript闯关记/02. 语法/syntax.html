@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript语法介绍</title>
+</head>
+
+<body>
+  <script>
+    // 语法
+
+    // 1. js区分大小写
+
+    // 2. 注释
+    // 单行注释
+    /*
+    * 块级注释
+    * 也叫多行注释
+    */
+    // 注释规范：
+    // 1.内容为单行使用单行注释 2.内容为多行使用多行注释
+
+    // 3. 严格模式
+    // "use strict"
+
+    // 4. 标识符
+    // 标识符：变量、函数、属性的名字，或者函数的参数。
+    // javascript表示符必须以字母、下划线(_)、或美元符号($)开始（数字不允许作为首字符出现）
+    // 驼峰命名：第一个字母小写，剩下的每个有意义的单词的首字母大写
+
+    // 5. 关键字和保留字
+    // 关键字：用于表示控制语句的开始或结束，或者用于执行特定操作
+    // 规则：关键字是语言保留的，不能用作标识符。
+
+    // 关卡
+    // 挑战一
+    // var class = 'person';
+    // console.log(class);
+    // Uncaught SyntaxError:Unexpected token =
+    // 为捕获的语法错误
+    // class为es6定义类的关键字
+    // class Person {
+    //   // 传入成员变量
+    //   constructor(name) {
+    //     this.name = name
+    //   }
+    //   toPlay() {
+    //     console.log('爬塔！！');
+    //   }
+    // }
+    // 挑战二
+    // var Class = 'person';
+    // console.log(class);     // Uncaught SyntaxError: Unexpected token )
+    // 挑战三
+    // var True = false;
+    // console.log(True); // false
+    // 挑战四
+    // var true = false;
+    // console.log(True);
+    // Uncaught SyntaxError: Unexpected token true
+    // true和false是ECMAScript3的关键字，不能用做变量名
+    // 挑战五
+    // var $_$ = 'stone';
+    // console.log($_$);       // stone
+    // 挑战六
+    // var 00_name = 'stone';
+    // console.log(00_name);
+    // 变量名不能以数字开头
+    // 挑战七
+    // var Array = 'null';
+    // console.log(Array);     // null
+    // 挑战八
+    // var undefined = 'null';
+    // console.log(undefined); // undefined 没有赋值成功
+    // 挑战九
+    // var result = 1 + 2
+    //   + 3 + 4
+    // console.log(result);    // 10 有效
+  </script>
+</body>
+
+</html>
