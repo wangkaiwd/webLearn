@@ -10,6 +10,60 @@
 
 <body>
   <script>
+    // 挑战一
+    // console.log(typeof "undefined");  // "string"
+    // console.log(typeof null);         // "object"
+    // 挑战二
+    // var message = "some string";
+    // console.log(typeof message);    // "string"
+    // message = 10000;
+    // console.log(typeof message);    // "number"
+    // 挑战三
+    // var a;
+    // var b = null;
+    // var c = {};
+    // if (a && b && c) {
+    //   console.log("true.");
+    // } else {
+    //   console.log("false.");      // "false."
+    // }
+    // 挑战四
+    // 0作为除数不会报错，正数除以0为正无穷，负数除以0为负无穷，0除以0:NaN
+    // console.log(typeof (0 / 0));    // "number"
+    // console.log(023 + 123);         // 146
+    // // 挑战五
+    // console.log(Number("1234S"));   // NaN
+    // parseInt会忽略字符串前面的空格，直至找到第一个非空格字符
+    // 只要第一个字符不是数字或者正负号,一律返回NaN
+    // 如果第一个非空格字符是数字字符,parseInt()会继续解析第二个字符
+    // 直到解析完所有后续字符或者遇到了一个非数字字符
+    // console.log(parseInt("1234S")); // 1234
+    // console.log(parseInt("")); // NaN(Number("")返回0)
+    // console.log(parseInt("12.4")); // 12
+    // // 挑战六
+    console.log(3.14E-7 === 0.000000314);   // true
+    console.log(0.1 + 0.6 === 0.7); // true
+    console.log(0.1 + 0.7 === 0.8); // false
+    console.log(NaN === NaN);       // false
+    // // 挑战七
+    // console.log("\right\now");          // ???
+    // console.log("\right\now".length);   // ???
+    // console.log(010.toString(2));       // ???
+    // // 挑战八
+    // // 1、为 person、wife、child 对象新增 weight 属性，数值分别为 62、36、15。
+    // // 2、为 person 对象新增二胎 child2 子对象，name 为 emma，其他属性自行发挥。
+    // var person = {
+    //   name: "stone",
+    //   age: 30,
+    //   wife: {
+    //     name: "sohpie",
+    //     age: 30
+    //   },
+    //   child: {
+    //     name: "tommy",
+    //     age: 3
+    //   }
+    // }
   </script>
 </body>
 
