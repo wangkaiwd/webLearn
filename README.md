@@ -1,5 +1,9 @@
 ## 前端学习
 ### html/css
+
+##### `demo`练习
+[小米官网](https://wangkaiwd.github.io/html-css-layout/xiaomi/index.html)
+
 ### javascript
 #### 基础知识
   1. [javascript闯关记](https://github.com/stone0090/javascript-lessons)
