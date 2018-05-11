@@ -10,17 +10,77 @@
 
 <body>
   <script>
-    var num = 0;
+    // var num = 0;
 
-    for (var i = 1; i < 10; i++) {
-      if (i % 5 == 0) {
-        break;
-      }
-      num++;
-    }
+    // for (var i = 1; i < 10; i++) {
+    //   if (i % 5 == 0) {
+    //     break;
+    //   }
+    //   num++;
+    // }
 
-    console.log(num);   // 4
-    console.log(i);  // 5 并不是6
+    // console.log(num);   // 4
+    // console.log(i);  // 5 并不是6
+
+    // 挑战一
+    // var k;
+    // for (i = 0, j = 0; i < 10, j < 6; i++ , j++) {
+    //   k = i + j;
+    // }
+    // console.log(k);  // 10
+    // 挑战二
+    // var nums = [12, 32, 54, 56, 78, 89];
+    // for (var n in nums) {
+    //   console.log(n);
+    //   // 结果为字符串
+    //   // "0","1","2","3","4","5"
+    // }
+    // 挑战三
+    // function showCase(value) {
+    //   switch (value) {
+    //     case 'A':
+    //       console.log('Case A');
+    //       break;
+    //     case 'B':
+    //       console.log('Case B');
+    //       break;
+    //     case undefined:
+    //       console.log('undefined');
+    //       break;
+    //     default:
+    //       console.log('Do not know!');
+    //   }
+    // }
+    // showCase(new String('A'));   // "Do not know!"
+    // 挑战四
+    // 注意： 这里的case 'A': 后面并没有break;
+    // function showCase(value) {
+    //   switch (value) {
+    //     case 'A':
+    //       console.log('Case A');
+    //     case 'B':
+    //       console.log('Case B');
+    //       break;
+    //     case undefined:
+    //       console.log('undefined');
+    //       break;
+    //     default:
+    //       console.log('Do not know!');
+    //   }
+    // }
+    // showCase(String('A'));   // "Case A", "Case B"
+    // 挑战五
+    // var i = 0;
+    // for (; ;) {
+    //   if (i = 2) {
+    //     continue;
+    //   }
+    //   if (i = 20) {
+    //     break;
+    //   }
+    //   i++;
+    // }
+    // console.log(i);  // 死循环？
   </script>
 </body>
 

@@ -96,3 +96,44 @@ console.log(i);  // 10
 ```
 * break:立即退出循环,强制继续执行循环后面的语句
 * continue:立即退出循环,退出循环后会从循环的顶部继续执行
+
+### [`return`语句](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/return)
+* 函数将在`return`语句执行之后立即终止
+* `return`后没有返回值的话，默认返回`undefined`
+
+### try-catch-finally
+```js
+try {
+  // 通常来讲，这里的代码从头到尾都不会产生任何问题
+  // 但有时会抛出一个异常，要么是由throw语句直接抛出
+  // 要么通过一个方法间接抛出
+}
+catch(e) {
+  // 当且仅当try语句块抛出了异常，才会执行这里的代码
+  // 这里可以通过局部变量e来获得对Error对象或者抛出其它值的引用
+  // 这里的代码块可以基于某种原因处理这个异常，也可以忽略这个异常
+  // 还可以通过throw语句重新抛出异常
+}
+finally {
+  // 不管try语句块是否抛出了异常，这里的逻辑总是会执行，终止try语句块的方式有：
+  // 1) 正常终止，执行完语句块的最后一条语句
+  // 2) 通过break、continue、或return语句终止
+  // 3) 抛出一个异常，异常被catch从句捕获
+  // 4) 抛出一个异常，异常未被捕获，继续向上传播
+}
+```
+
+### 本节疑问
+```js
+var i = 0;
+for (; ;) {
+  if (i = 2) {
+    continue;
+  }
+  if (i = 20) {
+    break;
+  }
+  i++;
+}
+console.log(i);  // 死循环？
+```
