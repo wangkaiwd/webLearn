@@ -1,6 +1,7 @@
 ## 运算符
 * 一些运算符是由关键字表示的，如:`typeof`,`instanceof`
-* `delete`运算符用来删除对象属性或数组元素，如果删除成功或所删除的目标不存在，`delete`将返回`true`。
+* [`delete`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/delete)运算符用来删除对象属性或数组元素，如果删除成功或所删除的目标不存在，`delete`将返回`true`。
+    ![](./images/delete.png)
 * 乘性运算符：乘法、除法和求模。在操作数为非数值的情况下会执行自动的类型转换，使用Number()转型函数将其转换为数值。即：空字符串将被当做0，布尔值true将被当做1。
 * undefined转换为number类型为NaN,null转换为number类型为0
 * ==和!=这俩个运算符都会进行强制类型转换,然后再比较它们的相等性
