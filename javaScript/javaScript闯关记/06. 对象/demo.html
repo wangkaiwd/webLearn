@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /*
+   * 把 p 中的可枚举属性复制到 o 中，并返回 o
+   * 如果 o 和 p 中含有同名属性，则覆盖 o 中的属性
+   */
+    // function extend(o, p) {
+    //   return o = Object.assign({}, p);
+    // }
+    /*
+     * 将 p 中的可枚举属性复制至 o 中，并返回 o
+     * 如果 o 和 p 中有同名的属性，o 中的属性将不受影响
+     */
+    // function merge(o, p) {
+    //   for (var k in p) {
+    //     if (o.hasOwnProperty(k)) continue;
+    //     o[k] = p[k];
+    //   }
+    //   return o;
+    // }
+    /*
+     * 如果 o 中的属性在 p 中没有同名属性，则从 o 中删除这个属性
+     * 返回 o
+     * restrict:
+     * 限制，限定; 约束，束缚
+     */
+    // function restrict(o, p) {
+    //   for (var k in o) {
+    //     if (!(k in p)) delete o[k];
+    //   }
+    //   return o;
+    // }
+    // console.log(restrict({ name: '小明', age: '18', sex: '男' }, { name: '张飞', skill: 'english' }))
+    /*
+     * 如果 o 中的属性在 p 中存在同名属性，则从 o 中删除这个属性
+     * 返回 o
+     */
+    // function subtract(o, p) {
+    //   for (var k in o) {
+    //     if (k in p) delete o[k];
+    //   }
+    //   return o;
+    // }
+    // console.log(subtract({ name: '小明', age: '18', sex: '男' }, { name: '张飞', skill: 'english' }))
+    /*
+     * 返回一个新对象，这个对象同时拥有 o 的属性和 p 的属性
+     * 如果 o 和 p 中有重名属性，使用 p 中的属性值
+     */
+    // function union(o, p) {
+    //   let obj = {};
+    //   return obj = Object.assign(o, p);
+    // }
+    // console.log(union({ name: '小明', age: '18', sex: '男' }, { name: '张飞', skill: 'english' }))
+
+    /*
+     * 返回一个数组，这个数组包含的是 o 中可枚举的自有属性的名字
+     */
+    // function keys(o) {
+    //   if (typeof o !== "object") throw TypeError('请输入对象');
+    //   let arr = [];
+    //   for (let p in o) {
+    //     if (o.hasOwnProperty(p)) arr.push(p);
+    //   }
+    //   return arr;
+    // }
+    // console.log(keys(1))
+  </script>
+</body>
+
+</html>
