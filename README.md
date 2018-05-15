@@ -16,6 +16,11 @@
 #### `demo`练习
 
 #### 学习笔记
+**ES5**
+1. [变量和数据类型](https://github.com/wangkaiwd/webLearn/blob/master/javaScript/javaScript%E9%97%AF%E5%85%B3%E8%AE%B0/03.%20%E5%8F%98%E9%87%8F%E5%92%8C%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/README.md)
+2. [表达式和运算符](https://github.com/wangkaiwd/webLearn/blob/master/javaScript/javaScript%E9%97%AF%E5%85%B3%E8%AE%B0/04.%20%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8C%E8%BF%90%E7%AE%97%E7%AC%A6/README.md)
+3. [语句](https://github.com/wangkaiwd/webLearn/blob/master/javaScript/javaScript%E9%97%AF%E5%85%B3%E8%AE%B0/05.%20%E8%AF%AD%E5%8F%A5/README.md)
+4. [对象](https://github.com/wangkaiwd/webLearn/blob/master/javaScript/javaScript%E9%97%AF%E5%85%B3%E8%AE%B0/06.%20%E5%AF%B9%E8%B1%A1/README.md)
 ### `Mockjs`
 1. [`mock.js`官方文档及示例](http://mockjs.com/)
 2. [easy-mock](https://easy-mock.com/)
