@@ -39,7 +39,7 @@ person.age = "28"
 ```js
 var person = {};
 person.wife; // undefined;
-
+// 错误原因：null和undefined值都没有属性，查询这些值的属性会报错
 person.wife.name; // Uncaught TypeError: Cannot read property 'name' of undefined
 
 // 避免访问属性出错
