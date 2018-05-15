@@ -1,9 +1,27 @@
-## 对象
+## [对象](http://javascript.ruanyifeng.com/grammar/object.html)
 ### 创建对象
 > 1. 使用对象字面量
 > 2. new 关键字
 > 3. ECMAScript5中的`object.create()`函数
 
+**对象的所有键名都是字符串**，加不加引号都可以。**如果键名是数值，会被自动转为字符串**
+```js
+var obj = {1:'a',2:'b'};
+// 这里的键名1和2都被自动转为了字符串
+```
+
+如果键名不符合标识符的条件（比如第一个字符为数字，或者含有空格或运算符），且也不是数字，则必须加上引号，否则会报错。
+```js
+// 报错
+var obj = { 1p:"Hello World" };
+
+// 不报错
+var obj = {
+  "1p":"Hello World",
+  "h w":"Hello World",
+  "p+q":"Hello World", // 最后一个属性可以加",",也可以不加
+}
+```
 #### 使用对象字面量创建对象(推荐)
 ```js
 // 推荐写法
@@ -46,6 +64,16 @@ person.wife.name; // Uncaught TypeError: Cannot read property 'name' of undefine
 var name = person && person.wife && person.wife.name;
 // person.wife => undefined 转换为boolean值为fale,返回person.wife
 ```
+
+数值键名不能使用点运算符（因为会被当成小数点），只能使用方括号运算符
+```js
+var obj = { 123:"hello world" };
+obj.123 // 报错
+// 会自动转为字符串
+obj[123] // "hello world"
+
+obj['123'] // "hello world"
+```
 ### 检测属性
 > 判断属性是否存在于某个对象中
 
@@ -80,3 +108,22 @@ console.log("x" in obj); // true;
 var obj = {100:"a", 2:"b", 7: "c"};
 // [ "2", "7", "100" ],对象的属性是一个字符串，顺序并不固定
 console.log(Object.keys(obj));
+```
+
+### `for...in`循环
+`for...in`循环有2个注意点:
+* 遍历的是所有可遍历(enumerable)的属性，会跳过不可遍历的属性
+* 不仅遍历对象自身的属性,还遍历继承的属性。
+  ```js
+  var person = { name: "老张" };
+  // 一般情况下，只想遍历对象自身的属性
+  // 所以在使用for...in循环的时候,应该结合使用hasOwnProperty方法
+  // 在循环内部判断一下,某个属性是否为对象的自身属性
+  for(var k in person) {
+    if(person.hasOwnProperty(k)) {
+      console.log(k);
+    }
+  }
+  ```
+
+> 推荐阅读：[面试官：请你实现一个深克隆](https://juejin.im/post/5abb55ee6fb9a028e33b7e0a)
