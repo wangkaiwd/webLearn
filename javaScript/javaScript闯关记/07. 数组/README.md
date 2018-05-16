@@ -81,4 +81,72 @@ console.log(a); // [1,3,5,7]
 ```
 > 在ECMAScript5中，可以用[`Object.defineProperty()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty)让数组的`length`属性变成只读的。
 
+### 数组元素的删除和添加
+添加数组元素最简单的方法,为新索引赋值
+```js
+var a = [];  // 开始是一个空数组
+a[0] = "zero"; // 向其中添加一个元素
+a[1] = "one";
+a[a.length] = a.length; // 为数组的最后一项赋值
+console.log(a); // ["zero","one",2]
+```
+
+可以像删除对象属性一样使用`delete`运算符来删除数组元素
+```js
+var a = [1,2,3];
+delete a[1] // a在索引1的位置不在有元素
+1 in a      // => false:数组索引并未在数组中定义
+a.length    // => 3: delete操作符并不影响数组长度
+```
+
+### 数组遍历
+题目：将一个对象的键名放入到一个数组中
+```js
+var obj = { name:'小明', age:'18', sex:'男',height:'167cm' };
+var keys = Object.keys(obj);
+var values = [];
+for(var i=0; i<keys.length; i++) {
+  values[i] = obj[keys[i]];
+}
+
+// 数组的长度只需要查询一次，而不必每次都查询
+// 优化
+for(var i=0, len=keys.length; i<len; i++) {
+  // 循环体
+}
+```
+
+这些例子假设数组是稠密的，并且所有的数据都是合法数据。否则，使用数组元素之前应该先检测它们
+```js
+for(var i=0;i<a.length;i++) {
+  if(!a[i]) continue; // 跳过null,undefined和不存在的元素，但内容为0的元素也会跳过
+  if(!(i in a)) continue; // 跳过不存在的元素，null、undefined、0都不会跳过
+  if(a[i] === undefined) continue;  // 跳过undefined元素和不存在的元素（不村在的元素默认为undefined）
+  // 循环体
+}
+```
+
+### 数组检测
+> 给定一个未知的对象，判断它是否为数组
+
+通过Array.isArray()函数来进行判断
+```js
+Array.isArray([]); // true
+Array.isArray({}); // false
+```
+
+通过`instaceof`实现
+```js
+[] instanceof Array;  // true
+({}) instanceof Array; // false
+```
+`instanceof`的问题在于Web浏览器中有可能有多个窗体存在。每个窗体都有自己的`JavaScript`环境，有自己的全局对象，每个全局对象有自己的一组构造函数。因此，一个窗体中的对象将不可能是另外窗体中的构造函数的实例。
+
+`isArray()`函数的代码实现
+```js
+var isArray = Array.isArray || function(o) {
+`return typeof o === 'object' && Object.prototype.toString.call(0) === '[object Array]'
+}
+```
+
 ### [数组常用方法](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype)

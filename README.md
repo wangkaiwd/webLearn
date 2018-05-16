@@ -21,6 +21,9 @@
 2. [表达式和运算符](https://github.com/wangkaiwd/webLearn/blob/master/javaScript/javaScript%E9%97%AF%E5%85%B3%E8%AE%B0/04.%20%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8C%E8%BF%90%E7%AE%97%E7%AC%A6/README.md)
 3. [语句](https://github.com/wangkaiwd/webLearn/blob/master/javaScript/javaScript%E9%97%AF%E5%85%B3%E8%AE%B0/05.%20%E8%AF%AD%E5%8F%A5/README.md)
 4. [对象](https://github.com/wangkaiwd/webLearn/blob/master/javaScript/javaScript%E9%97%AF%E5%85%B3%E8%AE%B0/06.%20%E5%AF%B9%E8%B1%A1/README.md)
+
+**ES6**
+1. [现代`JavaScript`备忘清单](http://translate.breword.com/pages/ef2ac50436e84d5582d3d04971488c22)
 ### `Mockjs`
 1. [`mock.js`官方文档及示例](http://mockjs.com/)
 2. [easy-mock](https://easy-mock.com/)

@@ -48,8 +48,13 @@ person.age = "28",
 ```js
 // 创建对象
 var person = Object.create(Object.prototype);
-person.name = "stone",
-person.age = "28"
+person.name = "stone";
+person.age = "28";
+
+// 创建一个纯净的对象（有什么用？）
+var pureObj = Object.create(null);
+// 不会从Object类继承任何方法
+console.log(pureObject.toSring); // undefined
 ```
 
 ### 属性的访问错误
