@@ -121,7 +121,7 @@ for(var i=0, len=keys.length; i<len; i++) {
 for(var i=0;i<a.length;i++) {
   if(!a[i]) continue; // 跳过null,undefined和不存在的元素，但内容为0的元素也会跳过
   if(!(i in a)) continue; // 跳过不存在的元素，null、undefined、0都不会跳过
-  if(a[i] === undefined) continue;  // 跳过undefined元素和不存在的元素（不村在的元素默认为undefined）
+  if(a[i] === undefined) continue;  // 跳过undefined元素和不存在的元素（不存在的元素默认为undefined）
   // 循环体
 }
 ```
@@ -201,7 +201,8 @@ myArray.reverse();
 console.log(myArray); // ['three','two','one']
 ```
 
-[`sort()`]()
+[`sort()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)方法对数组元素进行排序，并返回数组。默认排序顺序是根据字符串`Unicode`码点。
+![sort](./images/sort.png)
 #### 操作方法
 
 #### 位置方法
