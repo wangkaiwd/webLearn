@@ -150,3 +150,60 @@ var isArray = Array.isArray || function(o) {
 ```
 
 ### [数组常用方法](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype)
+#### 转换方法
+`value of()`:
+
+#### 栈方法和队列方法（会改变原数组）
+[`pop()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/pop)方法从数组中删除最后一个元素,并返回该元素的值。此方法更改数组的长度
+```js
+let myFish = ["angel","clown","mandarin","surgeon"];
+let popped = myFish.pop();
+// 数组长度发生改变
+console.log(myFish); // ["angel","clown","mandarin"]
+// 返回从数组中删除的元素,当数组为空时返回undefined
+console.log(popped); // "surgeon"
+```
+
+[`push()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/push)方法将一个或多个元素添加到数组的末尾,并返回新数组的长度
+```js
+var sports = ["soccer","baseball"];
+var total = sports.push("football","swimming");
+
+console.log(sports); // ["soccer","baseball","football","swimming"]
+// 返回新数组的长度
+console.log(total); // 4
+```
+
+[`shift()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/shift)方法从数组中删除第一个元素,并返回该元素的值。此方法更改数组的长度。
+```js
+let a = [ 1,2,3 ];
+let b = a.shift();
+// 原数组改变
+console.log(a); // [2,3]
+// 返回被删除的元素
+console.log(b); // 1
+```
+
+[`unshift()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift)方法将一个或多个元素添加到数组的开头,并返回新数组的长度.
+```js
+let a = [1,2];
+let result = a.unshift(0); // result of call is 3, the new array length
+// a is [0,1,2]
+let result2 = a.unshift(-2,-1); // 5
+// a is [-2,-1,0,1,2]
+```
+
+#### 重排序方法
+[`reverse()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse)颠倒数组中元素的位置,并返回该数组的引用。
+```js
+var myArray = ['one','two','three'];
+myArray.reverse();
+console.log(myArray); // ['three','two','one']
+```
+
+[`sort()`]()
+#### 操作方法
+
+#### 位置方法
+
+#### 迭代方法
