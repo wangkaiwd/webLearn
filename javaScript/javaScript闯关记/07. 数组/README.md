@@ -201,9 +201,47 @@ myArray.reverse();
 console.log(myArray); // ['three','two','one']
 ```
 
-[`sort()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)方法对数组元素进行排序，并返回数组。默认排序顺序是根据字符串`Unicode`码点。
+[`sort()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)方法对数组元素进行排序，并返回数组。默认排序顺序是根据字符串`Unicode`码点。(并没有理解)
 ![sort](./images/sort.png)
+```js
+// 比较函数
+function compare(a,b) {
+  if(a<b) {       // 按照某种排序标准进行比较,a小于b
+    return -1;
+  }
+  if(a>b) {
+    return 1;
+  }
+  // a must eqeual to b
+  return 0;
+}
+```
+要比较数字而非字符串,比较函数可以简单的以a减b,如下的函数将会将数组升序排列。
+```js
+function compareNumber(a,b) {
+  return a-b;
+}
+```
+
 #### 操作方法
+[`concat()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/concat)方法用于合并俩个或多个数组。此方法不会更改现有数组,而是返回一个新数组。
+```js
+var alpha = ['a','b','c'];
+var numeric = [1,2,3];
+alpha.concat(numeric);
+// result(a new array) is ['a','b','c',1,2,3]
+```
+
+[`slice()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/slice)方法返回一个从开始到结束(**不包括结束**)选择的数组的一部分**浅拷贝**到一个新数组对象。且原始数组不会被修改。
+![slice](./images/slice.png)
+```js
+var fruits = ['Banana', 'Orange', 'Lemon', 'Apple', 'Mango'];
+var citrus = fruits.slice(1,3);
+// fruits contains ['Banana', 'Orange', 'Lemon', 'Apple', 'Mango'],
+// fruits contains ['Orange','Lemon'],
+```
+
+[`splice()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/splice)方法通过删除现有元素和/或添加新元素来更改一个数组的内容。
 
 #### 位置方法
 
