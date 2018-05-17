@@ -208,3 +208,6 @@ console.log(myArray); // ['three','two','one']
 #### 位置方法
 
 #### 迭代方法
+
+> 推荐阅读：
+> 1. [7种方法实现数组去重](https://juejin.im/post/5aed6110518825671b026bed?utm_source=gold_browser_extension)

@@ -1,4 +1,5 @@
-## [前端技能图谱](https://leohxj.gitbooks.io/front-end-database/content/)
+## 学习路径
+> [前端技能图谱](https://leohxj.gitbooks.io/front-end-database/content/)
 ### html/css
 #### 基础知识
 1. [各种页面常见布局](https://sweet-kk.github.io/css-layout/#/)
