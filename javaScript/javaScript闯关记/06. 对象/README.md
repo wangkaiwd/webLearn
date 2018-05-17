@@ -94,11 +94,11 @@ console.log(obj.x !== undefined);
 console.log(obj.y !== undefined);
 ```
 
-`hasOwnProperty()`:指示对象**自身属性中**，是否具有指定的属性。对于继承属性他将返回`false`
+`hasOwnProperty()`:指定对象**自身属性中**，是否具有指定的属性。对于继承属性他将返回`false`
 ```js
 var obj = { x : 1 };
 console.log(obj.hasOwnProperty("x")); // true, x是obj的自有属性
-console.log(obj.hasOwnProperty("y")); // false, y不是obj的自由属性
+console.log(obj.hasOwnProperty("y")); // false, y不是obj的自有属性
 // false,toString是继承属性
 console.log(obj.hasOwnProperty("toString"));
 ```
@@ -131,4 +131,7 @@ console.log(Object.keys(obj));
   }
   ```
 
-> 推荐阅读：[面试官：请你实现一个深克隆](https://juejin.im/post/5abb55ee6fb9a028e33b7e0a)
+> 推荐阅读：
+> 1. [面试官：请你实现一个深克隆](https://juejin.im/post/5abb55ee6fb9a028e33b7e0a)
+> 2. [MDN|Object.prototype](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype)(Object对象原型上的方法)
+> 3. [MDN|Object](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object)(Object构造函数的方法)
