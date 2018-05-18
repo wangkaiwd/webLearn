@@ -145,7 +145,7 @@ Array.isArray({}); // false
 `isArray()`函数的代码实现
 ```js
 var isArray = Array.isArray || function(o) {
-`return typeof o === 'object' && Object.prototype.toString.call(0) === '[object Array]'
+`return typeof o === 'object' && Object.prototype.toString.call(o) === '[object Array]'
 }
 ```
 
