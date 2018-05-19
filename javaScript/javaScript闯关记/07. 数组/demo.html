@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // n维数组去重
+    var arr = [2, 3, 4, [2, 3, [2, 3, 4, 2], 5], 3, 5, [2, 3, [2, 3, 4, 2], 2], 4, 3, 6, 2];
+    // 实现思路：先将数组中的元素都进行处理成一维数组，然后为一维数组进行去重
+    var flatArr = []; // 转换为一维数组
+    var newArr = []; // 去重后的数组
+
+    // 递归遍历数组
+    function getArr(arr) {
+      arr.forEach(item => {
+        Array.isArray(item) ? getArr : flatArr.push(item);
+      })
+    }
+    // 将数组转换为一维数组
+    function flat(arr) {
+      for (var i = 0; i < arr.length; i++) {
+        // return在切断函数的同时连for循环也切断了，所以函数在执行到数组索引为3时不在继续执行了
+        // if (Array.isArray(arr[i])) return getArr(arr[i]);
+        Array.isArray(arr[i]) ? getArr : flatArr.push(arr[i]);
+      }
+    }
+    // 数组去重
+    function iterator() {
+      for (var i = 0; i < flatArr.length; i++) {
+        if (newArr.indexOf(flatArr[i]) === -1) {
+          newArr.push(flatArr[i]);
+        }
+      }
+    }
+    var unique = function (arr) {
+      // 初始化
+      flatArr = [];
+      newArr = [];
+      flat(arr);
+      iterator();
+      return newArr;
+    }
+    console.log(unique(arr)); // [2,3,4,5,6]
+  </script>
+</body>
+
+</html>

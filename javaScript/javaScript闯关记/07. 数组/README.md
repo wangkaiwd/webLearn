@@ -234,7 +234,14 @@ alpha.concat(numeric);
 
 [`slice()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/slice)方法返回一个从开始到结束(**不包括结束**)选择的数组的一部分**浅拷贝**到一个新数组对象。且原始数组不会被修改。
 ![slice](./images/slice.png)
+![](./images/array-convert.png)
 ```js
+// 语法
+arr.slice(); // 不添加参数默认从开头截取到末尾;
+arr.slice(begin); // [begin,end];
+arr.slice(begin,end); // [begin,end) (左闭右开区间)
+
+// 示例
 var fruits = ['Banana', 'Orange', 'Lemon', 'Apple', 'Mango'];
 var citrus = fruits.slice(1,3);
 // fruits contains ['Banana', 'Orange', 'Lemon', 'Apple', 'Mango'],
@@ -242,10 +249,105 @@ var citrus = fruits.slice(1,3);
 ```
 
 [`splice()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/splice)方法通过删除现有元素和/或添加新元素来更改一个数组的内容。
+![splice](./images/splice.png)
+```js
+var myFish = ["angel","clown","mandarin","surgeon"];
+// 从第2位开始删除0个元素,插入"drum";
+var removed = myFish.splice(2,0,"drum");
+
+// 修改原数组
+// "drum"的索引为2，即新增元素中的最前面的一个的索引值===开始索引
+console.log(myFish); // ["angel","clown","drum","mandarin","surgeon"]
+
+// 即使没有删除内容也会返回一个空数组
+console.log(removed); // [];
+```
 
 #### 位置方法
+`lastIndexOf()`方法返回指定元素(也即有效的JavaScript值或变量)在数组中的最后一个的索引,如果不存在则放回-1。从数组的后面向前查找，从`fromIndex`处开始。
+```js
+var array = [2,5,9,2];
+var index = array.lastIndexOf(2);
+console.log(index); // index is 3;
+
+index = array.lastIndexOf(7);
+console.log(index); // index is -1;查找不到返回-1
+
+// 可以传入第二个参数：开始逆向查找的位置，默认为数组的长度减1，即整个数组都被查找
+index = array.lastIndexOf(2,3);
+console.log(index); // index is 3;
+
+index = array.lastIndexOf(2,2);
+console.log(index); // index is 0;
+```
+
+`indexOf()`方法返回在数组中可以找到一个给定元素的第一个索引,如果不存在则返回-1.
+```js
+var array = [2, 5, 9];
+array.indexOf(2); // 0
+array.indexOf(7); // -1
+// 传入第二个参数，指定开始查找的位置
+array.indexOf(9,2); // 2
+array.indexOf(9,1); // -1
+```
 
 #### 迭代方法
+**传入的参数如下**
+![params](./images/forparams.png)
+
+`forEach()`方法对数组的每个元素执行一次提供的函数.没有返回值。
+
+`every()`方法测试数组的所有元素是否都通过了指定函数的测试。如果有一个没通过的话，返回false,否则返回true.
+
+题目：检测数组中所有的元素是否都大于10
+```js
+function isBigEnough() {
+  return (element >= 10);
+}
+var passed = [12, 5, 8, 130, 44].every(isBigEnough);
+console.log(passed); // false
+
+passed = [12, 54, 18, 130, 44].every(isBigEnough);
+console.log(passed); // true
+```
+
+`some()`方法测试数组中的某些元素是否通过由提供的函数实现的测试。如果全部不通过的话返回false,否则返回true.
+```js
+const isBigEnough = (element) => element >= 10;
+[2,5,8,1,4].some(isBigEnough); // false
+[12,5,8,1,4].some(isBigEnough); // true
+```
+
+`filter()`方法创建一个新数组，其包含通过所提供函数实现的测试的所有元素。
+```js
+// es6 way
+const isBigEnough = item => item >= 10;
+let arr = [12, 5, 8, 130, 44];
+let filtered = arr.filter(isBigEnough);
+// filtered is [12, 130, 44];
+```
+
+`map()`方法创建一个新数组,其结果是该数组中的每个元素都调用一个提供的函数后返回的结果.
+```js
+// es6
+let numbers = [1,5,10,15];
+let dobules = numbers.map( item => item*2 );
+// numbers数组未被修改
+console.log(numbers); // [1,5,10,15]
+console.log(dobules); // [2,10,20,30]
+```
+
+[`reduce()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce)方法对累加器和数组中的每个元素(从左到右)应用一个函数,将其减少为单个值。
+![reduce](./images/reduce.png)
+回调函数第一次执行时,`accumulator`和`currentValue`的取值有俩种情况：
+  1. 调用`reduce`时提供`initialValue` ,`accumulator`取值为`initialValue`,`currentValue`取数组中的第一个值。
+  2. 没有提供`initialValue`,`accumulator`取数组中的第一个值,`currentValue`取数组中的第二个值。
+```js
+// 题目：数组里所有值的和
+var arr = [0,1,2,3];
+var sum = arr.reduce((count,item)=> count+item );
+console.log(sum); // 6
+```
 
 > 推荐阅读：
 > 1. [7种方法实现数组去重](https://juejin.im/post/5aed6110518825671b026bed?utm_source=gold_browser_extension)
