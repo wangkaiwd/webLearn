@@ -48,3 +48,46 @@ if() {
 // 由于函数没有声明，会报错
 f(); // Uncaught SyntaxError: Unexpected token )
 ```
+
+### 函数的属性和方法
+
+#### `name`属性
+函数可以通过`name`属性来获取函数的名字
+```js
+// 获取函数参数的名字
+var myFunc = function(){
+function test(f) {
+console.log(f.name);
+}
+test(myFunc); // "myFunc"
+```
+
+#### `length`属性
+函数的`length`属性返回函数预期传入（即函数定义之中的参数个数）的参数个数
+```js
+// 定义了空的函数f
+function f(a,b) {}
+// `length`属性是定义时的参数个数。不管调用时输入了多少个参数
+f.length // 2
+```
+**`length`属性提供了一种机制，判断定义时和调用时参数的差异**，以便实现面向对象编程的“方法重载”。（什么意思？）
+
+#### `toString()` 方法
+函数的`toString()`方法返回一个字符串，内容是函数的源码（包括注释）
+```js
+function f() {
+  a();
+  b();
+  c();
+}
+f.toString()
+/**
+* 打印结果 
+*
+* "function f() {
+*   a();
+*   b();
+*   c();   
+* }"
+*/
+```
