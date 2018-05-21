@@ -91,3 +91,77 @@ f.toString()
 * }"
 */
 ```
+
+### `arguments`对象
+`arguments`:包含了函数运行时的所有参数,这个函数只可以在函数体内部使用.
+```js
+// 正常模式arguments对象可以在运行时修改
+var f = function(a,b) {
+  // 参数在内部被修改
+  arguments[0] = 3;
+  arguments[1] = 2;
+  return a + b;
+}
+f(1,1); // 5
+
+// 严格模式下,arguments对象是一个只读对象，修改它是无效的,但不会报错
+var f = function(a,b) {
+  "use strict"; // 开启严格模式
+  // 不会报错
+  arguments[0] = 3; // 无效
+  arguments[1] = 2; // 无效
+  return a + b;
+}
+f(1,1); // 2
+```
+`arguments.length`:函数实参的个数  
+`函数名.length`：函数形参的个数
+```js
+function f() {
+  console.log(f.length);
+  console.log(arguments.length);
+}
+f(1,2,3); // 0   3
+f(1); // 0   1
+f(0); // 0   1
+```
+
+`arguments`是伪数组,可以使用数组的属性，但是不能使用数组的方法  
+下面是俩种常用的转换方法：
+```js
+/**
+* 通过slice方法
+* arr.slice(); // 不传参数从头截取到尾
+* 然后通过call改变this指向 
+*/
+var args = Array.prototype.slice.call(arguments);
+
+// 逐一填入新数组
+var args = [];
+for(var i=0; i<arguments.length; i++) {
+  args.push(arguments[i]);
+}
+```
+
+`callee`:`arguments`对象带有一个`callee`属性，返回它所对应的原函数。
+```js
+var f = function () {
+  console.log(arguments.callee === f);
+}
+```
+可以通过`arguments.callee`,达到调用函数自身的目的。这个在严格模式是禁用的，因此不建议使用。
+
+### 函数参数
+> 1. 函数参数不是必需的，JavaScript允许省略参数
+> 2. 实参传多了放着不用，传少了用`undefined`补齐
+
+函数在运行的时候，有时需要提供外部数据，不同的外部数据会得到不同的结果，这种外部数据就叫参数。
+```js
+// 没办法只省略靠前的参数，而保留靠后的参数
+function (a,b) {
+  return a;
+}
+// 省略第一个参数会报错
+f(,1); // SyntaxError: Unexpected tokenj, (...)
+f(undefined,1); // undefined
+```
