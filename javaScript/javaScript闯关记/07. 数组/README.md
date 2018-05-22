@@ -351,3 +351,4 @@ console.log(sum); // 6
 
 > 推荐阅读：
 > 1. [7种方法实现数组去重](https://juejin.im/post/5aed6110518825671b026bed?utm_source=gold_browser_extension)
+> 2. [Javascript中的魔鬼](https://juejin.im/post/5abde3c05188255c56688bb6)
