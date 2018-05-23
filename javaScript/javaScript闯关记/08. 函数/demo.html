@@ -9,24 +9,75 @@
 <body>
     <script>
         // 挑战一，合并任意个数的字符串
-        var concat = function(){
-            // 先将arguments转换为真是的数组，才可以调用数组的方法
-            var args = Array.prototype.slice.call(arguments);
-            var str = args.join(''); // 传空字符串无缝连接,传入空格则用空格连接
-            return str;
-        }
-        console.log(concat('st','on','e'));  // stone
-        // // 挑战二，输出指定位置的斐波那契数列
+        // var concat = function(){
+        //     // 先将arguments转换为真是的数组，才可以调用数组的方法
+        //     var args = Array.prototype.slice.call(arguments);
+        //     // 传空字符串无缝连接,传入空格则用空格连接,不传参数默认为逗号连接
+        //     var str = args.join('');
+        //     return str;
+        // }
+        // console.log(concat('st','on','e'));  // stone
+        
+        // 挑战二，输出指定位置的斐波那契数列
         // var fioacciSequece = function(count){
-        //     // 待实现方法体
+        //   // 只能输入整整数
+        //   if(count !== parseInt(count) || count < 1) {
+        //     throw new Error("请输入满足条件的正整数！！！");
+        //   }
+        //   switch(count) {
+        //     case 1:
+        //       return 0;
+        //     break;
+        //     case 2:
+        //       return 1;
+        //     break;
+        //     default:
+        //       return fioacciSequece(count-1) + fioacciSequece(count-2);
+        //     break;
+        //   }
         // }
         // console.log(fioacciSequece(12));  // 0、1、1、2、3、5、8、13、21、34、55、89
-        // // 挑战三，三维数组或 n 维数组去重，使用 arguments 重写
-        // var arr = [2,3,4,[2,3,[2,3,4,2],5],3,5,[2,3,[2,3,4,2],2],4,3,6,2];
-        // var unique = function(arr){
-        //     // 待实现方法体
-        // }
-        // console.log(unique(arr)); // [2,3,4,5,6]
+
+        // 挑战三，三维数组或 n 维数组去重，使用 arguments 重写
+        var arr = [2,3,4,[2,3,[2,3,4,2],5],3,5,[2,3,[2,3,4,2],2],4,3,6,2];
+        // 递归遍历
+        // 综合运用数组方法进行出理
+        // FIXME: 数组运用的细节可能并不到位（对方法的理解不到位，尤其是reduce方法）
+        var unique = function(arr){
+          const flatArr = [];
+          const repeatArr = [];
+          function iterator(arr) {
+            arr.map( item => {
+              if(Array.isArray(item)) {
+                item.map( sub => {
+                  if(Array.isArray(sub)) {
+                    iterator(sub);
+                  }
+                })
+              }
+              else {
+                flatArr.push(item);
+              }
+            })
+          }
+          for(var value of arguments) {
+            // debugger
+            // 如果是数组的话，继续便历
+            if(Object.prototype.toString.call(value) === "[object Array]") {
+              iterator(value)
+            }
+            else {
+              flatArr.push(value);
+            }
+          }
+          flatArr.filter( item => {
+            if(repeatArr.indexOf(item) === -1) {
+              repeatArr.push(item);
+            }
+          });
+          return repeatArr;
+        }
+        console.log(unique(arr)); // [2,3,4,5,6]
     </script>
 </body>
 </html>
