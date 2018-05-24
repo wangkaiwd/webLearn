@@ -151,7 +151,16 @@ var isArray = Array.isArray || function(o) {
 
 ### [数组常用方法](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype)
 #### 转换方法
-`value of()`:
+`valueOf()`方法返回指定对象的原始值。该方法通常由JavaScript在后台自动调用，并不显示地出现在代码中。
+
+`toString()`方法返回一个字符串,表示指定的数组及其元素.
+```js
+var monthNames = ["Jan","Feb","Mar","Apr"];
+var myVar = monthNames.toString(); 
+console.log(myVar); // "Jan","Feb","Mar","Apr"
+```
+
+`toLocaleString()`方法
 
 #### 栈方法和队列方法（会改变原数组）
 [`pop()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/pop)方法从数组中删除最后一个元素,并返回该元素的值。此方法更改数组的长度

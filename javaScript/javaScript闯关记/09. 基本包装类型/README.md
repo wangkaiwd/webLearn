@@ -23,3 +23,4 @@ s1.color = "red";
 console.log(s1.color); // undefined
 ```
 
+### 字符串的操作方法
