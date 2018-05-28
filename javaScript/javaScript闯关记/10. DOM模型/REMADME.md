@@ -39,6 +39,9 @@ if(node.nodeType === 1) { // 适用于所有浏览器
 ```
 
 #### nodeName和nodeValue属性
+> nodeName: 显示节点的名称
+> nodeValue: 显示节点的值
+
 对于元素节点，`nodeName`中保存的始终都是元素的标签名，而`nodeValue`的值始终为`null`
 ```js
 if(node.nodeType === 1) { // 如果是元素节点
@@ -46,3 +49,15 @@ if(node.nodeType === 1) { // 如果是元素节点
 }
 ```
 
+### 节点关系
+`childNods`返回一个类似数组的对象(`NodeList`集合)，成员包括当前节点的所有子节点。除了元素节点，`childNode`属性的返回值还包括文本节点和注释节点。如果当前节点不包括任何子节点，则返回一个空的`NodeList`集合。
+```js
+// html代码
+// <div id="node">
+//   <p class="first">123</p>
+// </div>
+var node = document.getElementById("node");
+console.log(node.childNodes);
+```
+打印结果如下:  
+![childNodes](./images/NodeList.png)
