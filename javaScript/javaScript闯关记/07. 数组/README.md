@@ -1,5 +1,5 @@
 ## [数组](http://javascript.ruanyifeng.com/grammar/array.html)
-> javaScript数组是javaScript对象的特殊形式，数组索引实际上和碰巧是整数的属性名差不多。
+> JavaScript数组是javaScript对象的特殊形式，数组索引实际上和碰巧是整数的属性名差不多。
 > 通常，数组的实现是经过优化的，用数字索引来访问数组元素一般来说比访问常规的对象属性要快很多。
 
 **本质上，数组属于特殊的对象**
@@ -145,7 +145,7 @@ Array.isArray({}); // false
 `isArray()`函数的代码实现
 ```js
 var isArray = Array.isArray || function(o) {
-`return typeof o === 'object' && Object.prototype.toString.call(o) === '[object Array]'
+  return typeof o === 'object' && Object.prototype.toString.call(o) === '[object Array]'
 }
 ```
 
@@ -160,7 +160,20 @@ var myVar = monthNames.toString();
 console.log(myVar); // "Jan","Feb","Mar","Apr"
 ```
 
-`toLocaleString()`方法
+`toLocaleString()`方法返回一个字符串表示数组中的元素。数组中的元素将使用各自的`tolocaleString()`方法转成字符串,这些字符串将使用一个特定语言环境的字符串（例如一个逗号","）隔开。
+
+[`join()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/join)方法将一个数组（或类数组对象）的所有元素连接成一个字符串并返回这个字符串。不会改变原数组。
+```js
+const a = ["Wind", "Rain", "Fire"];
+console.log(a.join()); // 不传参数默认为逗号","连接
+// "Wind,Rain,Fire"
+console.log(a.join("")); // 分隔符 === 空字符串 ""
+// "WindRainFire"
+console.log(a.join(" ")); // 通过空格进行连接
+// "Wind Rain Fire"
+console.log(a.join("-")); // 分隔符 "-"
+// "Wind-Rain-Fire"
+```
 
 #### 栈方法和队列方法（会改变原数组）
 [`pop()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/pop)方法从数组中删除最后一个元素,并返回该元素的值。此方法更改数组的长度
