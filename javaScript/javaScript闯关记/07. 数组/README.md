@@ -233,6 +233,17 @@ function compareNumber(a,b) {
 ```
 
 #### 操作方法
+[`join()`]方法将一个数组（或一个类数组对象）的所有元素连接成一个字符串并返回这个字符串。不会改变原数组
+```js
+let a = ["Wind","Rain","Fire"];
+console.log(a.join()); // 默认为","，逗号连接
+// "Wind","Rain","Fire"
+console.log(a.join("")); // 分隔符 === 空字符 ""
+// "WindRainFire"
+console.log(a.join("-"); // 分隔符 "-"
+// "Wind"-"Rain"-"Fire"
+```
+
 [`concat()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/concat)方法用于合并俩个或多个数组。此方法不会更改现有数组,而是返回一个新数组。
 ```js
 var alpha = ['a','b','c'];
