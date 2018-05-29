@@ -13,13 +13,10 @@
     <p class="first">123</p>
   </div>
   <script>
-    // node.childNodes数组中有3个元素，其中第一个和最后一个是换行符
-    var node = document.getElementById("node");
-    // console.log(node.childNodes);
-    // console.log(node.querySelectorAll(".first"));
-    var children = document.body.childNodes;
-    Array.isArray(children) // false
-    console.log(node.hasChildNodes()); // true
+    var p = document.createElement('p');
+    var returnValue = document.body.appendChild(p);
+    console.log(returnValue === p);
+    console.log(document.body.lastChild === p);
   </script>
 </body>
 

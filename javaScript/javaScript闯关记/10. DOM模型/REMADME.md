@@ -68,3 +68,14 @@ node.hasChildNodes();
 node.firstChild !== null;
 node.childNodes && node.childNodes.length > 0;
 ```
+
+### 节点操作
+`appendChild`方法接受一个节点对象作为参数,将其作为最后一个子节点,插入当前节点。该方法的返回值就是插入文档的子节点。
+```js
+// 新家p标签插入到body的尾部
+var p = document.createElement('p');
+var returnValue = document.body.appendChild(p);
+console.log(returnValue === p); // true
+console.log(document.body.lastChild === p); // true
+```
+如果参数节点是DOM已经存在的节点,`appendChild`方法会将其从原来的位置**移动**到新位置。
