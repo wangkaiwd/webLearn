@@ -15,14 +15,11 @@
   <script>
     // node.childNodes数组中有3个元素，其中第一个和最后一个是换行符
     var node = document.getElementById("node");
-    console.log(node.childNodes);
+    // console.log(node.childNodes);
     // console.log(node.querySelectorAll(".first"));
     var children = document.body.childNodes;
-
     Array.isArray(children) // false
-
-    children.length // 34
-    children.forEach(console.log)
+    console.log(node.hasChildNodes()); // true
   </script>
 </body>
 
