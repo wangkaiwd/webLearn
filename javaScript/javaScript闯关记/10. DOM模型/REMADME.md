@@ -175,7 +175,7 @@ var body = document.body // 取得对body的引用
 
 以下属性返回文档信息.
 
-* (1)document.URI,documentURL,document.domain
+* (1)document.URI,document.URL,document.domain
 
   ```js
   // 文档网络地址：http://javascript.ruanyifeng.com/dom/document.html
@@ -185,3 +185,77 @@ var body = document.body // 取得对body的引用
   document.domain // 返回当前文档的域名
   // "javascript.ruanyifeng.com"
   ```
+
+* (2)document.title  
+  `document.title`属性返回当前文档的标题。默认情况下，返回`<title>`节点的值。该属性是可写的，一旦被修改， 就返回修改后的值。
+  ```js
+  document.title = '新标题'
+  document.title // "新标题"
+  ```
+* (3)document.referrer
+  `document.referrer`属性返回一个字符串，表示当前文档的访问者来自哪里
+  ```js
+  // 文档网络地址：http://javascript.ruanyifeng.com/dom/document.html
+  document.referrer
+  ```
+
+### 查找元素
+
+> 以下介绍的方法不仅可以在`document`对象上调用，也可以在任何元素节点上调用（除了`document.getElementById`）
+
+#### document.querySelector(),document.querySelectorAll()
+
+* `document.querySelector()`:接受一个 css 选择器作为参数，返回匹配该选择器的元素节点。**如果有多个节点满足匹配条件，则返回`null`。**
+* `document.querySelectorAll()`:与`querySelector`用法类似，区别是返回一个`NodeList`对象，包含所有匹配给定选择器的节点。
+
+这俩个方法都支持复杂的`css`选择器：
+
+```js
+// 选中data-fool-bar属性等于someval的元素
+document.querySelectorAll('[data-fool-bar="someval"]')
+// 选中div元素中，那些class含ignore的除外
+document.querySelectorAll('DIV:not(.ignore)')
+// 同时选中 div,a,script 三类元素
+document.querySelectorAll('DIV,A,SCRIPT')
+```
+
+它们无法选中伪类和伪元素。
+
+#### document.getElementsByTagName
+
+`document.getElementsByTagName`方法搜索 HTML 标签名，返回符合条件的元素。它的返回是一个类似数组对象(`HTMLCollection`实例),可以实时反映 HTML 文档的变化。如果没有任何匹配的元素，就返回一个空集。
+
+```js
+// 返回当前文档的所有p元素节点
+var paras = document.getElementsByTagName('p')
+paras instanceof HTMLCollection // true
+```
+
+HTML 标签名是对大小写不敏感的，因此 getElementByTagName 方法也是大小写不敏感的（不区分大小写）
+
+#### document.getElementsByClassName
+
+`document.getElementsByClassName`方法返回一个类似数组的对象（HTMLCollection 实例），包含了所有`class`名字符合指定条件的元素，元素的变化实时反映在返回结果中。  
+参数可以是多个`class`,它们之间使用空格分隔。
+
+```js
+// 多类名
+var elements = document.getElementsByClassName('foo bar')
+```
+
+#### document.getElementById
+
+`document.getElementById`方法返回匹配指定`id`属性的元素节点。如果没有发现匹配的节点，则返回`null`。  
+`document.getElementById`选取元素效率比较高。  
+**注意：这个方法只能在`document`对象上使用，不能在其它元素节点上使用**。
+
+```js
+// 选择所有的p标签
+var pArr = document.querySelectorAll('p')
+var pArr1 = document.getElementsByTagName('p')
+console.log(pArr)
+console.log(pArr1)
+```
+
+打印结果：
+![DOM.png](./images/DOM.png)
