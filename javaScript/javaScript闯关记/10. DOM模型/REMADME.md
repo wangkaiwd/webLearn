@@ -192,7 +192,7 @@ var body = document.body // 取得对body的引用
   document.title = '新标题'
   document.title // "新标题"
   ```
-* (3)document.referrer
+* (3)document.referrer  
   `document.referrer`属性返回一个字符串，表示当前文档的访问者来自哪里
   ```js
   // 文档网络地址：http://javascript.ruanyifeng.com/dom/document.html
