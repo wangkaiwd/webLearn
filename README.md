@@ -28,8 +28,9 @@
 
 #### `demo`练习
 
-> [预览索引](https://laihuamin.github.io/jsExample/)  
-> [参考源码](https://github.com/AllySu/JavaScript)
+1.  [83 个 js 小 demo](https://laihuamin.github.io/jsExample/)  
+    [参考源码](https://github.com/AllySu/JavaScript)
+2.  [JavaScript 打怪升级](https://juejin.im/post/5a39b2dcf265da431d3cd036)
 
 #### 学习笔记
 
@@ -75,3 +76,5 @@
 ### leetCode
 
 ### 调试技巧
+
+1.  [chrome 开发者工具不完全指南](https://juejin.im/post/59ffad656fb9a0450b65c4c0)
