@@ -10,13 +10,21 @@
 
 <body>
   <div id="node">
-    <p class="first">123</p>
+    <p class="first">
+      <span>123</span>
+    </p>
+    <p class="second">345</p>
+    <div contenteditable="true">12345r</div>
   </div>
+  <button accesskey="h" id="btn">点击</button>
   <script>
-    var p = document.createElement('p');
-    var returnValue = document.body.appendChild(p);
-    console.log(returnValue === p);
-    console.log(document.body.lastChild === p);
+    var pArr = document.querySelectorAll('p');
+    var pArr1 = document.getElementsByTagName('p');
+
+    // console.log(pArr);
+    // console.log(pArr1);
+    console.log(pArr[0].tagName);
+    // console.log(pArr[0].nodeName);
   </script>
 </body>
 
