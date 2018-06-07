@@ -75,7 +75,7 @@ console.log(node.childNodes)
 ```
 
 打印结果如下:  
-![childNodes](./images/NodeList.png)
+![childNodes](./images/NodeList.png)  
 `hasChildNodes()`:在节点包含一或多个子节点的情况下返回`true`。子节点包括所有节点，哪怕节点只包含一个空格，`hasChildNodes()`也会返回`true`.
 
 ```js

@@ -190,3 +190,73 @@ console.log(data); // 按照name属性进行排序: [{name:"Nicholas",age: 28},{
 data.sort(createComparisonFunction("age"));
 console.log(data);
 ```
+
+闭包的俩个最大用处：
+1. 可以读取函数内部的变量
+2. 让函数内部的变量始终保存在内存中，即闭包可以使得它诞生环境一直存在
+```js
+// 函数外部无法获取函数内部声明的变量
+function f1() {
+  var n = 999;
+}
+console.log(n); // Uncaught ReferenceError: n is not defined
+
+// 读取函数内部的变量
+function f1() {
+  var n = 999;
+  function f2() {
+    console.log(n);
+  }
+  return f2;
+}
+var result = f1(); // 保存状态
+result(); // 999 获取到函数内部的变量
+```
+闭包使得内部变量记住上一次调用时的运算结果
+```js
+function createIncrementor(start) {
+  return function () {
+    return start ++;
+  }
+}
+var inc = createIncrementor(5);
+inc() // 5
+inc() // 6
+inc() // 7
+```
+> 推荐阅读：  
+> 1. [闭包详解](https://juejin.im/post/5b167b476fb9a01e5b10f19b?utm_source=gold_browser_extension)(从词法作用域到高阶函数)
+
+### 立即调用的函数表达式
+> 有时我们需要在定义函数之后，立即调用该函数
+
+`function`这个关键字既可以当作语句，也可以当作表达式
+```js
+// 语句
+function f() {}
+
+// 表达式
+var f = function f() {}
+```
+
+如果`function`关键字出现在首行，一律解释成语句。`JavaScript`引擎看到行首是`function`关键字之后，认为这一段都是函数的定义，不应该以圆括号结尾，所以就报错了。
+```js
+function(){/* code */}()
+// SyntaxError: Unexpected token
+```
+解决方法：不要让`function`出现在行首，让引擎将其理解成一个表达式。最简单的处理就是将其放在一个圆括号里面。
+```js
+/**
+*  俩个函数之间必须要有分号（";"），
+*  否则JavaScript会将它们连在一起解释，将第二行解释为第一行的参数。
+*/ 
+(function() {
+  /*code*/
+})();
+(function() {
+  /*code*/
+})()
+```
+匿名函数的立即执行：  
+1. 不必为函数命名，避免了污染全局变量
+2. 内部形成了一个单独的作用域，可以封装一些外部无法读取的私有变量
