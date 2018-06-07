@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 找出元素 item 在给定数组 arr 中的位置
+    // 输入：[ 1, 2, 3, 4 ], 3  输出：2
+    function indexOf(arr, item) {
+      var len = arr.length;
+      if (Array.prototype.indexOf && false) {
+        return arr.indexOf(item)
+      } else {
+        for (var i = 0; i < len; i++) {
+          if (arr[i] === item) {
+            /**
+             *  return 会切断函数,连循环也会不再执行
+             *  @example: 
+             *  当满足条件即：arr[2] === 3时 
+             *  reutrn 2,之后的所有代码都不再执行（循环和函数都会断）
+             */
+            return i;
+          }
+        }
+        return -1;
+      }
+    }
+    console.log(indexOf([1, 2, 3, 4], 3))
+  </script>
+</body>
+
+</html>
