@@ -27,10 +27,12 @@
 5.  [JavaScript 深入系列](https://github.com/mqyqingfeng/Blog)
 
 #### `demo`练习
-
 1.  [83 个 js 小 demo](https://laihuamin.github.io/jsExample/)  
     [参考源码](https://github.com/AllySu/JavaScript)
 2.  [JavaScript 打怪升级](https://juejin.im/post/5a39b2dcf265da431d3cd036)
+3.  [牛客网练习题](https://www.nowcoder.com/ta/js-assessment)
+4.  [常用网页效果](http://jikeytang.github.io/)及[源码](https://github.com/jikeytang/jikeytang.github.io)
+#### 个人`demo`展示
 
 #### 学习笔记
 
