@@ -1,6 +1,7 @@
 ## 学习路径
 
-> [前端技能图谱](https://leohxj.gitbooks.io/front-end-database/content/)
+> [前端技能图谱 01](https://leohxj.gitbooks.io/front-end-database/content/)  
+> [前端技能图谱 02](https://github.com/f2e-awesome/knowledge)
 
 ![study](./images/study.png)
 
@@ -19,13 +20,17 @@
 ### javascript
 
 #### 基础知识
-
 1.  [javascript 闯关记](https://github.com/stone0090/javascript-lessons)
 2.  [廖雪峰 javascript 教程](https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000)
 3.  [MDN | JS 教程](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/A_re-introduction_to_JavaScript)
 4.  [JavaScript 标准参考教程(手册)](http://javascript.ruanyifeng.com/)
-5.  [JavaScript 深入系列](https://github.com/mqyqingfeng/Blog)
 
+#### 进阶知识
+1. [JavaScript 深入系列](https://github.com/mqyqingfeng/Blog)
+2. 读书笔记：  
+   1. [JavaScript面向对象精要](https://github.com/JChehe/blog/blob/master/posts/%E3%80%8AJavaScript%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%B2%BE%E8%A6%81%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0.md)
+   2. [JavaScript模式](https://github.com/JChehe/blog/blob/master/posts/%E3%80%8AJavaScript%E6%A8%A1%E5%BC%8F%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0.md)
+   3. [图解http](https://github.com/JChehe/blog/blob/master/posts/%E3%80%8A%E5%9B%BE%E8%A7%A3HTTP%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0.md)
 #### `demo`练习
 1.  [83 个 js 小 demo](https://laihuamin.github.io/jsExample/)  
     [参考源码](https://github.com/AllySu/JavaScript)
@@ -37,7 +42,6 @@
 #### 学习笔记
 
 **ES5**
-
 1.  [变量和数据类型](https://github.com/wangkaiwd/webLearn/blob/master/javaScript/javaScript%E9%97%AF%E5%85%B3%E8%AE%B0/03.%20%E5%8F%98%E9%87%8F%E5%92%8C%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/README.md)
 2.  [表达式和运算符](https://github.com/wangkaiwd/webLearn/blob/master/javaScript/javaScript%E9%97%AF%E5%85%B3%E8%AE%B0/04.%20%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8C%E8%BF%90%E7%AE%97%E7%AC%A6/README.md)
 3.  [语句](https://github.com/wangkaiwd/webLearn/blob/master/javaScript/javaScript%E9%97%AF%E5%85%B3%E8%AE%B0/05.%20%E8%AF%AD%E5%8F%A5/README.md)
@@ -56,7 +60,10 @@
 3.  [YAPI](http://yapi.demo.qunar.com/)
 
 ### http
-
+#### 基础知识
+1. [http_README](https://github.com/CyC2018/Interview-Notebook/blob/master/notes/HTTP.md)
+#### 书籍
+1. [图解http彩印版pdf](https://github.com/zhaohaihao/book-pdf/blob/master/http/%E5%9B%BE%E8%A7%A3HTTP%2B%E5%BD%A9%E8%89%B2%E7%89%88%2540www.java1234.com.pdf)
 ### node
 
 ### git

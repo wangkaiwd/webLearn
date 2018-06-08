@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 4. 实现一个flatten函数，将一个嵌套多层的数组 array（数组） 
+    // (嵌套可以是任何层数)转换为只有一层的数组，数组中元素仅基本类型的元素或数组，不存在循环引用的情况
+    var arr = [1, 2, 3, 4, 5, [4, 2, 5, 6, 8, 19], [[123, 434, 23, 5], 1]]
+    function flatten(data) {
+      function getArr(data) {
+        if (Array.isArray(data)) {
+          for (var i = 0; i < data.length; i++) {
+            getArr(data[i]);
+          }
+          return;
+        }
+        flatArr.push(data);
+      }
+      var flatArr = [];
+      for (var i = 0, len = arr.length; i < len; i++) {
+        getArr(arr[i])
+      }
+      return flatArr;
+    }
+    // console.log(flatten(arr));
+    // 没有理解
+    function flatten1(arr) {
+      var flatArr = [];
+      for (var i = 0; i < arr.length; i++) {
+        if (Array.isArray(arr[i])) {
+          flatArr = flatArr.concat(flatten1(arr[i]));
+        }
+        else {
+          flatArr.push(arr[i]);
+        }
+      }
+      console.log(flatArr);
+      return flatArr;
+    }
+    flatten1(arr)
+  </script>
+</body>
+
+</html>

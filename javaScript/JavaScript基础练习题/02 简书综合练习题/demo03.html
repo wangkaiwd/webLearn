@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 3. 写一个函数，生成一个随机 IP 地址，一个合法的 IP 地址为 0.0.0.0~255.255.255.255
+    function randomIP() {
+      var len = 4;
+      var str = '';
+      for (var i = 0; i < len; i++) {
+        if (i === len - 1) {
+          str += parseInt(Math.random() * 256);
+          break;
+        }
+        str += `${parseInt(Math.random() * 256)}.`;
+      }
+      return str;
+    }
+    // console.log(randomIP())
+
+    function randomIP1() {
+      var len = 4;
+      var arr = [];
+      for (var i = 0; i < len; i++) {
+        arr[i] = parseInt(Math.random() * 256);
+      }
+      return arr.join('.');
+    }
+    console.log(randomIP1());
+    // join不会改变原数组
+  </script>
+</body>
+
+</html>
