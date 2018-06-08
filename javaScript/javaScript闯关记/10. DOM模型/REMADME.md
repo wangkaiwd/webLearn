@@ -1,7 +1,7 @@
 ## DOM
 
 > DOM 是 JavaScript 操作网页的接口,全称为"文档对象模型"。它的作用是将网页转换为 JavaScript 对象,从而可以用脚本进行各种操作（比如增删内容）。  
-> 浏览器会根据 DOM 模型,将结构化文档(比如 HTML 和 XML)解析成一系列的节点,再由这些节点组成一个树状结构(DOM Tree)。所有的节点和最终的树状结构,都有规范的对外接口。
+浏览器会根据 DOM 模型,将结构化文档(比如 HTML 和 XML)解析成一系列的节点,再由这些节点组成一个树状结构(DOM Tree)。所有的节点和最终的树状结构,都有规范的对外接口。
 
 ### 节点
 
@@ -49,8 +49,7 @@ if (node.nodeType === 1) {
 
 #### nodeName 和 nodeValue 属性
 
-> nodeName: 显示节点的名称
-> nodeValue: 显示节点的值
+> nodeName: 显示节点的名称nodeValue: 显示节点的值
 
 对于元素节点，`nodeName`中保存的始终都是元素的标签名，而`nodeValue`的值始终为`null`
 
@@ -117,10 +116,10 @@ var returnValue = document.body.insertBefore(p, document.body.firstChild)
 console.log(returnValue === p) // true
 ```
 
-* 注意点：
-  1.  `insertBefore`的第二个参数不能省略。
-  2.  `insertBefore`的第二个参数如果是`null`,则新节点将插在当前节点内部的最后位置，变成最后一个子节点(相当于`appendChild`)
-  3.  如果所插入的节点是当前`DOM`现有的节点，则该节点将从原有位置移除，插入新的位置
+- 注意点：
+  1. `insertBefore`的第二个参数不能省略。
+  2. `insertBefore`的第二个参数如果是`null`,则新节点将插在当前节点内部的最后位置，变成最后一个子节点(相当于`appendChild`)
+  3. 如果所插入的节点是当前`DOM`现有的节点，则该节点将从原有位置移除，插入新的位置
 
 `replaceChild`方法用于将一个新的节点，替换当前节点的某一个子节点。
 
@@ -175,25 +174,28 @@ var body = document.body // 取得对body的引用
 
 以下属性返回文档信息.
 
-* (1)document.URI,document.URL,document.domain
+- (1)document.URI,document.URL,document.domain
 
   ```js
   // 文档网络地址：http://javascript.ruanyifeng.com/dom/document.html
   document.URL === document.URI
   // "http://javascript.ruanyifeng.com/dom/document.html"
-
+  
   document.domain // 返回当前文档的域名
   // "javascript.ruanyifeng.com"
   ```
 
-* (2)document.title  
-  `document.title`属性返回当前文档的标题。默认情况下，返回`<title>`节点的值。该属性是可写的，一旦被修改， 就返回修改后的值。
+- (2)document.title  
+`document.title`属性返回当前文档的标题。默认情况下，返回`<title>`节点的值。该属性是可写的，一旦被修改， 就返回修改后的值。
+
   ```js
   document.title = '新标题'
   document.title // "新标题"
   ```
-* (3)document.referrer  
-  `document.referrer`属性返回一个字符串，表示当前文档的访问者来自哪里
+
+- (3)document.referrer  
+`document.referrer`属性返回一个字符串，表示当前文档的访问者来自哪里
+
   ```js
   // 文档网络地址：http://javascript.ruanyifeng.com/dom/document.html
   document.referrer
@@ -205,8 +207,8 @@ var body = document.body // 取得对body的引用
 
 #### document.querySelector(),document.querySelectorAll()
 
-* `document.querySelector()`:接受一个 css 选择器作为参数，返回匹配该选择器的元素节点。**如果有多个节点满足匹配条件，则返回`null`。**
-* `document.querySelectorAll()`:与`querySelector`用法类似，区别是返回一个`NodeList`对象，包含所有匹配给定选择器的节点。
+- `document.querySelector()`:接受一个 css 选择器作为参数，返回匹配该选择器的元素节点。**如果有多个节点满足匹配条件，则返回`null`。**
+- `document.querySelectorAll()`:与`querySelector`用法类似，区别是返回一个`NodeList`对象，包含所有匹配给定选择器的节点。
 
 这俩个方法都支持复杂的`css`选择器：
 

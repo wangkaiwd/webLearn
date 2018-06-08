@@ -86,4 +86,5 @@
 
 ### 调试技巧
 
-1.  [chrome 开发者工具不完全指南](https://juejin.im/post/59ffad656fb9a0450b65c4c0)
+1. [chrome开发者工具不完全指南](https://juejin.im/post/59ffad656fb9a0450b65c4c0)
+2. [chrome实用调试技巧](https://juejin.im/entry/5804669f570c35006c828548)
