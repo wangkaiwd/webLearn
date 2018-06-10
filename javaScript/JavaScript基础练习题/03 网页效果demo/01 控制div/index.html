@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      margin: 100px auto;
+      width: 174px;
+    }
+
+    .box {
+      margin-top: 10px;
+      width: 174px;
+      height: 150px;
+      background-color: pink;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="btn-box">
+      <button>变宽</button>
+      <button>变高</button>
+      <button>变色</button>
+      <button>隐藏</button>
+      <button>重置</button>
+    </div>
+    <div class="box">
+
+    </div>
+  </div>
+  <script>
+    var btnArr = document.getElementsByClassName("btn-box")
+    var btnArr1 = document.getElementsByClassName("btn-box")[0]
+    // console.log(btnArr);
+    // childNodes属性的返回值还包括文本节点和注释节点
+    // Node.childNodes和Element.children的区别：后者只包含元素类型的子节点，不包括其它类型的子节点。
+    // 常用Element.children:如果当前元素没有子元素，则返回的对象包含0个成员
+    // console.log(btnArr1.childNodes[0]);
+  </script>
+</body>
+
+</html>
