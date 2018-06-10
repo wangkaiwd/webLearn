@@ -52,6 +52,7 @@
 **ES6**
 
 1.  [现代`JavaScript`备忘清单](http://translate.breword.com/pages/ef2ac50436e84d5582d3d04971488c22)
+2. [es6入门](http://es6.ruanyifeng.com/)
 
 ### `Mockjs`
 

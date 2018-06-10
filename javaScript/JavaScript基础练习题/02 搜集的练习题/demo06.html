@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 6. 写一个函数getChIntv，获取从当前时间到指定日期的间隔时间
+    function getChIntv(time) {
+      var futureTime = new Date(time).getTime();
+      var nowTime = new Date().getTime();
+      var intervalTime = Math.abs(futureTime - nowTime);
+      var mm = parseInt(intervalTime % 1000);
+      var sec = parseInt(intervalTime / 1000 % 60);
+      var min = parseInt(intervalTime / 1000 / 60 % 60);
+      var h = parseInt(intervalTime / 1000 / 60 / 60 % 60);
+      var d = parseInt(intervalTime / 1000 / 60 / 60 / 24);
+      var result = `距离${time}还有${d}天${h}小时${min}分${sec}秒${mm}毫秒`
+      return result;
+    }
+    console.log(getChIntv("2018-6-11"));
+  </script>
+</body>
+
+</html>
