@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 移除数组 arr 中的所有值与 item 相等的元素。不要直接修改数组 arr，结果返回新的数组
+    // input:[1, 2, 3, 4, 2], 2
+    // output:[1, 3, 4]
+
+    // filter
+    function remove(arr, item) {
+      return arr.filter(function (one) {
+        return one !== item;
+      })
+    }
+    // filter: 返回数组中符合函数条件的元素组成的新数组
+
+    // push
+    // 实现方法一：
+    function remove1(arr, item) {
+      var newArr = [];
+      var len = arr.length;
+      for (var i = 0; i < len; i++) {
+        if (arr[i] !== item) {
+          newArr.push(arr[i]);
+        }
+      }
+      return newArr;
+    }
+    // 实现方法二：
+    function remove2(arr, item) {
+      var newArr = []
+      var len = arr.length;
+      for (var i = 0; i < len; i++) {
+        if (arr[i] === item) {
+          continue;
+        }
+        newArr.push(arr[i]);
+      }
+      return newArr;
+    }
+    // splice
+    function remove3(arr, item) {
+      // splice返回的是一个新数组，如果newArr = arr,这种newArr是arr的引用，newArr改变，arr也会改变
+      // var newArr = arr.splice() // 不传参数默认为不截取，返回空数组，即：newArr = []
+      // var newArr = arr.splice(0) // 只传一个参数，相当于[start,end]，即：从传入的索引对应的元素到最后一个元素
+      // 此时arrv = [];
+      var newArr = arr.splice(0);
+      for (var i = 0; i < newArr.length; i++) {
+        if (newArr[i] === item) {
+          // splice会改变原数组，所以newArr.length也会随着改变
+          /**
+           * 解决方法：
+           *  提前将newArr.length缓存
+           */
+          newArr.splice(i, 1);
+          i--;
+        }
+      }
+      return newArr;
+    }
+  </script>
+</body>
+
+</html>

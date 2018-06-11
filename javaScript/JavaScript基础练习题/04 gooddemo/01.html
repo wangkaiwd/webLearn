@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>编程小分享01--Array之API</title>
+  <!-- element ui css样式 -->
+  <link rel="stylesheet" href="https://cdn.bootcss.com/element-ui/1.2.4/theme-default/index.css">
+  <!-- highlight.js插件样式 -->
+  <link href="https://cdn.bootcss.com/highlight.js/9.10.0/styles/monokai-sublime.min.css" rel="stylesheet">
+  <style>
+    pre {
+      margin: 0;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    h2 {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>编程小分享01--Array之API</h2>
+  <div id="app">
+    <el-collapse v-model="activeNames" @change="handleChange">
+      <el-collapse-item title="问题：" name="1">
+        <pre>
+          <code class="javascript">
+            let todos = [
+              {
+                id: 1001,
+                title: '请找出这个数组中第一个id为1005的todo的位置',
+                completed: false
+              },
+              {
+                id: 1002,
+                title: '请找出这个数组中所有completed为true的todo',
+                completed: true
+              },
+              {
+                id: 1005,
+                title: '这个数组中todo的completed都是true吗',
+                completed: false
+              },
+              {
+                id: 1004,
+                title: '给所有todo的id加10',
+                completed: true
+              },
+              {
+                id: 1003,
+                title: '计算所有todo的id的和',
+                completed: false
+              }
+            ] 
+            </code>
+          </pre>
+      </el-collapse-item>
+      <el-collapse-item :title="msg" name="2">
+        <pre>
+          <code>
+            // findIndex:返回数组中满足提供的测试函数的第一个元素的索引。否则返回-1
+            let index = todos.findIndex( (todo) => {
+              return todo.id === 1005
+            })
+          
+            let filterArr = todos.filter( (todo) => {
+              return todo.completed
+            })
+          
+            let isAllCompleted = todos.every( (todo) => {
+              return todo.completed
+            })
+          
+            todos.map( (todo) => {
+              todo.id += 10
+              return todo
+            })
+          
+            let sum = todos.reduce( (total,todo) => {
+              return totoal + todo.id
+            }, 0 )
+        </code> 
+      </pre>
+      </el-collapse-item>
+    </el-collapse>
+  </div>
+</body>
+<script src="https://cdn.bootcss.com/highlight.js/9.10.0/highlight.min.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+<script src="https://cdn.bootcss.com/vue/2.2.2/vue.js"></script>
+<script src="https://cdn.bootcss.com/element-ui/1.2.4/index.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      msg: '显示代码',
+      activeNames: ['1']
+    },
+    methods: {
+      handleChange: function () {
+        if (this.activeNames.findIndex(function (val) {
+          console.log(val);
+          return val === '2'
+        }) > -1) {
+          this.msg = '隐藏代码'
+        } else {
+          this.msg = '显示代码'
+        }
+      }
+    }
+  })
+</script>
+
+</html>

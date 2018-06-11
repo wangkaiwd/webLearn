@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let todos = [
+      {
+        id: 1001,
+        title: '请找出这个数组中第一个id为1005的todo的位置',
+        completed: false
+      },
+      {
+        id: 1002,
+        title: '请找出这个数组中所有completed为true的todo',
+        completed: true
+      },
+      {
+        id: 1005,
+        title: '这个数组中todo的completed都是true吗',
+        completed: false
+      },
+      {
+        id: 1004,
+        title: '给所有todo的id加10',
+        completed: true
+      },
+      {
+        id: 1003,
+        title: '计算所有todo的id的和',
+        completed: false
+      }
+    ]
+
+    // 请找出这个数组中第一个id为1005的todo的位置
+    let index = todos.findIndex(item => item.id === 1005);
+    console.log(index)
+
+    // 请找出这个数组中所有completed为true的todo
+    var todoArr = todos.filter(item => item.completed === true)
+    console.log(todoArr);
+
+    // 这个数组中todo的completed都是true吗
+    var isTrue = todos.every(item => item.completed === true)
+    console.log(isTrue);
+    // 给所有todo的id加10
+    var todoPlus = todos.map(item => item.id + 10)
+    console.log(todoPlus);
+    // 计算所有todo的id的和
+    var todoSum = todos.reduce((acc, item) => acc + item.id, 0)
+    console.log(todoSum);
+
+    // 知识点：
+    // find():返回数组中满足提供的测试函数的第一个元素的值。否则返回undefined.
+    // findIndex(): 返回数组中满足提供的测试函数的第一个元素得的索引。否则返回-1
+    // map():创建一个数组，其结果是该数组中每个元素都调用一个提供的函数后的返回结果
+  </script>
+</body>
+
+</html>
