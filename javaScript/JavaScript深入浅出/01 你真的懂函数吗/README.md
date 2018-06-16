@@ -175,9 +175,32 @@ this.onClick.bind = function (x,y,z) {
     return sum(1,y);
   }
   ```
+  柯理化可以将真实计算拖延到最后再做（闭包）
 * 高阶函数
   > 在数学和计算机科学中，高阶函数是至少满足下列一个条件的函数：
 
-  a. 接受一个或多个函数作为输入
-  b. 输出一个函数
-  c. 不过它同时常常满足俩个条件
+  a. 接受一个或多个函数作为输入:`forEach,map,filter,reduce`  
+  b. 输出一个函数: `lodsh.curry`  
+  c. 不过它同时常常满足俩个条件：`Function.prototype.bind`
+
+## 回调函数
+名词形式：被当做参数的函数就是回调函数  
+动词形式：调用这个回调  
+**注意回调和异步没有任何关系**
+```js
+// 异步回调（setTimeout是异步的）
+setTimeout(fn,1000) // fn是异步回调
+
+// 同步回到
+Array.prototype.map(fn) // fn是同步回到
+```
+`setTimeout`的回调函数中改变`this`指向
+```js
+/** 
+* @param {function} fn: 想要在`delay``毫秒之后执行的函数
+*   fn可以用字符串替代（不推荐）
+* @param {Number} delay: 延迟的毫秒数
+* @param {Any} : 附加参数（这里的1,2,3）,会做为参数传递给function(fn)
+*/
+setTimeout(fn.bind(fn),1000,1,2,3);
+```
