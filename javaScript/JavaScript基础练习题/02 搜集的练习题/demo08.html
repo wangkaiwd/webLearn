@@ -9,8 +9,45 @@
 </head>
 
 <body>
-  <script>
+  <div class="container">
+    <ul>
 
+    </ul>
+  </div>
+  <script>
+    const info = [
+      { id: 1, name: '医生;特种兵;学校;', aliase: '医;兵;校;' },
+      { id: 2, name: '', aliase: '' },
+      { id: 3, name: '医生;特种兵;学生;', aliase: '医;兵;生;' },
+      { id: 4, name: '发明家;科学家;厨师;', aliase: '明;科;厨;' },
+    ]
+    // 涉及内容：数组和字符串操作
+    // 业务需求：定义一个转换函数，将对应的别名显示到页面，鼠标悬浮时在提示框中显示全称
+    //          细节要求：不传别名时，别名默认为name字段每一项的第一个字
+    function transformName(name = "", aliase) {
+      const nameLen = name.length;
+      const nameArr = name.slice(0, nameLen - 1).split(";");
+      const firstFontArr = nameArr.map(item => item.charAt(0))
+      const aliaseArr = (aliase ? aliase.slice(0, aliase.length - 1).split(";") : firstFontArr);
+      const ul = document.getElementsByTagName('ul')[0];
+      const li = document.createElement('li');
+      aliaseArr.map((item, i) => {
+        const span = document.createElement("span");
+        span.innerHTML = item;
+        span.title = nameArr[i];
+        li.appendChild(span);
+      })
+      ul.appendChild(li);
+    }
+    info.map(item => transformName(item.name, item.aliase))
+    // 细节知识
+    // var str = ""
+    // 参数为负数：表示从原数组中的倒数第几个进行截取 slice(-2,-1) // 从倒数第二个截取到倒数第一个，不包含倒数第一个，即只截取倒数第二个
+    // str.slice(0,-1)  // ""
+    // str.split(";")  // [""]
+    // [""].slice(0,-1) // []
+    // var str = '1234';
+    // str.slice(0,0); // ""
   </script>
 </body>
 
