@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>
+    <button>按钮1</button>
+    <button>按钮4</button>
+    <button>change</button>
+    <button>按钮2</button>
+  </div>
+  <script>
+    var btnArr = document.getElementsByTagName('button');
+    var isdo = false;
+    btnArr[2].onclick = function () {
+      isdo = !isdo;
+      console.log('isdo', isdo);
+      if (isdo) {
+        btnArr[0].onclick = function () {
+          console.log('first', 0);
+        }
+
+        btnArr[1].onclick = function () {
+          console.log('second', 1);
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>
