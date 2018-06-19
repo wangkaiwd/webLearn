@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <img src="http://www.chinanews.com/cul/2018/01-08/U322P4T8D8418615F107DT20180108102000.jpg">
+  <script>
+    const img = document.getElementsByTagName('img')[0];
+    console.log('图片宽度', img.width);
+    img.onload = function () {
+      console.log('图片加载完毕', img.width);
+    }
+  </script>
+</body>
+
+</html>
