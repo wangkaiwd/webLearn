@@ -13,6 +13,12 @@
     // 在数组 arr 末尾添加元素 item。不要直接修改数组 arr，结果返回新的数组
     // input:[1, 2, 3, 4],  10
     // output:[1, 2, 3, 4, 10]
+    /** 
+    * 普通的迭代拷贝
+    * @param arr
+    * @param item
+    * @return newArr
+    */
     function append(arr, item) {
       var newArr = [];
       for (var i = 0; i < arr.length; i++) {
@@ -21,6 +27,41 @@
       newArr[newArr.length] = item;
       return newArr;
     }
+
+    /**
+     * slice浅拷贝+push
+     * @param arr
+     * @param item
+     * return newArr
+     */
+    function append2(arr, item) {
+      var newArr = arr.slice(); // 原数组的浅拷贝
+      newArr.push(item); // push方法返回的是添加元素后的数组length
+      return newArr;
+    }
+
+    /** 
+    * concat进行拼接
+    * @param arr
+    * @param item
+    * return newArr
+    */
+    function append3(arr, item) {
+      // 数据类型如字符串，数字和布尔值，concat将对应的值复制到新数组中
+      return arr.concat(item); // concat:返回一个新数组，新数组为原数组的浅拷贝
+    }
+
+    /**
+     * 获得原数组的深拷贝赋值给新数组，然后进行处理
+     * @param arr
+     * @param item
+     * return newArr
+     */
+    function append4(arr, item) {
+      var newArr = deepClone(arr);
+      return newArr.concat(item);
+    }
+
     // 
     /** 
     * 深拷贝
@@ -29,6 +70,7 @@
     *   TODO:
     *     1. 通过Object.prototype.toString.call()进行数据类型判断时，可以通过正则将返回的字符串对应的表示数据类型的字符串截取出来
     *     2. 数组通过for...in循环的话，会导致顺序无法进行确定
+    *     3. Date,Function,RegEx等对象无法进行拷贝，需要额外处理
     */
     // 自己实现一个深考贝
     function deepClone(obj) {
