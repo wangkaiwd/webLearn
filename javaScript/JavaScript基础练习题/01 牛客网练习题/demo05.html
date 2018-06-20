@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 在数组 arr 末尾添加元素 item。不要直接修改数组 arr，结果返回新的数组
+    // input:[1, 2, 3, 4],  10
+    // output:[1, 2, 3, 4, 10]
+    function append(arr, item) {
+      var newArr = [];
+      for (var i = 0; i < arr.length; i++) {
+        newArr[i] = arr[i]
+      }
+      newArr[newArr.length] = item;
+      return newArr;
+    }
+    // 
+    /** 
+    * 深拷贝
+    *  @param {Object || Array} 一个对象或者数组
+    *   FIXME:for...in不应该用于迭代一个Array,因为for...in迭代的顺序是依赖于执行环境的，数组遍历不一定按次序访问元素
+    *   TODO:
+    *     1. 通过Object.prototype.toString.call()进行数据类型判断时，可以通过正则将返回的字符串对应的表示数据类型的字符串截取出来
+    *     2. 数组通过for...in循环的话，会导致顺序无法进行确定
+    */
+    // 自己实现一个深考贝
+    function deepClone(obj) {
+      let o;
+      if (typeof obj !== "object" || obj === null) return obj;
+      function isType(obj) {
+        var str = Object.prototype.toString.call(obj);
+        const newStr = str.split(" ")[1];
+        return newStr.substr(0, newStr.length - 1);
+      }
+      o = (isType(obj) === 'Object' ? {} : []);
+      for (let k in obj) { // for...in循环语句将返回所有的可枚举属性，可能包含一些自身属性外的其它属性
+        if (obj.hasOwnProperty(k)) { // 返回一个布尔值，指示对象自身属性中是否具有指定的属性
+          const bool = isType(obj[k]) === 'Object' || isType(obj[k]) === 'Array';
+          o[k] = (bool ? deepClone(obj[k]) : obj[k]);
+        }
+      }
+      return o;
+    }
+    const obj = { a: { name: '小明', age: '28' }, b: { c: { name: '小红' } }, d: 'hello' }
+    var newObj = deepClone(obj);
+  </script>
+</body>
+
+</html>
