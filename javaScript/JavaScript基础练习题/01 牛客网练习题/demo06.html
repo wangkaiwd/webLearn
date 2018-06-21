@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 删除数组 arr 最后一个元素。不要直接修改数组 arr，结果返回新的数组
+    // input:[1, 2, 3, 4]
+    // output:[1, 2, 3]
+    /** 
+    * 普通迭代
+    */
+    function truncate(arr) {
+      // var newArr = [];
+      // for (var i = 0; i < arr.length; i++) {
+      //   newArr[i] = arr[i]
+      // }
+      // newArr.length = newArr.length - 1;
+      // return newArr;
+
+      var newArr = [];
+      for (var i = 0; i < arr.length - 1; i++) {
+        newArr[i] = arr[i];
+      }
+      return newArr;
+    }
+    // slice
+    function truncate1(arr) {
+      return arr.slice(0, -1) // 负数：表示从原数组的倒数第几个元素开始提取
+    }
+
+    // filter
+    function truncate2(arr) {
+      return arr.filter(function (item, i, array) {
+        return array.length - 1 !== i;
+      })
+    }
+    // join+split
+    function truncate3(arr) {
+      var newArr = arr.join().split(",");
+      newArr.pop();
+      return newArr;
+    }
+    // concat+pop
+    function truncate4(arr) {
+      var newArr = [].concat(arr);
+      newArr.pop();
+      return newArr;
+    }
+  </script>
+</body>
+
+</html>
