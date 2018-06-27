@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>
+
+  </div>
+  <script>
+    // 自己实现列表分页，可以指定每页的条数
+    // input: [1,2,3,4,5,6,7,8];
+    // output: [[1,2],[3,4],[5,6],[7,8]]
+
+    function paging(data, perpage) {
+      const pages = [];
+      data.forEach((item, i) => {
+        // 数组中对应的元素在第几页，页数从0开始算起
+        const index = Math.floor(i / perpage);
+        if (!pages[index]) pages[index] = [];
+        pages[index].push(item);
+      })
+      return pages;
+    }
+    console.log(paging([1, 2, 3, 4, 5, 6, 7, 8], 2));
+
+  </script>
+</body>
+
+</html>
