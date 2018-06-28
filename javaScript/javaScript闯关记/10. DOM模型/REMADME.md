@@ -106,8 +106,16 @@ console.log(element) // <b></b>
 ```
 
 `insertBefore`方法用于将某个节点插入父节点内部的指定位置。  
-`var insertedNode = parentNode.insertBefore(newNode,referenceNode)`;
-`insertBefore`方法接受俩个参数，第一个参数：所要插入的节点`newNode`,第二个参数是父节点`parentNode`内部的一个子节点`referenceNode`。`newNode`将插入到`referenceNode`这个子节点的前面，返回值是插入的新节点`newNode`。
+```js
+/** 
+* @desc
+*  insertBefore:将某个节点插入父节点内部的指定位置之前
+* @param newNode 要插入的节点
+* @param referenceNode 父节点parentNode内部的一个子节点
+* @return newNode 插入的新节点
+*/
+var insertedNode = parentNode.insertBefore(newNode,referenceNode);
+```
 
 ```js
 // 在body标签的第一个子节点之前插入p标签
@@ -207,7 +215,7 @@ var body = document.body // 取得对body的引用
 
 #### document.querySelector(),document.querySelectorAll()
 
-- `document.querySelector()`:接受一个 css 选择器作为参数，返回匹配该选择器的元素节点。**如果有多个节点满足匹配条件，则返回`null`。**
+- `document.querySelector()`:接受一个 css 选择器作为参数，返回匹配该选择器的元素节点。**如果有多个节点满足匹配条件，则返回第一个匹配到的节点,如果没有匹配到节点，返回Null。**
 - `document.querySelectorAll()`:与`querySelector`用法类似，区别是返回一个`NodeList`对象，包含所有匹配给定选择器的节点。
 
 这俩个方法都支持复杂的`css`选择器：
