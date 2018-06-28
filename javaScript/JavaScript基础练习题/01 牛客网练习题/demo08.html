@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 在数组 arr 的 index 处添加元素 item。不要直接修改数组 arr，结果返回新的数组
+    // input:[1, 2, 3, 4], 'z', 2
+    // output:[1, 2, 'z', 3, 4]
+    function insert(arr, item, index) {
+      var newArr = arr.slice();
+      /** 
+       *  通过删除现有元素和/或添加新元素来更改一个数组的内容
+       *  @param start:指定修改的位置，如果超出数组长度，则从数组末尾开始添加内容，如果只使用start表示删除[start,end]
+       *  @param deleteCount:表示要移除的数组元素的个数。如果是0，则不移除，至少添加一个新元素
+       *  @param item1...itemn:要添加进数组的元素，要添加进去的元素，从start位置开始（即原来start位置的元素的索引会发生变化）
+      */
+      newArr.splice(index, 0, item); // 要添加进数组的元素，从start位置开始
+      return newArr;
+    }
+    console.log(insert([1, 2, 3, 4], 'z', 2));
+  </script>
+</body>
+
+</html>
