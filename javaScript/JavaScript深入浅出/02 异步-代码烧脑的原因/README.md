@@ -74,3 +74,5 @@ for(var  i=0;i<liList.length;i++) {
 ```
 
 ### `Ajax`中的异步
+
+## 获取异步结果的技巧
