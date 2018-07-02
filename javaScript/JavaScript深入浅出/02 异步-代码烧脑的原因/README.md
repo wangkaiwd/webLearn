@@ -1,6 +1,6 @@
 # 异步-代码烧脑的原因
-## 同步于异步
-同步：等待结果
+## 同步与异步
+同步：等待结果  
 异步：不等待结果
 
 **异步常常伴随回调一起出现，但是异步不是回调，回调也不一定是异步**
@@ -29,6 +29,7 @@ console.log(2);
 ```
 
 ## 前端经常遇到的异步
+### 1. 图片加载
 图片加载是需要时间的，但它并不会阻塞后续代码的执行，即：图片加载是异步的
 ```html
 <img src="http://www.chinanews.com/cul/2018/01-08/U322P4T8D8418615F107DT20180108102000.jpg">
@@ -48,3 +49,28 @@ img.onload = function() {
 }
 ```
 ![img-onload](../images/02-img-onload.png)
+
+### 面试
+```html
+<div id="box">
+  <ul>
+    <li>选项1</li>
+    <li>选项2</li>
+    <li>选项3</li>
+    <li>选项4</li>
+    <li>选项5</li>
+    <li>选项6</li>
+  </ul>
+</div>
+```
+```js
+let liList = document.querySelectorAll('li');
+// 这里i会变量声明提升，是全局变量
+for(var  i=0;i<liList.length;i++) {
+  liList.onclick = function() {
+    console.log(i); // 6
+  }
+}
+```
+
+### `Ajax`中的异步
