@@ -51,7 +51,7 @@
       // splice返回的是一个新数组，如果newArr = arr,这种newArr是arr的引用，newArr改变，arr也会改变
       // var newArr = arr.splice() // 不传参数默认为不截取，返回空数组，即：newArr = []
       // var newArr = arr.splice(0) // 只传一个参数，相当于[start,end]，即：从传入的索引对应的元素到最后一个元素
-      // 此时arrv = [];
+      // 此时arr = [];
       var newArr = arr.splice(0);
       for (var i = 0; i < newArr.length; i++) {
         if (newArr[i] === item) {
