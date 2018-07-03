@@ -13,7 +13,7 @@ var sum = function (num1,num2) {
 // 写法三：`Function`构造函数（不推荐写法）
 var sum = new Function("num1","num2","return num1+num2");
 ```
-> 函数不调用不执行
+> **函数不调用不执行**
 
 ### 函数声明与函数表达式
 > 变量声明提升：`JavaScript`引擎的工作方式是，先解析代码，获取所有被声明的变量，然后再一行一行地运行。即：所有的变量的声明语句（**只提升变量声明的过程，赋值过程并不会提升**），都会被提升到代码的头部。
@@ -57,9 +57,9 @@ f(); // Uncaught SyntaxError: Unexpected token )
 函数可以通过`name`属性来获取函数的名字
 ```js
 // 获取函数参数的名字
-var myFunc = function(){
+var myFunc = function(){}
 function test(f) {
-console.log(f.name);
+  console.log(f.name);
 }
 test(myFunc); // "myFunc"
 ```
@@ -160,7 +160,7 @@ var f = function () {
 函数在运行的时候，有时需要提供外部数据，不同的外部数据会得到不同的结果，这种外部数据就叫参数。
 ```js
 // 没办法只省略靠前的参数，而保留靠后的参数
-function (a,b) {
+function f (a,b) {
   return a;
 }
 // 省略第一个参数会报错
