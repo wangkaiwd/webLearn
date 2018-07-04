@@ -13,18 +13,19 @@
     <p class="first">
       <span>123</span>
     </p>
-    <p class="second">345</p>
+    <p class="second" id="second" name="second">345</p>
     <div contenteditable="true">12345r</div>
   </div>
   <button accesskey="h" id="btn">点击</button>
   <script>
     var pArr = document.querySelectorAll('p');
     var pArr1 = document.getElementsByTagName('p');
-
+    let p = document.getElementById('second');
     // console.log(pArr);
     // console.log(pArr1);
     console.log(pArr[0].tagName);
     // console.log(pArr[0].nodeName);
+    console.log('attribute',p.attributes); // 元素所有属性组成的伪数组
   </script>
 </body>
 
