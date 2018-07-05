@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  //  找出数组 arr 中重复出现过的元素
+  //  input:[1, 2, 4, 4, 3, 3, 1, 5, 3]
+  //  output:[1, 3, 4]
+
+  //通过filter进行数组去重
+  // function duplicate(arr) {
+  //   const noDuplicate = arr.filter((item, i) => {
+  //     return arr.indexOf(item) === i;
+  //   });
+  //   return noDuplicate;
+  // };
+  function duplicate(arr) {
+    const newArr = arr.filter((item,i) => {
+      return arr.indexOf(item) !== i;
+    });
+    const noDuplicate = newArr.filter((item,i) => {
+      return newArr.indexOf(item) === i;
+    })
+    return noDuplicate;
+  }
+  console.log(duplicate([1, 2, 4, 4, 3, 3, 1, 5, 3]));
+</script>
+</body>
+</html>
