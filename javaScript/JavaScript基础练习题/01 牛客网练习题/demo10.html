@@ -17,16 +17,93 @@
   //   });
   //   return noDuplicate;
   // };
-  function duplicate(arr) {
-    const newArr = arr.filter((item,i) => {
-      return arr.indexOf(item) !== i;
-    });
-    const noDuplicate = newArr.filter((item,i) => {
-      return newArr.indexOf(item) === i;
+  /**
+   * 通过filter实现
+   * @param {Array} arr
+   * @returns {Array} 重复出现的元素组成的数组
+   */
+  function duplicate (arr) {
+    const newArr = arr.filter((item, i) => {
+      return arr.indexOf(item) !== i
     })
-    return noDuplicate;
+    const noDuplicate = newArr.filter((item, i) => {
+      return newArr.indexOf(item) === i
+    })
+    return noDuplicate
   }
-  console.log(duplicate([1, 2, 4, 4, 3, 3, 1, 5, 3]));
+
+  console.log(duplicate([1, 2, 4, 4, 3, 3, 1, 5, 3]))
+
+  /**
+   * 通过原生for循环进行实现
+   * @param arr
+   * @returns {Array}
+   */
+  function duplicate1 (arr) {
+    const newArr = []
+    for (let i = 0; i < arr.length; i++) {
+      if (arr.indexOf(arr[i]) !== i && newArr.indexOf(arr[i]) === -1) {
+        newArr.push(arr[i])
+      }
+    }
+    return newArr
+  }
+
+  console.log('repeateArr', duplicate1([1, 2, 3, 4, 5, 6, 1]))
+
+  /**
+   * 创建一个新数组，用来将原来数组的值存为该数组的键，如果值重复，该数组对应键的对应值加1，否则赋值为1
+   * 最后值为1的键即为不重复元素，大于1的键为重复元素，这里要注意稀疏数组
+   * @param arr
+   * @returns {Array}
+   */
+  function duplicate3 (arr) {
+    const arrb = []
+    const arra = []
+    for (let i = 0; i < arr.length; i++) {
+      var val = arr[i]
+      if (!(val in arrb)) {
+        arrb[val] = 1
+      }
+      else {
+        arrb[val]++
+      }
+    }
+    // 这里的arrb是稀疏数组，数组中的某一项可能不存在，取值为undefined
+    // console.log('arrb', arrb)
+    for (let j = 0; j < arrb.length; j++) {
+      if (arrb[j] > 1) {
+        arra.push(j)
+      }
+    }
+    return arra
+    // return arrb.map((item, i) => {
+    //   // 由于arrb此时为稀疏数组，所以item的取值可能为undefined
+    //   if (item > 1) {
+    //     console.log('i', i)
+    //     return i
+    //   }
+    // })
+    // 返回结果会有一个undefined
+  }
+
+  console.log('3', duplicate3([1, 4, 4, 3, 3, 1, 5, 3]))
+
+  /**
+   * 通过sort和indexOf进行遍历
+   * @param arr
+   * @returns {Array}
+   */
+  function duplicate4 (arr) {
+    var newArr = arr.sort()
+    var res = []
+    for (var i = 0; i < newArr.length; i++) {
+      if (arr[i] === arr[i + 1] && res.indexOf(arr[i]) === -1) {
+        res.push(arr[i])
+      }
+    }
+    return res
+  }
 </script>
 </body>
 </html>

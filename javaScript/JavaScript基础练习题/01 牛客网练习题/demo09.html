@@ -9,41 +9,45 @@
 </head>
 
 <body>
-  <script>
-    // 统计数组 arr 中值等于 item 的元素出现的次数
-    // input:[1, 2, 4, 4, 3, 4, 3], 4
-    // output:3
-    function count(arr, item) {
-      let total = 0;
-      arr.forEach(one => {
-        one == item && total++;
-      })
-      return total;
-    }
-    console.log(count([1, 2, 4, 4, 3, 4, 3], 4));
+<script>
+  // 统计数组 arr 中值等于 item 的元素出现的次数
+  // input:[1, 2, 4, 4, 3, 4, 3], 4
+  // output:3
+  function count (arr, item) {
+    let total = 0
+    arr.forEach(one => {
+      one === item && total++
+    })
+    return total
+  }
 
-    // filter实现:filter返回true项组成的数组
-    function count1(arr, item) {
-      // const total = arr.filter(one => {
-      //   return one === item;
-      // })
-      // return total.length;
-      return arr.filter(one => one === item).length;
-    }
-    console.log(count1([1, 2, 4, 4, 3, 4, 3], 4));
+  console.log(count([1, 2, 4, 4, 3, 4, 3], 4))
 
-    // reduce实现:对累加器和数组中的每个元素（从左到右）应用一个函数，将其减少为单个值
-    function count2(arr, item) {
-      // TODO:这里为什么不可以用total++
-      const count = arr.reduce((total, one) => {
-        // return item === one ? total++:total; 有问题
-        return item === one ? total + 1 : total;
-      }, 0)
-      return count;
-    }
-    console.log(count2([1, 2, 4, 4, 3, 4, 3], 4));
+  // filter实现:filter返回true项组成的数组
+  function count1 (arr, item) {
+    // const total = arr.filter(one => {
+    //   return one === item;
+    // })
+    // return total.length;
+    return arr.filter(one => one === item).length
+  }
 
-  </script>
+  console.log(count1([1, 2, 4, 4, 3, 4, 3], 4))
+
+  // reduce实现:对累加器和数组中的每个元素（从左到右）应用一个函数，将其减少为单个值
+  function count2 (arr, item) {
+    // TODO:这里为什么不可以用total++
+    // 可能原因：这里要先进行运算，然后再自增，所以每次返回的都是未自增的total
+    const count = arr.reduce((total, one) => {
+      // return item === one ? total++:total; 有问题
+      return item === one ? total + 1 : total
+    }, 0)
+    return count
+  }
+
+  console.log(count2([1, 2, 4, 4, 3, 4, 3], 4))
+
+</script>
 </body>
 
 </html>
