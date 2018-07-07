@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="box">
+    <ul>
+      <li>选项1</li>
+      <li>选项2</li>
+      <li>选项3</li>
+      <li>选项4</li>
+      <li>选项5</li>
+      <li>选项6</li>
+    </ul>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+    // let request = $.ajax({
+    //   url: ".",
+    //   // 默认为true异步
+    //   async: false,
+    // });
+    // console.log(request);
+    $.ajax({
+      url:'.',
+      async: true,
+      success: function(res) {
+        console.log(res);
+      }
+    });
+    const liList = document.querySelectorAll('li');
+    for (var i = 0; i < liList.length; i++) {
+      liList[i].onclick = function () {
+        console.log('i', i);
+      }
+    };
+  </script>
+</body>
+
+</html>
