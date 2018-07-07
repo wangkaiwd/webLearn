@@ -5,10 +5,103 @@
 * 箭头函数
 
 ## 词法作用域
+```js
+var global1 = 1
+function fn1(param1){
+    var local1 = 'local1'
+    var local2 = 'local2'
+    function fn2(param2){
+        var local2 = 'inner local2'
+        console.log(local1)
+        console.log(local2)
+    }
 
+    function fn3(){
+        var local2 = 'fn3 local2'
+        fn2(local2)
+    }
+    fn3()
+}
+fn1() // "local1", "inner local2"
+```
 ## call stack
-> 可以理解函数的调用关系（如递归是如何调用的）
+> 可以理解函数的调用关系（如递归是如何调用的）  
+1. 记录函数的执行位置
+2. 执行函数
+3. 返回函数执行时的位置，继续执行之后的代码  
 
+例子:  
+* [普通调用1+1+1](http://latentflip.com/loupe/?code=ZnVuY3Rpb24gYSgpewogICAgY29uc29sZS5sb2coJ2EnKQogIHJldHVybiAnYScgIAp9CgpmdW5jdGlvbiBiKCl7CiAgICBjb25zb2xlLmxvZygnYicpCiAgICByZXR1cm4gJ2InCn0KCmZ1bmN0aW9uIGMoKXsKICAgIGNvbnNvbGUubG9nKCdjJykKICAgIHJldHVybiAnYycKfQoKYSgpCmIoKQpjKCk%3D!!!)
+  ```js
+  function a(){
+    // 这里的console.log()也是一个函数，也会进入call stack中
+    console.log('a')
+  return 'a'  
+  }
+
+  function b(){
+      console.log('b')
+      return 'b'
+  }
+
+  function c(){
+      console.log('c')
+      return 'c'
+  }
+
+  a() // a
+  b() // b
+  c() // c
+  ```
+* [嵌套调用1>2>3](http://latentflip.com/loupe/?code=ZnVuY3Rpb24gYSgpewogICAgY29uc29sZS5sb2coJ2ExJykKICAgIGIoKQogICAgY29uc29sZS5sb2coJ2EyJykKICByZXR1cm4gJ2EnICAKfQpmdW5jdGlvbiBiKCl7CiAgICBjb25zb2xlLmxvZygnYjEnKQogICAgYygpCiAgICBjb25zb2xlLmxvZygnYjInKQogICAgcmV0dXJuICdiJwp9CmZ1bmN0aW9uIGMoKXsKICAgIGNvbnNvbGUubG9nKCdjJykKICAgIHJldHVybiAnYycKfQphKCkKY29uc29sZS5sb2coJ2VuZCcp!!!)
+  ```js
+  function a(){
+    console.log('a1')
+    b()
+    console.log('a2')
+    return 'a'  
+  }
+  function b(){
+    console.log('b1')
+    c()
+    console.log('b2')
+    return 'b'
+  }
+  function c(){
+    console.log('c')
+    return 'c'
+  }
+  a()
+  console.log('end')
+  /**
+  * 打印结果
+  * 1. "a1" 2. "b1" 3. "c"
+  * 4. "b2" 5. "a2" 6. "end"
+  */
+  ```
+* [递归](http://latentflip.com/loupe/?code=ZnVuY3Rpb24gZmFiKG4pewogICAgY29uc29sZS5sb2coJ3N0YXJ0IGNhbGMgZmFiICcrIG4pCiAgICBpZihuPj0zKXsKICAgICAgICByZXR1cm4gZmFiKG4tMSkgKyBmYWIobi0yKQogICAgfWVsc2V7CiAgICAgICAgcmV0dXJuIDEKICAgIH0KfQoKZmFiKDUp!!!PGJ1dHRvbj5DbGljayBtZSE8L2J1dHRvbj4%3D)
+  ```js
+  function fab(n){
+    console.log('start calc fab '+ n)
+    if(n>=3){
+        return fab(n-1) + fab(n-2)
+    }else{
+        return 1
+    }
+  }
+  fab(5)
+  "start calc fab 5"
+  "start calc fab 4"
+  "start calc fab 3"
+  "start calc fab 2"
+  "start calc fab 1"
+  "start calc fab 2"
+  "start calc fab 3"
+  "start calc fab 2"
+  "start calc fab 1"
+  ```
+
+**如果函数中还有嵌套其它函数的话，重复执行1,2步骤，直到函数中不再有函数，再通过3步骤一步步返回**  
 ## this&arguments
 ### `this`是函数隐藏的第一个参数，且必须是对象
 > 函数直接调用相当于省略了`call`
@@ -92,7 +185,7 @@ sum.apply(undefined,arr)
 // 相当于： sum.call(undefined, a[0],a[1],a[2],a[3]...a[6]);
 // arguments: [1,2,3,4,5,6,7] n: 28
 sum(arr) // sum.call(undefined,arr); // 在call时传入一个数组
-// arguments: [[1,2,3,4,5,6,7]] n: "01,2,3,4,5,6,7
+// arguments: [[1,2,3,4,5,6,7]] n: "01,2,3,4,5,6,7"
 ```
 
 ## `bind`
@@ -191,8 +284,8 @@ this.onClick.bind = function (x,y,z) {
 // 异步回调（setTimeout是异步的）
 setTimeout(fn,1000) // fn是异步回调
 
-// 同步回到
-Array.prototype.map(fn) // fn是同步回到
+// 同步回调
+Array.prototype.map(fn) // fn是同步回调
 ```
 `setTimeout`的回调函数中改变`this`指向
 ```js
