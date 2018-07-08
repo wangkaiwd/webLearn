@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 为数组 arr 中的每个元素求二次方。不要直接修改数组 arr，结果返回新的数组
+    // input:[1, 2, 3, 4]
+    // output:[1, 4, 9, 16]
+    /**
+     * 求平方
+     * 通过map方法
+     */
+    function square(arr) {
+      return arr.map(item => Math.pow(item, 2))
+    }
+    console.log('arr', square([1, 2, 3, 4]));
+
+    /**
+     * 通过原生语法实现求平方
+     */
+    function square1(arr) {
+      const newArr = [];
+      for (let i = 0; i < arr.length; i++) {
+        newArr.push(arr[i] * arr[i]);
+      }
+      return newArr;
+    }
+
+    /** 
+     * es6语法实现
+     *  可以很简单的通过一行实现，但是不好理解
+     */
+    const square2 = arr => arr.map(item => item * item);
+    console.log('square2', square2([1, 2, 3, 4]));
+  </script>
+</body>
+
+</html>
