@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 在数组 arr 中，查找值与 target 相等的元素出现的所有位置
+    // input:'abcdefabc','a'
+    // output:[0, 6]
+    // FIXME:这里用map实现会有问题
+    function findAllOccurrences(arr, target) {
+      return arr.map((item, i) => {
+        if (item === target) {
+          return i;
+        }
+        // 不符合条件的话则什么都不反回，即相当于
+        // else {
+        //   return undefined;
+        // }
+        // 所以最后结果为[0,undefined,undefined,undefined,undefined,undefined,6,undefined,undefined]
+      })
+    }
+    console.log('arr', findAllOccurrences('abcdefabc'.split(''), 'a'));
+
+    function findAllOccurrences1(arr, target) {
+      var newArr = [];
+      for (var i = 0; i < arr.length; i++) {
+        arr[i] === target && newArr.push(i);
+      }
+      return newArr;
+    }
+    console.log('arr1', findAllOccurrences1('abcdefabc'.split(''), 'a'));
+  </script>
+</body>
+
+</html>
