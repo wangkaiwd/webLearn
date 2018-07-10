@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function a() {
+      console.log(this);
+    }
+    a();
+
+    function a() {
+      'use strict';
+      console.log(this);
+    }
+    a(); // undefined
+
+
+    var obj = {
+      sayThis: a,
+    }
+    obj.sayThis();
+
+    /** 
+    * 严格模式：undefined
+    * 非严格模式：
+    *   浏览器：window
+    *   Node: global
+    */
+    obj.sayThis.call();
+
+    // this的值是不确定的
+    button.onclick = function () {
+      console.log(this); // button
+    }
+    // mdn：this值是触发事件的元素
+
+    $('button').on('click', function () {
+      console.log(this);
+    })
+    // jquery官方文档：this关键字指向的是当前正在执行事件的元素
+
+    $('ul').on('click', 'li', function () {
+      console.log(this);
+    })
+    // juqery官方文档：使用事件代理的话，this代表了与`selector`相匹配的元素
+    // selector:一个选择器字符串，用于过滤出被选中的元素中能触发事件的后代元素
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=\, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var obj = {
+      name: 'Frank',
+      sayName: function () {
+        console.log('I am' + ' ' + this.name);
+      }
+    }
+    obj.sayName(); // 这里的this指向对象
+    obj.sayName.call(); // call方法在定义的时候形参已经写好了，如果不传的话默认为undefined
+    // 如果call的第一个参数是null或这undefined的话，this指向window
+    obj.sayName.call(obj); // 用call方法来完整调用函数
+
+    var parent = {
+      name: 'MaYun',
+      child: {
+        name: 'SiCong',
+        sayName: function () {
+          console.log('I am' + ' ' + this.name);
+        }
+      }
+    }
+    parent.child.sayName(); // "I am SiCong"，隐式传递this
+    parent.child.sayName.call(); // "I am"(this.name是空字符串，因为这里打印的是window.name)
+    // 相当于parent.child.sayName.call(undefined);
+    // 函数是一等公民，是一个单纯的对象，并没有和任何其它对象有联系
+    // 确定this指向的方法只有一个：函数在调用`call`方法时的第一个参数
+    parent.child.sayName.call(parent.child); // 显示传递this
+    parent.child.sayName.call({ name: 'wangkaiwd' });
+  </script>
+</body>
+
+</html>
