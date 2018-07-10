@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 原型继承
+    // 继承
+    function Human(options) {
+      this.name = options.name;
+      this.肤色 = options.肤色;
+    }
+    Human.prototype.eat = function () { };
+    Human.prototype.drink = function () { };
+    Human.prototype.poo = function () { };
+
+    function Solider(options) {
+      Human.call(this, options);
+      this.ID = options.ID;
+      this.生命值 = 42;
+    }
+    Solider.prototype.兵种 = '美国大兵';
+    Solider.prototype.攻击力 = function () { };
+    Solider.prototype.行走 = function () { };
+    Solider.prototype.奔跑 = function () { };
+    Solider.prototype.死亡 = function () { };
+    Solider.prototype.攻击 = function () { };
+    Solider.prototype.防御 = function () { };
+    Solider.prototype.__proto__ = Human.prototype;
+
+    var s = new Solider({ name: 'wangkaiwd', ID: 8, 肤色: 'pink' });
+
+    // 1. __proto__不能使用（生产环境）
+  </script>
+</body>
+
+</html>

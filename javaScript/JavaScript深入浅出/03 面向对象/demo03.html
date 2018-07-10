@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // js继承
+    var personCommon = {
+      吃: '',
+      喝: '',
+      拉: '',
+      撒: ''
+    }
+    var soliderCommon = {
+      兵种: '美国大兵',
+      攻击力: '5',
+      行走: function () { },
+      奔跑: function () { },
+      死亡: function () { },
+      攻击: function () { },
+      防御: function () { },
+    }
+    soliderCommon.__proto__ = personCommon;
+
+    var s = {};
+    s.__proto__ = soliderCommon
+  </script>
+</body>
+
+</html>
