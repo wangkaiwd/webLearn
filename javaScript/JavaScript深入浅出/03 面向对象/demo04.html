@@ -10,7 +10,7 @@
 
 <body>
   <script>
-    // 原型继承
+    // 原型继承,士兵要继承人类的属性和方法
     // 继承
     function Human(options) {
       this.name = options.name;
@@ -19,12 +19,35 @@
     Human.prototype.eat = function () { };
     Human.prototype.drink = function () { };
     Human.prototype.poo = function () { };
+    var p = new Human({ name: 'hhh', 肤色: 'purple' });
+    console.log(p);
 
     function Solider(options) {
       Human.call(this, options);
       this.ID = options.ID;
       this.生命值 = 42;
     }
+
+
+    // // ie
+    // function FakeHuman() {
+
+    // }
+    // FakeHuman.prototype = Human.prototype
+    // Solider.prototype = new FakeHuman();
+    // // 改正Solider.prototype的constructor的指向
+    // Solider.prototype.constructor = Solider;
+
+    // no-ie
+    // Object.create():创建一个新对象，使用现有对象来提供新创建对象的__proto__
+    Solider.prototype = Object.create(Human.prototype);
+    Solider.prototype.constructor = Solider;
+
+    // 大脑中的
+    // 要实现的目标Solider.prototype.__proto__ = Human.prototype;
+
+    // 此时this为Solider.prototype,所以this.name === Solider.prototype.name,
+    // Solider原型上会多出来2个属性
     Solider.prototype.兵种 = '美国大兵';
     Solider.prototype.攻击力 = function () { };
     Solider.prototype.行走 = function () { };
@@ -32,11 +55,14 @@
     Solider.prototype.死亡 = function () { };
     Solider.prototype.攻击 = function () { };
     Solider.prototype.防御 = function () { };
-    Solider.prototype.__proto__ = Human.prototype;
+    // 用下面这一行来试着替换__proto__
+    // new: 1. this = {} 2. this.__proto__ = Human.prototype 3. return this;
 
     var s = new Solider({ name: 'wangkaiwd', ID: 8, 肤色: 'pink' });
+    console.log(s);
 
-    // 1. __proto__不能使用（生产环境）
+    // 要实现的目标Solider.prototype.__proto__ = Human.prototype;
+    // 但是__proto__不能使用（生产环境）
   </script>
 </body>
 

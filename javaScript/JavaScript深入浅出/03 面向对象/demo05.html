@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 自己实现一个简单的继承
+    function Human(options) {
+      this.name = options.name;
+      this.age = options.age;
+      this.sex = options.sex;
+    }
+    Human.prototype.eat = function () {
+      console.log(this.name + "is eating");
+    }
+    Human.prototype.drink = function () {
+      console.log(this.name + "is drinking");
+    }
+
+    var p = new Human({ name: '小明', age: 18, sex: '男' });
+    console.log(p);
+
+    function Worker(options) {
+      Human.call(this, options);
+      this.work = options.work;
+      this.salary = options.salary;
+    }
+    // no-ie
+    // Object.create():创建一个新对象，使用现有对象来提供新创建对象的__proto__
+    Solider.prototype = Object.create(Human.prototype);
+    Solider.prototype.constructor = Solider;
+    Worker.prototype.getMoney = function () {
+      console.log(this.name + "I am geting money");
+    }
+
+    // 1.继承自身属性 2.继承原型上的属性children.prototype.__proto__ === parent.prototype
+
+  </script>
+</body>
+
+</html>

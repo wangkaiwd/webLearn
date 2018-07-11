@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // es6
+    class Human {
+      constructor(options) {
+        this.name = options.name;
+        this.age = options.age;
+        this.sex = options.sex;
+      }
+      eat() {
+        console.log(this.name + "is eating");
+      }
+      drink() {
+        console.log(this.name + "is drinking");
+      }
+    }
+    var p = new Human({ name: '小明', age: 18, sex: '男' });
+    console.log(p);
+
+    class Worker extends Human {
+      constructor(options) {
+        super(options);
+        this.work = options.work;
+        this.salary = options.salary;
+      }
+      getMoney() {
+        console.log(this.name + "I am geting money");
+      }
+    }
+
+    var w = new Worker({ name: '将军', age: 20, sex: '男', work: '机械师', salary: '80k' });
+    console.log(w);
+  </script>
+</body>
+
+</html>
