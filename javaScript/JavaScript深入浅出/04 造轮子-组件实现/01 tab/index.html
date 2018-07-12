@@ -63,8 +63,18 @@
       border-color: blue;
     }
 
+    .tabs>ol:first-child li.active {
+      cursor: pointer;
+      border-color: blue;
+    }
+
     .tabs>ol:last-child li {
+      display: none;
       border: 1px solid #000;
+    }
+
+    .tabs>ol:last-child li.current {
+      display: block;
     }
   </style>
 </head>
@@ -73,18 +83,39 @@
   <div class="box">
     <div class="tabs">
       <ol>
-        <li>旅游</li>
-        <li>消化</li>
-        <li>3</li>
+        <li class="active">旅游</li>
+        <li>购物</li>
+        <li>游戏</li>
       </ol>
       <ol>
-        <li class="active">content1</li>
+        <li class="current">content1</li>
+        <li>content2</li>
+        <li>content3</li>
+      </ol>
+    </div>
+
+    <div class="tabs">
+      <ol>
+        <li class="active">旅游</li>
+        <li>购物</li>
+        <li>游戏</li>
+      </ol>
+      <ol>
+        <li class="current">content1</li>
         <li>content2</li>
         <li>content3</li>
       </ol>
     </div>
   </div>
 </body>
+<script>
+  $(".tabs ol:first-child").on('click', 'li', function () {
+    var index = $(this).index();
+    $(this).addClass('active').siblings().removeClass('active');
+    // 这个时候要从里往外找，因为外边可能会有多个.tabs
+    $(this).parent('ol').siblings().find('li').eq(index).addClass('current').siblings().removeClass('current');
+  })
+</script>
 <script>
   // var tabs = new Tabs('.tabs');
 </script>
