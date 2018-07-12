@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+    crossorigin="anonymous"></script>
+  <style>
+    /* 初始化样式 */
+
+    html {
+      box-sizing: border-box;
+    }
+
+    *,
+    *::after,
+    *::before {
+      box-sizing: inherit;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .box {
+      margin: 40px;
+    }
+
+    .tabs li,
+    .tabs ol {
+      margin: 0;
+      padding: 0;
+    }
+
+    .tabs li {
+      list-style: none;
+    }
+
+    /* tab的标题 */
+
+    .tabs>ol:first-child {
+      display: flex;
+      border-bottom: 1px solid red;
+    }
+
+    .tabs>ol:first-child li {
+      /* 宽高用padding撑开,也就不用再进行垂直居中了 */
+      /* width: 40px;
+      height: 26px;
+      line-height: 26px; */
+      padding: 2px 16px;
+      text-align: center;
+      border: 1px solid transparent;
+      border-bottom: 0;
+    }
+
+    .tabs>ol:first-child li:hover {
+      cursor: pointer;
+      border-color: blue;
+    }
+
+    .tabs>ol:last-child li {
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <div class="tabs">
+      <ol>
+        <li>旅游</li>
+        <li>消化</li>
+        <li>3</li>
+      </ol>
+      <ol>
+        <li class="active">content1</li>
+        <li>content2</li>
+        <li>content3</li>
+      </ol>
+    </div>
+  </div>
+</body>
+<script>
+  // var tabs = new Tabs('.tabs');
+</script>
+
+</html>
