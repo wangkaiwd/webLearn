@@ -49,10 +49,16 @@
       background-color: skyblue;
     }
 
-    .fixed {
+    .title.fixed {
       position: fixed;
       top: 0;
       width: 100%;
+    }
+
+    button.fixed {
+      position: fixed;
+      top: 0;
+      width: 82.65px;
     }
   </style>
 
@@ -97,7 +103,7 @@
     Sticky.prototype.getOffsets = function () {
       this.elements.each((index, element) => {
         // .offset()在匹配的元素集合中，获取的第一个元素相对于文档的坐标
-        var offsetTop = $(element).offset();
+        var offsetTop = $(element).offset().top;
         this.offsets.push(offsetTop);
       })
     }
@@ -112,8 +118,14 @@
     }
     Sticky.prototype.listenToScroll = function () {
       $(window).on('scroll', () => {
+        var scrollY = $(window).scrollTop();
         this.elements.each((index, element) => {
-
+          var $element = $(element);
+          if (scrollY > this.offsets[index]) {
+            $element.addClass('fixed');
+          } else {
+            $element.removeClass('fixed');
+          }
         })
       })
     }
