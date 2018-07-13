@@ -89,14 +89,21 @@
     // .wrap():在每一个匹配元素的外层包裹一个html元素
     function Sticky(selector) {
       this.elements = $(selector);
+      this.wrapPlaceholder();
       this.listenToScroll();
+    }
+    Sticky.prototype.wrapPlaceholder = function () {
+      this.elements.each(function (index, element) {
+        var $element = $(element);
+        $element.wrap('<div class="wrap-placeholder"></div>');
+        var $wrap = $element.parent();
+        $wrap.height($element.innerHeight());
+        $wrap.width($element.innerWidth());
+      });
     }
     Sticky.prototype.listenToScroll = function () {
       $(window).on('scroll', () => {
-        this.elements.each(function (index, element) {
-          console.log('ele', element);
-          console.log('jq', $(element));
-        });
+
       })
     }
 

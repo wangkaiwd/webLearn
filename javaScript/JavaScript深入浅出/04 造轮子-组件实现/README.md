@@ -1,4 +1,4 @@
-# jquery基础-jquery对象与DOM对象的区别与相互转换
+# jquery基础知识
 
 ## 什么是`jQuery`对象
 jQuery:通过jQuery包装DOM对象后产生的对象。`jQuery`对象是`jQuery`独有的，其可以使用`jQuery`里的方法
@@ -31,3 +31,8 @@ jQuery:通过jQuery包装DOM对象后产生的对象。`jQuery`对象是`jQuery`
 var v = document.getElementById('v'); // dom对象，只能使用原生dom方法
 var $v = $(v); // jquery对象，只能使用jquery方法
 ```
+
+## `jQuery`中获取高度
+* .height():获取匹配元素集合中的第一个元素的当前计算高度值(不包括：`margin,padding,border`)
+* .innerHeight():为匹配的元素集合中获取第一个元素的当前计算高度(包括`padding`但是不包括`border`)
+* .outerHeight():为匹配的元素集合中获取第一个元素的当前计算高度(包括`padding,border`,选择性的`margin`)
