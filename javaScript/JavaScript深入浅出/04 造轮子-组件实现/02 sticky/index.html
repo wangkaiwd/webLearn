@@ -89,8 +89,17 @@
     // .wrap():在每一个匹配元素的外层包裹一个html元素
     function Sticky(selector) {
       this.elements = $(selector);
+      this.offsets = [];
       this.wrapPlaceholder();
+      this.getOffsets();
       this.listenToScroll();
+    }
+    Sticky.prototype.getOffsets = function () {
+      this.elements.each((index, element) => {
+        // .offset()在匹配的元素集合中，获取的第一个元素相对于文档的坐标
+        var offsetTop = $(element).offset();
+        this.offsets.push(offsetTop);
+      })
     }
     Sticky.prototype.wrapPlaceholder = function () {
       this.elements.each(function (index, element) {
@@ -103,7 +112,9 @@
     }
     Sticky.prototype.listenToScroll = function () {
       $(window).on('scroll', () => {
+        this.elements.each((index, element) => {
 
+        })
       })
     }
 
