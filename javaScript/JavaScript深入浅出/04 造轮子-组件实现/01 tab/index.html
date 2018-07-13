@@ -30,6 +30,10 @@
       margin: 40px;
     }
 
+    .tabs {
+      margin-bottom: 40px;
+    }
+
     .tabs li,
     .tabs ol {
       margin: 0;
@@ -83,12 +87,12 @@
   <div class="box">
     <div class="tabs">
       <ol>
-        <li class="active">旅游</li>
+        <li>旅游</li>
         <li>购物</li>
         <li>游戏</li>
       </ol>
       <ol>
-        <li class="current">content1</li>
+        <li>content1</li>
         <li>content2</li>
         <li>content3</li>
       </ol>
@@ -96,12 +100,12 @@
 
     <div class="tabs">
       <ol>
-        <li class="active">旅游</li>
+        <li>旅游</li>
         <li>购物</li>
         <li>游戏</li>
       </ol>
       <ol>
-        <li class="current">content1</li>
+        <li>content1</li>
         <li>content2</li>
         <li>content3</li>
       </ol>
@@ -109,15 +113,73 @@
   </div>
 </body>
 <script>
-  $(".tabs ol:first-child").on('click', 'li', function () {
-    var index = $(this).index();
-    $(this).addClass('active').siblings().removeClass('active');
-    // 这个时候要从里往外找，因为外边可能会有多个.tabs
-    $(this).parent('ol').siblings().find('li').eq(index).addClass('current').siblings().removeClass('current');
-  })
+  // jquery
+  // 默认激活第一个tab和其对应的content
+  // $(".tabs").each(function (index, element) {
+  //   $(element).children('ol').eq(0).find('li').eq(0).addClass('active');
+  //   $(element).children('ol').eq(1).find('li').eq(0).addClass('current');
+  // })
+
+  // $(".tabs ol:first-child").on('click', 'li', function () {
+  //   var index = $(this).index();
+  //   $(this).addClass('active').siblings().removeClass('active');
+  //   // 这个时候要从里往外找，因为外边可能会有多个.tabs
+  //   var $content = $(this).parent('ol').siblings().find('li').eq(index);
+  //   $content.addClass('current').siblings().removeClass('current');
+  // })
+
+
+  // 面向对象对象
+  // function Tabs(selector) {
+  //   // this = {}
+  //   // this.__proto__ = Tabs.prototype
+  //   this.elements = $(selector);
+  //   this.init();
+  //   this.bindEvent();
+  //   // return this
+  // }
+  // Tabs.prototype.init = function () {
+  //   this.elements.each(function (index, element) {
+  //     $(element).children('ol').eq(0).find('li').eq(0).addClass('active');
+  //     $(element).children('ol').eq(1).find('li').eq(0).addClass('current');
+  //   })
+  // }
+  // Tabs.prototype.bindEvent = function () {
+  //   this.elements.find('ol:first-child').on('click', 'li', function () {
+  //     var index = $(this).index();
+  //     $(this).addClass('active').siblings().removeClass('active');
+  //     // 这个时候要从里往外找，因为外边可能会有多个.tabs
+  //     var $content = $(this).parent('ol').siblings().find('li').eq(index);
+  //     $content.addClass('current').siblings().removeClass('current');
+  //   })
+  // }
+
+  // es6 Class
+  class Tabs {
+    constructor(selector) {
+      this.elements = $(selector);
+      this.init();
+      this.bindEvent();
+    }
+    init() {
+      this.elements.each(function (index, element) {
+        $(element).children('ol').eq(0).find('li').eq(0).addClass('active');
+        $(element).children('ol').eq(1).find('li').eq(0).addClass('current');
+      })
+    }
+    bindEvent() {
+      this.elements.find('ol:first-child').on('click', 'li', function () {
+        var index = $(this).index();
+        $(this).addClass('active').siblings().removeClass('active');
+        // 这个时候要从里往外找，因为外边可能会有多个.tabs
+        var $content = $(this).parent('ol').siblings().find('li').eq(index);
+        $content.addClass('current').siblings().removeClass('current');
+      })
+    }
+  }
 </script>
 <script>
-  // var tabs = new Tabs('.tabs');
+  var tabs = new Tabs('.tabs');
 </script>
 
 </html>
