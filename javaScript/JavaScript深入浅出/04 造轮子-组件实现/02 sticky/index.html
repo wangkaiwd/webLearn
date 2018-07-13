@@ -30,6 +30,14 @@
       box-sizing: border-box;
     }
 
+    /* 组件提供的css只有这一个，其它的需要用户来自己写 */
+
+    .fixed {
+      position: fixed;
+      top: 0;
+      width: 100%;
+    }
+
     .title {
       width: 100%;
       height: 80px;
@@ -37,7 +45,6 @@
       text-align: center;
       line-height: 80px;
       color: #fff;
-      opacity: 0.5;
     }
 
     .list {
@@ -49,16 +56,21 @@
       background-color: skyblue;
     }
 
+    /* 用户需要自己写样式来确定吸附元素的偏移量和宽度 */
+
     .title.fixed {
-      position: fixed;
       top: 0;
       width: 100%;
     }
 
     button.fixed {
-      position: fixed;
-      top: 0;
+      top: 80px;
       width: 82.65px;
+    }
+
+    .text.fixed {
+      top: 120px;
+      width: 60px;
     }
   </style>
 
@@ -73,7 +85,7 @@
       <p>内容3</p>
       <p>内容4</p>
       <p>内容5</p>
-      <p>内容6</p>
+      <p class="text">内容6</p>
       <p>内容7</p>
       <p>内容8</p>
       <p>内容9</p>
@@ -81,6 +93,16 @@
       <button>吸住的按钮</button>
       <p>内容11</p>
       <p>内容12</p>
+      <p>内容1</p>
+      <p>内容2</p>
+      <p>内容3</p>
+      <p>内容4</p>
+      <p>内容5</p>
+      <p>内容6</p>
+      <p>内容7</p>
+      <p>内容8</p>
+      <p>内容9</p>
+      <p>内容10</p>
     </div>
   </div>
   <script>
@@ -93,8 +115,9 @@
     */
 
     // .wrap():在每一个匹配元素的外层包裹一个html元素
-    function Sticky(selector) {
+    function Sticky(selector, offset) {
       this.elements = $(selector);
+      this.offset = offset || 0;
       this.offsets = [];
       this.wrapPlaceholder();
       this.getOffsets();
@@ -121,7 +144,7 @@
         var scrollY = $(window).scrollTop();
         this.elements.each((index, element) => {
           var $element = $(element);
-          if (scrollY > this.offsets[index]) {
+          if (scrollY + this.offset > this.offsets[index]) {
             $element.addClass('fixed');
           } else {
             $element.removeClass('fixed');
@@ -131,23 +154,8 @@
     }
 
     var title = new Sticky('.title');
-    var button = new Sticky('button');
-
-    // var $title = $('.title');
-    // $title.wrap('<div class="wrapper-placeholder"></div>');
-    // var $wrapper = $('.wrapper-placeholder');
-    // $wrapper.height($title.height())
-    // $wrapper.width($title.width())
-    // $(window).on('scroll', function () {
-    //   let top = $(window).scrollTop();
-    //   if (top > 0) {
-    //     $title.addClass('fixed');
-    //   }
-    //   else {
-    //     $title.removeClass('fixed');
-    //   }
-    // })
-
+    var button = new Sticky('button', 80)
+    var p = new Sticky('.text', 120);
     /** 
      * 解决问题的思路
      * 1. 自己的解决方法：为要吸附的元素之后的元素设置margin-top来为fixed定位的元素空一个位置
