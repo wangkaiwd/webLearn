@@ -38,7 +38,30 @@ var server = http.createServer(function (request, response) {
     <link rel="stylesheet" href="/main">
     </head>
     <h1>你好</h1>
+    <script src="/1"></script>
+    <script>
+      let xhr = new XMLHttpRequest();
+      xhr.open('get', 'http://localhost:9999/3.json');
+      xhr.send();
+      xhr.onreadystatechange = function () {
+        if(xhr.readyState === 4) {
+          if(xhr.status === 200) {
+            console.log('object', xhr.responseText);
+            var info = xhr.responseText;
+            var jsonInfo = JSON.parse(info);
+            // var info = JSON.parse(xhr.responseText);
+            console.log(jsonInfo);
+          }
+        }
+      }
+    </script>
     `);
+  } else if (path === '/1') {
+    response.setHeader('Content-Type', 'application/javascript;charset=utf-8');
+    response.end('alert(1)');
+  } else if (path === '/3.json') {
+    response.setHeader('Content-Type', 'application/json;charset=utf-8');
+    response.end('{"name":"wangkaiwd","age":"18"}');
   } else {
     response.statusCode = 404
     response.setHeader('Content-Type', 'text/html;charset=utf-8')
