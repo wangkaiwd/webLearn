@@ -36,3 +36,4 @@ var $v = $(v); // jquery对象，只能使用jquery方法
 * .height():获取匹配元素集合中的第一个元素的当前计算高度值(不包括：`margin,padding,border`)
 * .innerHeight():为匹配的元素集合中获取第一个元素的当前计算高度(包括`padding`但是不包括`border`)
 * .outerHeight():为匹配的元素集合中获取第一个元素的当前计算高度(包括`padding,border`,选择性的`margin`)
+## 
