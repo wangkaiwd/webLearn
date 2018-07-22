@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 给定一个字符串，找出不含有重复字符的最长子串的长度。
+
+    //   示例：
+    //   给定 "abcabcbb" ，没有重复字符的最长子串是 "abc" ，那么长度就是3。
+    //   给定 "bbbbb" ，最长的子串就是 "b" ，长度是1。
+    //   给定 "pwwkew" ，最长子串是 "wke" ，长度是3。请注意答案必须是一个子串，"pwke" 是 子序列  而不是子串。
+    function lengthOfLongestSubstring(str) {
+      const result = [];
+      let newArr = [];
+      for (let i = 0; i < str.length; i++) {
+        const currentVal = str.charAt(i)
+        if (newArr.indexOf(currentVal) === -1) {
+          newArr.push(currentVal);
+        } else {
+          result.push(newArr)
+          newArr = [currentVal]
+        }
+      }
+      result.push(newArr)
+      let maxLength = result[0].length;
+      for (let n = 0; n < result.length - 1; n++) {
+        if (result[n + 1].length > result[n].length) {
+          maxLength = result[n + 1].length;
+        }
+      }
+      return maxLength;
+    }
+    console.log('object', lengthOfLongestSubstring('dvdf'));
+  </script>
+</body>
+
+</html>
