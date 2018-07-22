@@ -38,7 +38,7 @@
     //  2. aaa.bbb
     //  3. a.aaa:bbb
     //  4. a.aaa::bbb.bbbb.aaaa..:aaa.aaaaaa:
-    const extractStr = (str) => {
+    const extractStr1 = (str) => {
       let reg = /\:([^\.\:]*)\./g;
       let matchArr = str.match(reg) === null ? [] : str.match(reg);
       let result = matchArr.map((el) => {
