@@ -1,7 +1,8 @@
 ## 学习路径
 
 > [前端技能图谱 01](https://leohxj.gitbooks.io/front-end-database/content/)  
-> [前端技能图谱 02](https://github.com/f2e-awesome/knowledge)
+> [前端技能图谱 02](https://github.com/f2e-awesome/knowledge)  
+> [前端技能图谱 03](https://yuchengkai.cn/docs/zh/frontend/)
 
 ![study](./images/study.png)
 
@@ -83,8 +84,9 @@
   2.  [react-admin](https://github.com/yezihaohao/react-admin)(可以学习`redux`，功能和各种插件比较完善)
   3.  [antd-admin](https://github.com/zuiidea/antd-admin)(星星最多)
 
-### leetCode
-
+### 常用工具小技巧
+#### 学习笔记
+1. [常用网站及工具技巧](https://github.com/wangkaiwd/webLearn/blob/master/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/toolTips.md)
 ### 调试技巧
 
 1. [chrome开发者工具不完全指南](https://juejin.im/post/59ffad656fb9a0450b65c4c0)
