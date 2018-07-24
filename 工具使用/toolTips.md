@@ -11,7 +11,13 @@
 ## 常用编辑器设置及快捷键
 
 ### `webStorm`
-
+1. 查找文件  
+    全局搜索：
+    1. `ctrl+shift+f`: 全局搜索项目中的任意代码
+    2. ![webstorm](./images/findFile.png)
+    3. `shift+shift`: 全局搜索任意内容（代码，编辑器功能，文件）
+    4. `ctrl+shift+a`: 快速查找并使用编辑器的所有功能
+    局部搜索：
 #### 常用快捷键
 #### [常用设置](https://juejin.im/entry/599ad8f26fb9a0249174ef09)
 1. `Allow unsigned requests`:允许为签名的请求  
