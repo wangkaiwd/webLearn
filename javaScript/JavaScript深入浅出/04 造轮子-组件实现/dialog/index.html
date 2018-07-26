@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+          integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+          crossorigin="anonymous"></script>
+  <style>
+    .wangkaiwd-dialog {
+      position: fixed;left: 0;top: 0;
+      background-color: rgba(0, 0, 0, .6);
+      width: 100%;height: 100%;display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .wangkaiwd-wrapper {padding: 12px;min-width: 200px;background-color: #fff;}
+
+    .wangkaiwd-dialog-header {border-bottom: 1px solid #000;}
+
+    .wangkaiwd-dialog-main {padding: 8px 0;}
+
+    /*.wangkaiwd-dialog-footer {display: flex;justify-content: flex-end;}*/
+    /*text-align可以对行内和行内块元素生效*/
+    .wangkaiwd-dialog-footer {text-align: right;}
+
+    .wangkaiwd-dialog-footer button:last-child {margin-left: 12px;}
+  </style>
+</head>
+<body>
+<div class="box">
+  <button id="button">点击</button>
+</div>
+<script>
+  // 设计好API很重要，可以参考一些社区优秀轮子
+  button.onclick = function () {
+    const dialog = new Dialog({
+      title: '标题',
+      content: '内容',
+      buttons: [
+        {
+          text: '确认',
+          action: function () {
+            console.log('确认的回调')
+            dialog.hide()
+          }
+        },
+        {
+          text: '取消',
+          action: function () {
+            console.log('取消时的回调')
+            dialog.hide()
+          }
+        }
+      ]
+    })
+    dialog.show()
+  }
+
+  /**
+   *  todo:
+   *    1. 样式优化
+   *    2. 通过es6 class形式再次实现
+   *    3. 可以通过点击模态框关闭dialog
+   *    4. 参考社区优秀轮子设计的接口进行实现
+   */
+  function Dialog (options) {
+    this.options = options
+    this.init()
+  }
+
+  Dialog.prototype.createTemplate = function () {
+    const {title, content} = this.options
+    const template = `
+      <div class="wangkaiwd-dialog">
+        <div class="wangkaiwd-wrapper">
+          <header class="wangkaiwd-dialog-header">${title}</header>
+          <main class="wangkaiwd-dialog-main">${content}</main>
+          <footer class="wangkaiwd-dialog-footer"></footer>
+        </div>
+      </div>
+    `
+    this.dialog = $(template)
+  }
+  Dialog.prototype.init = function () {
+    this.createTemplate()
+    this.options.buttons.map((item) => {
+      const $button = $('<button></button>')
+      $button.text(item.text)
+      $button.on('click', item.action)
+      this.dialog.find('footer').append($button)
+    })
+  }
+  Dialog.prototype.show = function () {
+    const $body = $('body')
+    $body.append(this.dialog)
+  }
+  Dialog.prototype.hide = function () {
+    this.dialog.remove()
+  }
+</script>
+</body>
+</html>
