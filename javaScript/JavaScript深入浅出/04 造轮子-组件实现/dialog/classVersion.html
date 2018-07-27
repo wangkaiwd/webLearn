@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+          integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+          crossorigin="anonymous"></script>
+  <style>
+    .wk-dialog {position: fixed;top: 0;left: 0;
+      width: 100%;height: 100vh;background-color: rgba(0, 0, 0, .6);
+      display: flex;justify-content: center;align-items: center;
+    }
+
+    .wk-dialog-wrapper {min-width: 200px;padding: 20px;background-color: #fff;}
+
+    .wk-dialog-header {padding: 8px 0;border-bottom: 1px solid #000;}
+
+    .wk-dialog-main {padding: 12px 0;}
+
+    .wk-dialog-footer {text-align: right;}
+
+    .wk-dialog-footer button {margin-left: 12px;}
+  </style>
+</head>
+<body>
+<button id="button">
+  点击
+</button>
+<script>
+  const $button = $('#button')
+  $button.on('click', () => {
+    const dialog = new Dialog('我是dialog')
+    dialog.show()
+  })
+
+  class Dialog {
+    constructor (options = {}) {
+      if (typeof options === 'string') {
+        this.content = options
+      }
+      else {
+        this.content = options.content || '内容'
+      }
+      this.title = options.title || '标题'
+      this.buttons = options.buttons || [
+        {text: '确认', actions: () => {this.hide()}},
+        {text: '取消', actions: () => {this.hide()}}
+      ]
+      this.init()
+    }
+
+    init () {
+      const template = `
+        <div class="wk-dialog">
+          <div class="wk-dialog-wrapper">
+            <header class="wk-dialog-header">${this.title}</header>
+            <main class="wk-dialog-main">${this.content}</main>
+            <footer class="wk-dialog-footer"></footer>
+          </div>
+        </div>
+      `
+      this.dialog = $(template)
+      this.createButtons()
+      this.dialog.on('click', (e) => {
+        if (e.target.className === 'wk-dialog') {
+          this.hide()
+        }
+      })
+    }
+
+    createButtons () {
+      this.buttons.forEach((item) => {
+        const $button = $('<button></button>')
+        $button.text(item.text)
+        $button.on('click', item.actions)
+        this.dialog.find('footer').append($button)
+      })
+    }
+
+    hide () {
+      this.dialog.remove()
+    }
+
+    show () {
+      const $body = $('body')
+      $body.append(this.dialog)
+    }
+  }
+</script>
+</body>
+</html>
