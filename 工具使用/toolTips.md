@@ -25,9 +25,14 @@
     1. `ctrl+f`：当前文件（局部）搜索
     2. `ctrl+r`: 当前文件替换(`ctrl+h`)
 2. 重构代码
+    1. `ctrl+j`: 代码行缩进
+    2. `shift+f6`: 重构作用域内的某个字符
 
 3. `vcs`操作
-      
+    1. `ctrl+y`: `git pull`拉取代码
+    2. `ctrl+k`: `git commit`提交代码
+    3. `ctrl+i`: `git push`推送代码
+
 #### [常用设置](https://juejin.im/entry/599ad8f26fb9a0249174ef09)
 1. `Allow unsigned requests`:允许为签名的请求  
   ![allowUnsignedRequest](./images/allowUnsignedRequest.png)
@@ -46,4 +51,5 @@
    ![webstorm](./images/doubleClick.png)  
    ![webstorm](./images/camelHumps.png)
 
-## `vscode`
+### `vscode`
+#### 常用快捷键
