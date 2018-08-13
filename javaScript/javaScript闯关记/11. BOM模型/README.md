@@ -12,8 +12,29 @@
 * (3) `window.top`:指向最顶层窗口，主要用于在子窗口里面获取顶层的父窗口。
 * (4) `window.parent`:指向父窗口。如果当前窗口没有父窗口，`window.parent`指向自身。
 ### `window`对象的常用方法
-* (1)
-
+* (1) `window.scrollTo()`:用于将文档滚动到指定位置
+  ```js
+  /**
+  * 用于将文档滚动到指定位置
+  *  params: Number x: 滚动后位于窗口左上角的横坐标
+  *  params: Number y: 滚动后位于窗口左上角的纵坐标
+  *  params: Object options: 
+  *         对象属性：
+  *             top: 滚动后页面左上角的垂直坐标，即y坐标
+  *             left: 滚动后页面左上角的水平坐标，即x坐标
+  *             behavior: 字符串，表示滚动的方式，有三个可能只
+  *                       1. smooth：平滑滚动
+  *                       2. instant：瞬间滚动
+  *                       3. auto(默认值)：实测效果等同于instant
+  **/
+  window.scrollTo(x, y);
+  window.scrollTo(options) // 接受一个配置对象作为参数
+  window.scroll()是window.scrollTo()方发的别名
+  ```
+* (2) `window.getComputedStyle()`:返回浏览器计算后得到的最终规则
+  ```js
+  
+  ```
 ## `history`对象
 > `window.history`属性指向`History`对象，它表示当前窗口的浏览历史。
 
