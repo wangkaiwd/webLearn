@@ -36,4 +36,14 @@ var $v = $(v); // jquery对象，只能使用jquery方法
 * .height():获取匹配元素集合中的第一个元素的当前计算高度值(不包括：`margin,padding,border`)
 * .innerHeight():为匹配的元素集合中获取第一个元素的当前计算高度(包括`padding`但是不包括`border`)
 * .outerHeight():为匹配的元素集合中获取第一个元素的当前计算高度(包括`padding,border`,选择性的`margin`)
-## 
+
+# DOM事件
+> 事件的本质是程序各个组成部分之间的一种通信方式，是异步编程的一种实现。
+
+## 事件的传播
+一个事件发生后，会在子元素和父元素之间传播(propagation)。这种传播分为三个阶段：
+* 第一阶段：从`window`对象传导到目标节点（上层传到底层），称为“捕获阶段”(capture phase)
+* 第二阶段: 在目标节点上触发，称为“目标阶段”(target phase)
+* 第三阶段: 从目标节点传导回`window`对象（从底层传回上层），称为“冒泡阶段”（bubbling phase）
+
+## 事件代理

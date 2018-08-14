@@ -29,15 +29,26 @@
   **/
   window.scrollTo(x, y);
   window.scrollTo(options) // 接受一个配置对象作为参数
-  window.scroll()是window.scrollTo()方发的别名
+  window.scroll() 是window.scrollTo()方法的别名
   ```
 * (2) `window.getComputedStyle()`:返回浏览器计算后得到的最终规则
   ```js
-  
+  /**
+  * 返回浏览器计算后得到的最终规则
+  *   params: {Object} element:节点对象
+  *   params: {伪元素} pseudoElement: 指定一个要匹配的伪元素的字符串。必须对普通元素省略(或`null`)
+  *   return: 返回CSSStyleDeclaration,包含了指定节点的最终样式信息
+  *           最终样式：各种CSS规则叠加后的结果
+  **/
+  var div = document.querySelector('div');
+  window.getComputedStyle(div) // 传入一个参数
+  window.getComputedStyle(div,':before') // 传入第二个参数
+  getComputedStyle(box).height // 40px
+  getComputedStyle(box).margin // 100px 381px
   ```
 ## `history`对象
 > `window.history`属性指向`History`对象，它表示当前窗口的浏览历史。
 
-* (1) history.back():移动到上一个网址，等同于点击浏览器的后退键
-* (2) history.forward():移动到下一个网址，等同于点击浏览器的前进键
-* (3) history.go():接受一个整数作为参数，以当前网址为基准，移动到参数指定的网址，比如`go(1)`相当于`forward()`,`go(-1)`相当于`back()`。**如果参数超过实际存在的网址范围，该方法无效；如果不指定参数，默认参数为0，相当于刷新当前页面。**
+* (1) `history.back()`:移动到上一个网址，等同于点击浏览器的后退键
+* (2) `history.forward()`:移动到下一个网址，等同于点击浏览器的前进键
+* (3) `history.go()`:接受一个整数作为参数，以当前网址为基准，移动到参数指定的网址，比如`go(1)`相当于`forward()`,`go(-1)`相当于`back()`。**如果参数超过实际存在的网址范围，该方法无效；如果不指定参数，默认参数为0，相当于刷新当前页面。**
