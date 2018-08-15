@@ -12,7 +12,7 @@
 
 ### `webStorm`
 #### 常用快捷键
-1. 查找和文件  
+1. 查找和文件替换  
     全局功能：
     1. `ctrl+shift+f`: 全局搜索项目中的任意代码
     2. ![webstorm](./images/findFile.png)
@@ -21,10 +21,9 @@
     4. `ctrl+shift+a`: 快速查找并使用编辑器的所有功能  
     5. `ctrl+shift+r`: 全局替换(`ctrl+shift+h`)
 
-    局部搜索：
+    局部功能：
     1. `ctrl+f`：当前文件（局部）搜索
     2. `ctrl+r`: 当前文件替换(`ctrl+h`)
-    3. `ctrl+`
 
 2. 重构代码
     1. `ctrl+j`: 代码行缩进
@@ -34,6 +33,10 @@
     1. `ctrl+y`: `git pull`拉取代码
     2. `ctrl+k`: `git commit`提交代码
     3. `ctrl+i`: `git push`推送代码
+
+4. 其它操作：
+    1. `ctrl+w`: 关闭当前的代码窗口
+    2. `ctrl+o`: 选中一个词（类似于双击）
 
 #### [常用设置](https://juejin.im/entry/599ad8f26fb9a0249174ef09)
 1. `Allow unsigned requests`:允许为签名的请求  
