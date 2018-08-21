@@ -12,37 +12,41 @@
       padding: 0;
     }
 
-    ul li {
-      list-style: none;
-    }
-
     .box {
-      background-color: pink;
-      height: 400px;
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    li {
-      display: inline-block;
-      padding: 4px 12px;
-    }
-
-    li:hover {
-      border: 1px solid red;
-    }
-
-    ul {
-      border-bottom: 1px solid blue;
+    p {
+      background-color: skyblue;
     }
   </style>
 </head>
 
 <body>
-<div>
   <div class="box">
-    <ul>
-      <li>呵呵</li>
-    </ul>
+    <p>点击</p>
   </div>
-</div>
+  <script>
+    const box = document.getElementsByClassName('box')[0];
+    const p = document.getElementsByTagName('p')[0];
+    // 第三个函数表示：监听函数是否在捕获阶段触发，默认是false(监听函数只在冒泡阶段触发)，该参数可选
+    box.addEventListener('click', (e) => {
+      // 0: 事件目前没有发生， 1: 事件目前处于捕获阶段，即处于从祖先节点向目标节点的传播过程
+      // 2：事件到达目标节点， 3: 事件处于冒泡阶段，即处于从目标节点向祖先节点的反向传播过程中
+      console.log('div:eventPhase', e.eventPhase);
+      console.log('点击div');
+      e.preventDefault();
+    }, { passive: false })
+    p.addEventListener('click', (e) => {
+      console.log('p:eventPhase', e.eventPhase);
+      console.log('点击p');
+    }, false)
+  </script>
 </body>
+
 </html>
