@@ -50,7 +50,7 @@ img.onload = function() {
 ```
 ![img-onload](../images/02-img-onload.png)
 
-### 面试
+### 2. 面试
 ```html
 <div id="box">
   <ul>
@@ -73,6 +73,8 @@ for(var  i=0;i<liList.length;i++) {
 }
 ```
 
-### `Ajax`中的异步
+### 3. `Ajax`中的异步
 
-## 获取异步结果的技巧
+#### 异步的形式
+* 不太好的方法：轮询
+* 正规方法：回调

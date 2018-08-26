@@ -12,7 +12,7 @@
 
 ### `webStorm`
 #### 常用快捷键
-1. 查找和文件替换  
+1. 查找和文件替换
     全局功能：
     1. `ctrl+shift+f`: 全局搜索项目中的任意代码
     2. ![webstorm](./images/findFile.png)
@@ -27,14 +27,14 @@
 
 2. 重构代码
     1. `ctrl+j`: 代码行缩进
-    2. `shift+f6`: 重构作用域内的某个字符
+    2. `shift+f6`: 重构作用域内的某个字符(`ctrl+6`)
 
 3. `vcs`操作
     1. `ctrl+y`: `git pull`拉取代码
     2. `ctrl+k`: `git commit`提交代码
     3. `ctrl+i`: `git push`推送代码
 
-4. 其它操作：
+4. 其它操作(自己设置的快捷键)：
     1. `ctrl+w`: 关闭当前的代码窗口
     2. `ctrl+o`: 选中一个词（类似于双击）
 
