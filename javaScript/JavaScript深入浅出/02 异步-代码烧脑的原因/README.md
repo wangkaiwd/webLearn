@@ -149,7 +149,22 @@ for(var  i=0;i<liList.length;i++) {
   ```
 * `Promise`的`then`形式：
   ```js
-  axios('xxx')
+  axios({url:'xxx'})
     .then(() => {},() => {})
     .then(() => {},() => {})
   ```
+#### `Promise`和`async/await`
+* `Promise A +`规范:  
+  ```js
+  axios({url:''})
+    .then(
+      s1 => {console.log('成功1')},
+      e1 => {console.log('失败1')}
+    )
+    .then(
+      s2 => {console.log('成功2')},
+      e2 => {console.log('失败2')}
+    )
+  ```
+  只要第一个`.then`函数中的`s1,e1`对结果处理的**没有问题**的话，就会进入下一个`.then`函数的成功回调即`s2`中
+* `async/await`

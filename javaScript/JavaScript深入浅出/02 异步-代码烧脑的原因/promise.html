@@ -7,16 +7,83 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
+  <style>
+    .row {
+      margin: 20px;
+    }
+  </style>
 </head>
 
 <body>
-  <button id="button">点击发起请求</button>
-  <button id="button2">主动错误</button>
-  <button id="button3">异常没有处理</button>
+  <div class="row">
+    <button id="button">成功回调处理内容成功</button>
+    <button id="buttone">失败回调处理内容成功</button>
+  </div>
+  <div class="row">
+    <button id="button1">成功回调处理内容失败</button>
+    <button id="button1e">失败回调处理内容失败</button>
+  </div>
+  <div class="row">
+    <button id="button2">主动错误</button>
+  </div>
+  <div class="row">
+    <button id="button3">异常没有处理</button>
+  </div>
 
   <script>
-    button.addEventListener('click', () => {
-      console.log('click')
+    button.onclick = () => {
+      console.log('click');
+      axios.post('https://easy-mock.com/mock/5b2e15c2d901cc25e7df4e0c/travel/detail')
+        .then(
+          res => {
+            console.log('成功1');
+            return '成功1执行'
+          },
+          err => {
+            console.log('失败1');
+            return '失败1执行成功'
+          }
+        )
+        .then(
+          res => {
+            // 相当于接力，会接受到前一个.then成功回调或失败回调没有错误情况下的返回值
+            console.log(res);
+            console.log('成功2');
+          },
+          err => {
+            // 前一个.then函数中的成功回调或失败回到有错误时才会执行，参数err是错误信息
+            console.error(err);
+            console.log('失败2');
+          }
+        )
+    }
+    buttone.onclick = () => {
+      axios.post('haha')
+        .then(
+          res => {
+            console.log('成功1');
+            return '成功1执行'
+          },
+          err => {
+            console.log('失败1');
+            return '失败1执行成功'
+          }
+        )
+        .then(
+          res => {
+            // 相当于接力，会接受到前一个.then成功回调或失败回调没有错误情况下的返回值
+            console.log(res);
+            console.log('成功2');
+          },
+          err => {
+            // 前一个.then函数中的成功回调或失败回到有错误时才会执行，参数err是错误信息
+            console.error(err);
+            console.log('失败2');
+          }
+        )
+    }
+    button1.addEventListener('click', () => {
+      console.log('click1')
       axios.post('https://easy-mock.com/mock/5b2e15c2d901cc25e7df4e0c/travel/detail')
         .then(
           res => {
@@ -27,6 +94,31 @@
           err => {
             console.log('失败1');
             console.log(err);
+          }
+        )
+        .then(
+          res => { // 相当于接力，会接受到前一个.then成功回调或失败回调没有错误情况下的返回值
+            console.log(res);
+            console.log('成功2');
+          },
+          err => {
+            console.error(err); // 前一个.then函数中的成功回调或失败回到有错误时才会执行，参数err是错误信息
+            console.log('失败2');
+          }
+        )
+    })
+    button1e.addEventListener('click', () => {
+      console.log('click1')
+      axios.post('haha')
+        .then(
+          res => {
+            console.log('成功1');
+            console.log(data); // 如果代码书写错误，会直接到下一个.then函数的错误回调中，并传递错误信息
+            return res.data;
+          },
+          err => {
+            console.log('失败1');
+            console.log(data);
           }
         )
         .then(
@@ -61,7 +153,7 @@
             console.log('2成功2');
           },
           err => {
-            console.error(err); // 前一个.then函数中的成功回调或失败回到有错误时才会执行，参数err是错误信息
+            console.log(err); // 前一个.then函数中的成功回调或失败回到有错误时才会执行，参数err是错误信息
             console.log('2失败2');
           }
         )
@@ -88,11 +180,11 @@
             console.log(res);
             console.log('2成功2');
           },
-          // err => {
-          //   console.error(err); // 前一个.then函数中的成功回调或失败回到有错误时才会执行，参数err是错误信息
-          //   console.log('2失败2');
-          // }
-        )
+        // err => {
+        //   console.error(err); // 前一个.then函数中的成功回调或失败回到有错误时才会执行，参数err是错误信息
+        //   console.log('2失败2');
+        // }
+      )
     }
 
   </script>
