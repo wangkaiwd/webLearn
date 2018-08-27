@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 轮询：隔一段时间就去询问，异步执行内容是否获取到结果，如果获取到结果：拿到结果值，不再询问。
+    // 如果没有获取到结果：继续隔一段时间去询问，直到拿到结果
+
+    // 代码实现
+    const buyFruit = () => {
+      setTimeout(() => {
+        window.apple = '买到苹果了'
+      }, (parseInt(Math.random() * 10) + 5) * 1000)
+    }
+
+    const getResult = () => {
+      const timerId = setInterval(() => {
+        console.log(window.apple)
+        if (window.apple) {
+          clearInterval(timerId)
+        }
+      }, 1000)
+    }
+    buyFruit()
+    getResult()
+  </script>
+</body>
+
+</html>

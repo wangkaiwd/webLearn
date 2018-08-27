@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
+</head>
+
+<body>
+  <button id="button">点击发起请求</button>
+  <button id="button2">主动错误</button>
+  <button id="button3">异常没有处理</button>
+
+  <script>
+    button.addEventListener('click', () => {
+      console.log('click')
+      axios.post('https://easy-mock.com/mock/5b2e15c2d901cc25e7df4e0c/travel/detail')
+        .then(
+          res => {
+            console.log('成功1');
+            console.log(data); // 如果代码书写错误，会直接到下一个.then函数的错误回调中，并传递错误信息
+            return res.data;
+          },
+          err => {
+            console.log('失败1');
+            console.log(err);
+          }
+        )
+        .then(
+          res => { // 相当于接力，会接受到前一个.then成功回调或失败回调没有错误情况下的返回值
+            console.log(res);
+            console.log('成功2');
+          },
+          err => {
+            console.error(err); // 前一个.then函数中的成功回调或失败回到有错误时才会执行，参数err是错误信息
+            console.log('失败2');
+          }
+        )
+    })
+    button2.onclick = () => {
+      console.log('click2')
+      axios.post('https://easy-mock.com/mock/5b2e15c2d901cc25e7df4e0c/travel/detail')
+        .then(
+          res => {
+            console.log('2成功1');
+            // console.log(data); // 如果代码书写错误，会直接到下一个.then函数的错误回调中，并传递错误信息
+            // return res.data;
+            return Promise.reject(res.data); // 主动失败，将内容会传递到下一个.then函数中的错误回调
+          },
+          err => {
+            console.log('2失败1');
+            console.log(err);
+          }
+        )
+        .then(
+          res => { // 相当于接力，会接受到前一个.then成功回调或失败回调没有错误情况下的返回值
+            console.log(res);
+            console.log('2成功2');
+          },
+          err => {
+            console.error(err); // 前一个.then函数中的成功回调或失败回到有错误时才会执行，参数err是错误信息
+            console.log('2失败2');
+          }
+        )
+    }
+    button3.onclick = () => {
+      console.log('click3')
+      axios.post('https://easy-mock.com/mock/5b2e15c2d901cc25e7df4e0c/travel/detail')
+        .then(
+          res => {
+            console.log('2成功1');
+            // 如果代码书写错误，会直接到下一个.then函数的错误回调中，并传递错误信息
+            // 如果下一个.then函数没有传处理错误的函数，则会报错：Uncaught(in promise) ReferenceError: data is not defined
+            // 未捕获的 promise 引用：data 没有定义
+            console.log(data);
+            return res.data;
+          },
+          err => {
+            console.log('2失败1');
+            console.log(err);
+          }
+        )
+        .then(
+          res => { // 相当于接力，会接受到前一个.then成功回调或失败回调没有错误情况下的返回值
+            console.log(res);
+            console.log('2成功2');
+          },
+          // err => {
+          //   console.error(err); // 前一个.then函数中的成功回调或失败回到有错误时才会执行，参数err是错误信息
+          //   console.log('2失败2');
+          // }
+        )
+    }
+
+  </script>
+</body>
+
+</html>
