@@ -75,6 +75,81 @@ for(var  i=0;i<liList.length;i++) {
 
 ### 3. `Ajax`中的异步
 
-#### 异步的形式
-* 不太好的方法：轮询
+### 4. 异步的形式
+* 不太好的方法：轮询  
+  轮询：隔一段时间就去询问，异步执行内容是否获取到结果，如果没有获取到结果，则继续隔一段时间去询问，直到获取到结果
+  ```js
+  // 代码实现
+  // 10到15s之间的某一个时间点，会为window添加一个apple属性
+  const buyFruit = () => {
+    setTimeout(() => {
+      window.apple = '买到苹果了'
+    }, (parseInt(Math.random() * 10) + 5) * 1000)
+  }
+  // 每一秒都去查看window上是否有apple属性
+  const getResult = () => {
+    const timerId = setInterval(() => {
+      if (window.apple) {
+        console.log(window.apple)
+        clearInterval(timerId)
+      } else {
+        console.log('没有买到水果！');
+      }
+    }, 1000)
+  }
+  buyFruit()
+  getResult()
+  ```
+  这样写的话对性能损耗比较大，不推荐
 * 正规方法：回调
+  ```js
+  const buyFruit = (fn) => {
+    setTimeout(() => {
+      fn.call(undefined, '买到苹果了')
+    },((Math.random() * 10) + 5) * 1000)
+  }
+  buyFruit(function() {
+    console.log(arguments[0]);
+  })
+  ```
+  为`buyFruit`传入一个函数作为参数，虽然定时器的执行时间是不固定的，但函数是在定时器执行完毕的时候自动执行。这样我们就可以获取到异步执行的结果。
+
+  现在我们加入异步执行失败的情况：
+  ```js
+  const buyFruit = (fn) => {
+    setTimeout(() => {
+      if(Math.random > 0.5) {
+        fn.call(undefined, '买到苹果了')
+      } else {
+        // 失败的时候抛出异常
+        fn.call(undefined, new Error())
+      }
+    },((Math.random() * 10) + 5) * 1000)
+  }
+
+  buyFruit(function(result) {
+    // instanceof语法： object instanceof constructor
+    // result的构造函数是不是Error
+    if(result instanceof Error) {
+      console.log('没有买到')
+    } else {
+      console.log('买到了');
+    }
+  })
+  ```
+  当异步结果出错的时候抛出异常，我们可以根据异常来进行一些操作
+### 5. 回调获取异步执行结果的形式
+* `jquery`的`success/error`形式：
+  ```js
+  $.ajax({
+    url:'xxx',
+    success: () => {},
+    error: () => {}
+  })
+  ```
+* `Promise`的`then`形式：
+  ```js
+  axios('xxx')
+    .then(() => {},() => {})
+    .then(() => {},() => {})
+  ```
