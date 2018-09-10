@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  // 完成一个 extractStr 函数，可以把一个字符串中所有的 : 到 . 的子串解析出来并且存放到一个数组当中，例如：
+  // extractStr('My name is:Jerry. My age is:12.') // => ['Jerry', '12']
+  // 注意，: 和 . 之间不包含 : 和 .。也即是说，如果 ::abc..，则返回 ['abc']。
+
+  // fixme: 会将:.之间的空字符串也会进行匹配，要根据需求进行合理处理
+  const extractStr = (str) => {
+    let result = [],
+      // +：匹配前面一个表达式1次或多次。等价于{1,}
+      // (x): 这里的括号称为捕获括号，匹配'x'并且记住匹配项
+      // \w: 匹配一个单字字符（字母、数字或者下划线）
+      // *: 匹配前一个表达式0次或多次。等价于{0,}
+      // \: 1. 在非特殊字符之前的反斜杠表示下一个字符是特殊的，不能从字面上解释
+      //    2. 将其后的特殊字符，转义为字面量
+      // .: （小数点）匹配除换行符之外的任意单个字符
+      // g: 全局搜索
+      // exec(): 指定字符串中执行一个搜索匹配。返回一个结果数组或null
+      //         匹配成功：1.返回的数组将完全匹配成功的文本作为第一项，将正则括号里匹配成功的作为数组填充到后面
+      //         匹配失败：exec()方法返回null
+
+      // 正则含义：全局匹配1个或多个冒号(:)和小数点(.)之间的用括号括起来的内容
+      pattern = /:+(\w*)\./g,
+      temp = null
+    while (temp = pattern.exec(str)) {
+      result.push(temp[1])
+    }
+    return result
+  }
+  extractStr('My name is::Jerry...:. My age .is:12.')
+</script>
+</body>
+</html>
