@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  //   有时候我们需要访问一个对象较深的层次，但是如果这个对象某个属性不存在的话就会报错，例如：
+  //   var data = { a: { b: { c: 'ScriptOJ' } } }
+  //   data.a.b.c // => scriptoj
+  //   data.a.b.c.d // => 报错，代码停止执行
+  //   console.log('ScriptOJ') // => 不会被执行
+  //   请你完成一个 safeGet 函数，可以安全的获取无限多层次的数据，一旦数据不存在不会报错，会返回 undefined，例如：
+  //   var data = { a: { b: { c: 'ScriptOJ' } } }
+  //   safeGet(data, 'a.b.c') // => scriptoj
+  //   safeGet(data, 'a.b.c.d') // => 返回 undefined
+  //   safeGet(data, 'a.b.c.d.e.f.g') // => 返回 undefined
+  //   console.log('ScriptOJ') // => 打印 ScriptOJ
+  const safeGet = (data, str) => {
+    const paramsArray = str.split('.')
+    for (let i = 0, len = paramsArray.length; i < len; i++) {
+      // if (data[paramsArray[i]] === 'undefined') {
+      //   break
+      // }
+    }
+    return undefined
+  }
+</script>
+</body>
+</html>
