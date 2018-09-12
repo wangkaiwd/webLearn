@@ -20,15 +20,35 @@
   //   safeGet(data, 'a.b.c.d') // => 返回 undefined
   //   safeGet(data, 'a.b.c.d.e.f.g') // => 返回 undefined
   //   console.log('ScriptOJ') // => 打印 ScriptOJ
+  var data = {a: {b: {c: 'ScriptOJ'}}}
   const safeGet = (data, str) => {
     const paramsArray = str.split('.')
+    let result = data
     for (let i = 0, len = paramsArray.length; i < len; i++) {
-      // if (data[paramsArray[i]] === 'undefined') {
-      //   break
-      // }
+      if (result[paramsArray[i]]) {
+        result = result[paramsArray[i]]
+      } else {
+        return undefined
+      }
     }
-    return undefined
+    return result
   }
+  // shift: 从数组中删除第一个元素，并返回该元素的值。方法会改变原数组
+  const safeGet2 = (data, path) => {
+    const paths = path.split('.')
+    let temp = data
+    for (let i = paths.length - 1; i >= 0; i--) {
+      temp = temp[paths.shift()]
+      // 这里的return会切断函数，而循环是在函数里的，所以循环也会随之切断
+      if (!temp) return undefined
+    }
+    return temp
+  }
+  safeGet(data, 'a.b.c.d.e.f.g')
+  safeGet(data, 'a.b.c')
+
+  safeGet2(data, 'a.b.c.d.e.f.g')
+  safeGet2(data, 'a.b.c')
 </script>
 </body>
 </html>
