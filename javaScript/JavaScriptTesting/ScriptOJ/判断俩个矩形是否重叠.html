@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // 用一个对象的数据来表示一个矩形的位置和大小：
+  // {
+  //   x: 100,
+  //   y: 100,
+  //   width: 150,
+  //   height: 250
+  // }
+  // 它表示一个宽为 150 高为 250 的矩形在页面上的 (100, 100) 的位置。
+  //
+  // 请你完成一个函数 isOverlap 可以接受两个矩形作为参数，判断这两个矩形在页面上是否重叠。例如：
+  //
+  // const rect1 = { x: 100, y: 100, width: 100, height: 100 }
+  // const rect2 = { x: 150, y: 150, width: 100, height: 100 }
+  // isOverlap(rect1, rect2) // => true
+  const isOverlap = (rect1, rect2) => {
+    let width, height
+    const {x: x1, y: y1, width: width1, height: height1} = rect1
+    const {x: x2, y: y2, width: width2, height: height2} = rect2
+    if (x2 > x1 && y2 > y1) {
+      width = width1
+      height = height1
+    } else if (x2 > x1 && y2 <= y1) {
+      width = width1
+      height = height2
+    } else if (x2 < x1 && y2 > y1) {
+      width = width2
+      height = height1
+    } else {
+      width = width2
+      height = height2
+    }
+    const limit = (Math.abs(x2 - x1) <= width) && (Math.abs(y2 - y1) <= height)
+    return limit
+  }
+
+  // 对象解构赋值
+  // 如果变量名和属性名不一致，必须写成下面这样
+  // let {foo: baz} = {foo: 'aaa', bar: 'bbb'}
+  // 对象的解构赋值是下面形式的简写
+  // let {foo: foo, bar: bar} = {foo: 'aaa', bar: 'bbb'}
+  // 解构规则： 对象解构赋值的内部机制，是先找到同名属性，然后再把属性值赋值给变量
+  // console.log(foo, bar)
+</script>
+</body>
+</html>
