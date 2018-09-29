@@ -80,10 +80,17 @@
     console.log(items)
     // 可以先对sections根据索引值进行从大到小排序，之后在items对应索引之前添加sections的content属性
     const injectSections1 = (items, sections) => {
-
+      sections.sort((a, b) => b.value - a.value)
+        .forEach(({ value, content }) => items.splice(value, 0, content))
+      return items
     }
-
-    // reduce实现
+    console.log(injectSections(
+      ['item1', 'item2', 'item3', 'item4', 'item5'],
+      [
+        { content: 'section1', index: 0 },
+        { content: 'section2', index: 2 }
+      ]
+    ))
 
 
   </script>
