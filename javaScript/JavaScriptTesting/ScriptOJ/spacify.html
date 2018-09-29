@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 请你给字符串都添加上原型方法 spacify，可以让一个字符串的每个字母都多出一个空格的间隔：
+    // "ScriptOJ".spacify() // => "S c r i p t O J"
+
+    // 注意：这里不能用箭头函数，因为箭头函数内部没有this和arguments
+    // 箭头函数几个使用注意点：
+    //  1. 函数体内的this对象，就是定义时所在的对象，而不是使用时所在对象。箭头函数中this对象的指向是固定的
+    //  2. 不可以用作构造函数，即：不可以使用new命令，否则会抛出一个错误 
+    //  3. 不可以使用arguments对象，该对象在函数体内不存在。可以用rest参数代替
+    // String.prototype.spacify = () => {
+    //   let newString = ''
+    //   for (let i = 0, len = this.length; i < len - 1; i++) {
+    //     newString += this[i] + ' '
+    //   }
+    //   return newString
+    // }
+    // console.log("ScriptOJ".spacify());       
+
+    // 这里使用箭头函数后函数的this会指向window
+    String.prototype.spacify = function () {
+      let newString = ''
+      for (let i = 0, len = this.length; i < len - 1; i++) {
+        newString += this[i] + ' '
+      }
+      return newString + this.charAt(this.length - 1)
+    }
+    console.log("ScriptOJ".spacify());
+
+    // join
+    String.prototype.spacify1 = function () {
+      // Array.from() : 从一个类似数组或者可迭代对象中创建一个新的数组实例
+      // return Array.from(this).join(' ')
+      return this.split('').join(' ')
+    }
+    console.log("ScriptOJ".spacify1())
+
+  </script>
+</body>
+
+</html>
