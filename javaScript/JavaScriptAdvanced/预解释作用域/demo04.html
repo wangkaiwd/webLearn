@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="box">点我</div>
+  <script>
+    // 私有作用域：只有函数执行才会产生私有作用域
+    //     一般情况下，函数执行会形成一个新的私有作用域，当私有作用域中的代码执行完成后，当前的作用域都会进行主动的释放和销毁
+
+    // 特殊情况：当前私有作用域中的部分内存被作用域以外的东西占用了，那么当前的这个作用域就不能销毁了
+    //  a. 函数执行反回了一个引用数据类型的值，并且在函数的外面被其它内容接收了，这种情况下形成的私有作用域都不会销毁
+    function fn() {
+      var num = 100;
+      return function () {
+        num++;
+      }
+    }
+    var f = fn(); // 内存空间不会被销毁
+    // b. 在一个私有作用域中给DOM元素的事件绑定方法，私有作用域不会销毁
+    var oDiv = document.getElementById('box');
+    (function () {
+      oDiv.onclick = function () {
+
+      }
+    })();
+  </script>
+</body>
+
+</html>
