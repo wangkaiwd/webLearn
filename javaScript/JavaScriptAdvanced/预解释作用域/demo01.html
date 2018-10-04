@@ -35,7 +35,15 @@
     // 1. 栈内存：用来提供一个供js代码执行的环境 -> 作用域(全局，私有)
     // 2. 堆内存：用来存储引用数据类型的值 => 对象存储的是属性和对应的属性值，
     // 函数存储的是代码字符串
-    
+    console.log(total); // undefined
+    var total = 0;
+    function fn(num1, num2) {
+      console.log(total); // undefined
+      var total = num1 + num2;
+      console.log(total); // 300
+    }
+    fn(100, 200);
+    console.log(total); // 0
   </script>
 </body>
 

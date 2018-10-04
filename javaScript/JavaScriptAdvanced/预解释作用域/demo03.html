@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var num = 12;
+    function fn() {
+      var num = 120;
+      return function () {
+        console.log(num);
+      }
+    }
+    var f = fn();
+    f();
+    // 立即调用函数表达式必须加分号，否则会报错
+    (function () {
+      var num = 1200;
+      f();
+    })();
+  </script>
+</body>
+
+</html>

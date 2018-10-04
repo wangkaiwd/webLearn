@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 1. 函数本身也是一个值，也有自己的作用域。它的作用域域变量一样，就是其声明时
+    // 所在的作用域，与其运行时所在的作用域无关
+    // var a = 1;
+    // var x = function () {
+    //   console.log(a);
+    // }
+    // function f() {
+    //   var a = 2;
+    //   x();
+    // }
+    // f(); // 1
+
+    // 2. 全局作用域：带有var的变量才会进行声明提升
+    // console.log(num) // undefined
+    // // 给全局作用域增加了一个全局变量num,它也给window增加了一个属性名num,属性值12
+    // var num = 12;
+    // console.log(num2); // Uncaught ReferenceError: num2 is not defined
+    // // 相当于给window增加了一个叫做num2的属性名，属性值是12
+    // num2 = 12
+
+    // 3. 不管条件是否成立，都会js都会进行声明提升
+    // if (!(num in window)) {
+    //   var num = 12;
+    // }
+    // console.log(num); // undefined
+
+    // 4. 函数和变量同时进行提升
+    fn() // 2
+    function fn() {
+      console.log(1);
+    }
+    var fn = 10;
+    fn() // fn is not a function
+    function fn() {
+      console.log(2);
+    }
+
+  </script>
+</body>
+
+</html>
