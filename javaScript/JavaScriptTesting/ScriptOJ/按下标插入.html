@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 现在有一个数组存放字符串数据：
+
+    // ['item1', 'item2', 'item3', 'item4', 'item5']
+    // 有另外一个数组存放一组对象：
+
+    // [
+    //   { content: 'section1', index: 0 },
+    //   { content: 'section2', index: 2 }
+    // ]
+    // 它每个对象表示的是会往原来的数组的 index 坐标插入 content 数据（index 不会重复）：
+
+    //       0      1      2      3      4
+    //     item1  itme2  item3  item4  item5
+    //     ^             ^ 
+    //     |             |
+    // section1     section2  
+
+    // 最后结果是：['section1', 'item1', 'item2', 'section2', 'item3', 'item4', 'item5']
+    // 请你完成 injectSections 函数，可以达到上述的功能：
+
+    // injectSections(
+    //   ['item1', 'item2', 'item3', 'item4', 'item5'],
+    //   [
+    //     { content: 'section1', index: 0 },
+    //     { content: 'section2', index: 2 }
+    //   ]
+    // ) // => ['section1', 'item1', 'item2', 'section2', 'item3', 'item4', 'item5']  
+    // 循环了2次，不太利于性能
+    const injectSections = (items, sections) => {
+      for (let i = items.length - 1; i >= 0; i--) {
+        sections.forEach(section => {
+          if (i === section.index) {
+            items.splice(i, 0, section.content)
+          }
+        })
+      }
+      return items
+    }
+
+    // Array.prototype.sort(): 对数组的元素进行排序，并返回数组。排序不一定是稳定的。默认排序顺序是根据字符串Unicode码点
+    // 语法：arr.sort([compareFunction]), compareFunction:用来指定按某种顺序进行排列的函数。如果省略，元素按照转换为的字符串的各个字符的Unicode位点进行排序
+    // compareFunction(a,b) > 0 , b会排列在a之前；compareFunction(a,b) < 0, a会排列在b之前；compareFunction(a,b) = 0 , 
+    // 对象可以按照某个属性来进行排序：
+    var items = [
+      { name: 'Edward', value: 21 },
+      { name: 'Sharpe', value: 37 },
+      { name: 'And', value: 45 },
+      { name: 'The', value: -12 },
+      { name: 'Magnetic' },
+      { name: 'Zeros', value: 37 }
+    ]
+    // sort by value
+    // items.sort((a, b) => a.value - b.value)
+    // console.log(items);
+    // sort by value: 字符串没有办法通过减法来进行运算，所以只能通过返回 0，-1,1来进行排序
+    items.sort((a, b) => {
+      const nameA = a.name.toLowerCase()
+      const nameB = b.name.toLowerCase()
+      if (nameA < nameB) {
+        return -1
+      }
+      if (nameA > nameB) {
+        return 1
+      }
+      // equal
+      return 0
+    })
+    console.log(items)
+    // 可以先对sections根据索引值进行从大到小排序，之后在items对应索引之前添加sections的content属性
+    const injectSections1 = (items, sections) => {
+      sections.sort((a, b) => b.value - a.value)
+        .forEach(({ value, content }) => items.splice(value, 0, content))
+      return items
+    }
+    console.log(injectSections(
+      ['item1', 'item2', 'item3', 'item4', 'item5'],
+      [
+        { content: 'section1', index: 0 },
+        { content: 'section2', index: 2 }
+      ]
+    ))
+
+
+  </script>
+</body>
+
+</html>

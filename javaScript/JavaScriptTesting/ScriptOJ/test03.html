@@ -9,24 +9,24 @@
 </head>
 
 <body>
-  <script>
-    // 完成将 toChineseNum， 可以将数字转换成中文大写的表示，处理到万级别，例如 toChineseNum(12345)，返回 一万二千三百四十五
-    function toChineseNum(num) {
-      const cnArray = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '百', '千', '万']
-      const w = Math.floor(num / 10000)
-      const q = Math.floor(num % 10000 / 1000)
-      const b = Math.floor(num % 1000 / 100)
-      const s = Math.floor(num % 100 / 10)
-      const g = Math.floor(num % 10)
-      const array = []
-      array[0] = w >= 1 ? `${cnArray[w - 1]}万` : ''
-      array[1] = q >= 1 ? `${cnArray[q - 1]}千` : ''
-      array[2] = b >= 1 ? `${cnArray[b - 1]}百` : ''
-      array[3] = s >= 1 ? `${cnArray[s - 1]}十` : ''
-      array[4] = g >= 1 ? `${cnArray[g - 1]}` : ''
-      return array.join('')
-    }
-  </script>
+<script>
+  // 完成将 toChineseNum， 可以将数字转换成中文大写的表示，处理到万级别，例如 toChineseNum(12345)，返回 一万二千三百四十五
+  function toChineseNum (num) {
+    const cnArray = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '百', '千', '万']
+    const w = Math.floor(num / 10000)
+    const q = Math.floor(num % 10000 / 1000)
+    const b = Math.floor(num % 1000 / 100)
+    const s = Math.floor(num % 100 / 10)
+    const g = Math.floor(num % 10)
+    const array = []
+    array[0] = w >= 1 ? `${cnArray[w]}万` : '零'
+    array[1] = q >= 1 ? `${cnArray[q]}千` : '零'
+    array[2] = b >= 1 ? `${cnArray[b]}百` : '零'
+    array[3] = s >= 1 ? `${cnArray[s]}十` : '零'
+    array[4] = g >= 1 ? `${cnArray[g]}` : '零'
+    return array.join('').replace(/^零+/, '').replace(/零+/, '零')
+  }
+</script>
 </body>
 
 </html>
