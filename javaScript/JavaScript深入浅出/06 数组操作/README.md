@@ -30,10 +30,8 @@ array.slice(startIndex,endIndex)
 ```js
 Array.prototype.slice = function(start=0,end=this.length) {
   const result = [];
-  for(let i=0;i<this.length;i++) {
-    if(i>=start && i<end) {
-      result.push(this[i]);
-    }
+  for(let i=start;i<end;i++) {
+    result.push(i);
   }
   return result;
 }

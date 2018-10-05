@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 用slice来将伪数组转换为数组
+    const array = Array.prototype.slice.call(arrayLike)
+    // 或者
+    // array = [].slice.call(arrayLike)
+
+    // es6提供了一个新的API，用来专门将伪数组转换为真数组
+    // array = Array.from(arrayLike)
+  </script>
+</body>
+
+</html>
