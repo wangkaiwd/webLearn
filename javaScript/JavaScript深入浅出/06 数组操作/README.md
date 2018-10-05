@@ -36,3 +36,6 @@ Array.prototype.slice = function(start=0,end=this.length) {
   return result;
 }
 ```
+
+## `forEach`
+[经典面试题](https://jsbin.com/mubepip/edit?html,js,output)

@@ -31,7 +31,45 @@
     }
     const array = [1, 2, 3, 4]
     array.myforEach((item, i, array) => { console.log(item, i, array) })
+    // forEach和for的主要区别有2个：
+    //  1. forEach没法break
+    //  2. forEach用到了函数，所以每次迭代都会有一个新的函数作用域；而for循环只有一个作用域
 
+    // 模拟实现map
+    Array.prototype.myMap = function (fn) {
+      const result = []
+      for (let i = 0; i < this.length; i++) {
+        if (i in this) {
+          // 这里不能使用push，要使用索引来对应
+          result[i] = fn.call(null, this[i], i, this)
+        }
+      }
+      return result
+    }
+    // map和forEach功能差不多，只是多了一个返回值而已,所以我们可以直接
+    // 使用map来代替forEach
+
+    // 模拟实现filter: 创建一个新数组,其包含通过所提供函数实现的测试的所有
+    // 元素
+    Array.prototype.filter = function (fn) {
+      const result = []
+      for (let i = 0; i < this.length; i++) {
+        if (fn.call(null, this[i], i, this)) {
+          result.push(this[i])
+        }
+      }
+      return result
+    }
+
+    // 模拟实现reduce:
+    Array.prototype.reduce = function (fn, init) {
+      let result = init
+      for (let i = 0; i < this.length; i++) {
+        if (i in this) {
+          result = fn.call(null, result, this[i], i, this)
+        }
+      }
+    }
   </script>
 </body>
 
