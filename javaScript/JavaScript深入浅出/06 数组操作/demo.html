@@ -11,12 +11,27 @@
 <body>
   <script>
     // 用slice来将伪数组转换为数组
-    const array = Array.prototype.slice.call(arrayLike)
+    // const array = Array.prototype.slice.call(arrayLike)
     // 或者
     // array = [].slice.call(arrayLike)
 
     // es6提供了一个新的API，用来专门将伪数组转换为真数组
     // array = Array.from(arrayLike)
+
+    // 伪数组和真数组的区别：伪数组的原型链中没有Array.prototype,而真数组的原型链中有Array.prototype，因此伪数组没有pop,join等属性
+
+    // 模拟实现forEach
+    Array.prototype.myforEach = function (fn) {
+      for (let i = 0; i < this.length; i++) {
+        // in运算符：如果指定的属性在指定的对象或其原型链中，则in运算符返回true
+        if (i in this) {
+          fn.call(null, this[i], i, this)
+        }
+      }
+    }
+    const array = [1, 2, 3, 4]
+    array.myforEach((item, i, array) => { console.log(item, i, array) })
+
   </script>
 </body>
 
