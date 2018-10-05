@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body {
+      line-height: 1;
+    }
+    #btn {
+      user-select: none;
+      background-color: pink;
+      height: 40px;
+      width: 352px;
+    }
+    p {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      text-align: center;
+    }
+    p:active {background-color: orange;}
+    span {
+      display: inline-block;
+      vertical-align: top;
+      height: 100%;
+      line-height: 40px;
+    }
+    .sponsor {
+      cursor: pointer;
+    }
+    .count {
+      margin-left: 20px;
+      font-size: 28px;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+<div class="box">
+  <h2>问题：认为耿大大很丑的请狂点~~</h2>
+  <div id="btn">
+    <p>
+      <span class="sponsor">我非常非常非常赞同以上观点</span>
+      <span class="count">0</span>
+    </p>
+  </div>
+  <script>
+    var oButton = document.getElementsByTagName('p')[0]
+    var oCount = document.getElementsByClassName('count')[0]
+    // 1. 弊端： 项目中为了防止全局变量之间的冲突，一般要禁止或减少使用全局变量
+    // var count = 0
+    // oButton.onclick = function (e) {
+    //   console.log('click')
+    //   e.preventDefault()
+    //   count++
+    //   oCount.innerHTML = count
+    // }
+
+    //   2. 自己形成一个不销毁的私有作用域来保存我们需要累加的数字
+    // (function () {
+    //   var count = 0
+    //   oButton.onclick = function () {
+    //     count++
+    //     oCount.innerHTML = count
+    //   }
+    // })()
+    // oButton.onclick = (function () {
+    //   var count = 0
+    //   return function () {
+    //     count++
+    //     oCount.innerHTML = count
+    //   }
+    // })()
+    // 弊端：有一个不销毁的私有作用域，会占用一丢丢的内存
+
+    // 3. 每次点击的时候获取最新值，最新值累加之后重新放入到dom之中
+    // oButton.onclick = function () {
+    //   // var count = oCount.innerHTML
+    //   // count++
+    //   // oCount.innerHTML = count
+    //   oCount.innerHTML++
+    // }
+    //  弊端：当重新添加的时候，浏览器都会重新渲染
+
+    // 4. 利用自定义属性进行存储
+    // oButton.count = 0
+    // oButton.onclick = function () {
+    //   oCount.innerHTML = ++this.count
+    // }
+
+  </script>
+</div>
+</body>
+</html>

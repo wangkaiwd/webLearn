@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  var num = 20
+  var obj = { // 这不是作用域，而是在内存中开辟了一块堆内存
+    num: 30,
+    // 自执行函数中的this永远是window，因为它没有调用者，undefined会转换为window
+    // 自执行函数的作用域一直不会销毁，因为它会在一开始就会执行，被外界占用内存
+    fn: (function (num) {
+      this.num *= 3
+      num += 15
+      // 形参有num，不用进行声明提升
+      var num = 45
+      return function () {
+        this.num *= 4
+        num += 20
+        console.log(num)
+      }
+    })(num) // -> 把全局变量num的值20赋值给了自执行函数的形参，如果想是obj下的30：要写为obj.num
+  }
+  var fn = obj.fn
+  fn() // 65
+  // 自执行函数的作用域一直没有被销毁
+  obj.fn() //85
+  console.log(window.num, obj.num) // 240,120
+
+</script>
+</body>
+</html>
