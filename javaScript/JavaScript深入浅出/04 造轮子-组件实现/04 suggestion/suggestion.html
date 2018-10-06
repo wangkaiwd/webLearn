@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+
+    *,
+    *::after,
+    *::before{ 
+      margin: 0;
+      padding: 0;
+      box-sizing: inherit;
+    }
+    html {
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+
+<body>
+  <input id="input" type="text">
+  <script>
+    // suggestion:建议，意见，联想，启发
+    // 在输入内容时进行搜索提示
+    // 设计调用接口
+    function Suggestion(selector, options) {
+      this.input = document.querySelector(selector)
+      this.search = options.search
+      this.init()
+      this.bindEvent()
+    }
+    // 构造函数为什么可以在原型上的方法定义之前进行定义
+    Suggestion.prototype.init = function () {
+      this.ol = document.createElement('ol')
+      this.input.after(this.ol)
+    }
+    Suggestion.prototype.bindEvent = function () {
+      this.input.addEventListener('input', function (e) {
+        while (this.ol.firstElementChild) { this.ol.removeChild(this.ol.children[0]) }
+        this.searchList(e.target.value)
+      }.bind(this))
+    }
+    Suggestion.prototype.searchList = function (keyword) {
+      const array = this.search(keyword)
+      array.map(item => {
+        const li = document.createElement('li')
+        li.innerText = item
+        this.ol.appendChild(li)
+      })
+    }
+    const suggestion = new Suggestion('#input', {
+      loading: '正在加载',
+      empty: '没有搜索到内容',
+      search: function (text, callback) {
+        const result = []
+        for (let i = 0; i < 10; i++) {
+          const temp = text + parseInt(Math.random() * 100, 10)
+          result.push(temp);
+        }
+        return result
+      }
+    });
+  </script>
+</body>
+
+</html>
