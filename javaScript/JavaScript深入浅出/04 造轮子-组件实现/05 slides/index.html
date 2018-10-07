@@ -109,10 +109,10 @@
         // 自己单独添加一个比较独特的class来写自己的样式，可以防止样式冲突，也方便自己样式的书写
         this.element.classList.add('wk-slide')
         this.index = 0
-        this.init()
+        this.initHtml()
         this.bindEvent()
       }
-      init() {
+      initHtml() {
         this.calcHeight()
         // 要通过left来控制ol的位移的话需要计算高度，如果是通过margin-left或者transform:translate平移的话就不需要
         this.createDirection()
