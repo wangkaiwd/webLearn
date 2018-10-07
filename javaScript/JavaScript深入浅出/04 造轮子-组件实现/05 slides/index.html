@@ -6,15 +6,97 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <!-- 组件样式 -->
+  <style>
+    /* 初始化样式 */
+    *,
+    *::after,
+    *::before {
+      margin: 0;
+      padding: 0;
+      box-sizing: inherit;
+    }
+
+    .wk-slide li {
+      list-style: none;
+    }
+
+    .wk-slide li img {
+      vertical-align: top;
+    }
+
+    html {
+      box-sizing: border-box;
+    }
+
+    /* 组件样式 */
+
+    .wk-slide {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .wk-slide ol {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      display: flex;
+      transition: all 1s;
+    }
+
+    .wk-slide .wk-slide-prev,
+    .wk-slide .wk-slide-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .wk-slide .wk-slide-prev {
+      left: 0;
+    }
+
+    .wk-slide .wk-slide-next {
+      right: 0;
+    }
+
+    .wk-slide .wk-slide-controls {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .wk-slide .wk-slide-controls button {
+      padding: .2em .4em;
+    }
+
+    .wk-slide .wk-slide-controls button:not(:last-child) {
+      margin-right: 8px;
+    }
+  </style>
+  <!-- 用户自己的样式 -->
+  <style>
+    body {
+      text-align: center;
+    }
+
+    .slide {
+      display: inline-block;
+      margin: 100px 0;
+    }
+  </style>
 </head>
 
 <body>
   <!-- 轮播组件的dom结构 -->
   <div class="slide">
     <ol>
-      <li><img src="" alt=""></li>
-      <li><img src="" alt=""></li>
-      <li><img src="" alt=""></li>
+      <li><img src="https://i.loli.net/2018/01/03/5a4c93e92b0e1.png" alt=""></li>
+      <li><img src="https://i.loli.net/2018/01/03/5a4c93e931f93.png" alt=""></li>
+      <li><img src="https://i.loli.net/2018/01/03/5a4c93e938b6b.png" alt=""></li>
     </ol>
   </div>
   <script>
@@ -22,15 +104,106 @@
     //      1.1 调用方法
     class Slide {
       constructor(options) {
-
+        this.options = options
+        this.element = document.querySelector(options.element)
+        // 自己单独添加一个比较独特的class来写自己的样式，可以防止样式冲突，也方便自己样式的书写
+        this.element.classList.add('wk-slide')
+        this.index = 0
+        this.init()
+        this.bindEvent()
+      }
+      init() {
+        this.calcHeight()
+        // 要通过left来控制ol的位移的话需要计算高度，如果是通过margin-left或者transform:translate平移的话就不需要
+        this.createDirection()
+        this.options.controls && this.createControls()
+      }
+      calcHeight() {
+        this.ol = this.element.querySelector('ol')
+        this.lis = this.element.querySelectorAll('li')
+        this.liHeight = this.lis[0].children[0].offsetHeight
+        this.liWidth = this.lis[0].offsetWidth
+        for (let i = 0; i < this.lis.length; i++) {
+          this.lis[i].style.height = this.liHeight + 'px'
+        }
+        this.element.style.height = this.liHeight + 'px'
+        this.element.style.width = this.liWidth + 'px'
+        this.ol.style.height = this.liHeight + 'px'
+      }
+      createDirection() {
+        this.prev = this.createElement('button', '前一张', 'wk-slide-prev')
+        this.next = this.createElement('button', '后一张', 'wk-slide-next')
+        this.element.appendChild(this.prev)
+        this.element.appendChild(this.next)
+      }
+      createControls() {
+        this.controls = this.createElement('div', '', 'wk-slide-controls')
+        // 当使用css的transform: translate属性的时候，高度不需要计算
+        for (let i = 0; i < this.lis.length; i++) {
+          const button = this.createElement('button', i + 1)
+          this.controls.appendChild(button)
+        }
+        this.buttons = this.controls.querySelectorAll('button')
+        this.element.appendChild(this.controls)
+      }
+      bindEvent() {
+        this.handlePrev()
+        this.handleNext()
+        this.options.controls && handleGo()
+      }
+      handleNext() {
+        this.next.addEventListener('click', () => {
+          this.index++
+          if (this.index > 2) {
+            this.index = 0
+          }
+          this.ol.style.transform = `translateX(-${this.liWidth * this.index}px)`
+        })
+      }
+      handlePrev() {
+        this.prev.addEventListener('click', () => {
+          this.index--
+          if (this.index < 0) {
+            this.index = 2
+          }
+          this.ol.style.transform = `translateX(-${this.liWidth * this.index}px)`
+        })
+      }
+      handleGo(index) {
+        if (typeof index !== undefined) {
+          this.ol.style.transform = `translateX(-${this.liWidth * (index - 1)}px)`
+          return
+        }
+        for (let i = 0; i < this.buttons.length; i++) {
+          this.buttons[i].addEventListener('click', () => {
+            this.ol.style.transform = `translateX(-${this.liWidth * i}px)`
+            this.index = i
+          })
+        }
+      }
+      createElement(tag, content, className) {
+        const result = document.createElement(tag)
+        result.innerHTML = content
+        if (typeof className === undefined) {
+          return result
+        }
+        if (result.classList.contains(className)) {
+          console.warning('tag has already same className')
+          return result
+        }
+        result.classList.add(className)
+        return result
       }
     }
-    const slide = new Slide({
-      selector: '.slider',
-      autoPlay: true,
-      controls: false,
-      pagination: false
-    })
+    // 注意点：图片是异步加载的，要确保图片加载完成后才能获取相对应的高度
+    window.onload = function () {
+      const slide = new Slide({
+        element: '.slide',
+        autoPlay: true,
+        controls: false,
+        pagination: false
+      })
+    }
   </script>
 </body>
 
