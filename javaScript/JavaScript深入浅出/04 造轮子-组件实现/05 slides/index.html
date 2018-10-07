@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 轮播组件的dom结构 -->
+  <div class="slide">
+    <ol>
+      <li><img src="" alt=""></li>
+      <li><img src="" alt=""></li>
+      <li><img src="" alt=""></li>
+    </ol>
+  </div>
+  <script>
+    // 1. 设计接口和dom结构
+    //      1.1 调用方法
+    class Slide {
+      constructor(options) {
+
+      }
+    }
+    const slide = new Slide({
+      selector: '.slider',
+      autoPlay: true,
+      controls: false,
+      pagination: false
+    })
+  </script>
+</body>
+
+</html>
