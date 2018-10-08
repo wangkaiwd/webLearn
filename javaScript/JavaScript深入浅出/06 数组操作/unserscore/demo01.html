@@ -9,31 +9,52 @@
 </head>
 
 <body>
-  <script>
-    /** 
-    * 返回数组的第一项或前n项
-    * @params {Array} array: 要操作的数组
-    * @params {Number} n: 返回数组的前n项，不传参数默认为第一项
-    * @return {Array | Number} 数组的第一项或者操作数组前n项组成的新数组
-    **/
-    function first(array, n) {
-      if (typeof n == undefined) return array[0]
-      if (n < 0) return []
-      return [].slice.call(array, 0, n)
-    }
+<script>
+  /**
+   * 返回数组的第一项或前n项
+   * @params {Array} array: 要操作的数组
+   * @params {Number} n: 返回数组的前n项，不传参数默认为第一项
+   * @return {Array | Number} 数组的第一项或者操作数组前n项组成的新数组
+   **/
+  function first (array, n) {
+    if (typeof n == undefined) return array[0]
+    if (n < 0) return []
+    return [].slice.call(array, 0, n)
+  }
 
-    function initial(array, n) {
-      // const len = array.length
-      // if (typeof n === undefined) {
-      //   return [].slice.call(array, 0, len - 1)
-      // }
-      // if (n < 0) {
-      //   return []
-      // }
-      // return [].slice.call(array, 0, len - n)
-      return [].slice.call(array, 0, Math.max(0, array.length - (n == null ? 1 : n)))
+  /**
+   * 返回操作数组去掉后一项或n项之后的数组
+   * @param array 要操作的数组
+   * @param n 后n项,不传默认为后一项
+   * @returns *[] 去掉后一项或n项之后的新数组
+   */
+  function initial (array, n) {
+    // const len = array.length
+    // if (typeof n === undefined) {
+    //   return [].slice.call(array, 0, len - 1)
+    // }
+    // if (n < 0) {
+    //   return []
+    // }
+    // return [].slice.call(array, 0, len - n)
+    return [].slice.call(array, 0, Math.max(0, array.length - (n == null ? 1 : n)))
+  }
+
+  /**
+   * 返回数组的后一项或后n项
+   * @param array 操作数组
+   * @param [n]   后n项，不传默认为1
+   * @returns * 后一项或者后n项组成的数组
+   */
+  function last (array, n) {
+    const len = array.length
+    if (typeof n === undefined) {
+      return array[len - 1]
     }
-  </script>
+    // len-n 如果小于0的取0，返回空数组([].slice.call(array,0,0)返回值为[]空数组)
+    return [].slice.call(array, Math.max(len - n, 0))
+  }
+</script>
 </body>
 
 </html>
