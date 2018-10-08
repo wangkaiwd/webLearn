@@ -109,6 +109,7 @@
         // 自己单独添加一个比较独特的class来写自己的样式，可以防止样式冲突，也方便自己样式的书写
         this.element.classList.add('wk-slide')
         this.index = 0
+        this.timer = null
         this.initHtml()
         this.bindEvent()
       }
@@ -117,6 +118,16 @@
         // 要通过left来控制ol的位移的话需要计算高度，如果是通过margin-left或者transform:translate平移的话就不需要
         this.createDirection()
         this.options.controls && this.createControls()
+        if (this.options.autoPlay) {
+          this.autoPlay()
+          this.element.addEventListener('mouseover', () => {
+            clearInterval(this.timer)
+            this.timer = null
+          })
+          this.element.addEventListener('mouseout', () => {
+            this.autoPlay()
+          })
+        }
       }
       calcHeight() {
         this.ol = this.element.querySelector('ol')
@@ -149,37 +160,44 @@
       bindEvent() {
         this.handlePrev()
         this.handleNext()
-        this.options.controls && handleGo()
+        this.options.controls && handleControls()
       }
       handleNext() {
         this.next.addEventListener('click', () => {
-          this.index++
-          if (this.index > 2) {
-            this.index = 0
-          }
-          this.ol.style.transform = `translateX(-${this.liWidth * this.index}px)`
+          this.go(this.index + 1)
         })
       }
       handlePrev() {
         this.prev.addEventListener('click', () => {
-          this.index--
-          if (this.index < 0) {
-            this.index = 2
-          }
-          this.ol.style.transform = `translateX(-${this.liWidth * this.index}px)`
+          this.go(this.index - 1)
         })
       }
-      handleGo(index) {
+      handleControls(index) {
         if (typeof index !== undefined) {
-          this.ol.style.transform = `translateX(-${this.liWidth * (index - 1)}px)`
+          this.go(index - 1)
           return
         }
         for (let i = 0; i < this.buttons.length; i++) {
           this.buttons[i].addEventListener('click', () => {
-            this.ol.style.transform = `translateX(-${this.liWidth * i}px)`
-            this.index = i
+            this.go(i)
           })
         }
+      }
+      autoPlay() {
+        this.timer = setInterval(() => {
+          this.index++
+          this.go(this.index)
+        }, 1000)
+      }
+      go(index) {
+        if (index > 2) {
+          index = 0
+        }
+        if (index < 0) {
+          index = 2
+        }
+        this.index = index
+        this.ol.style.transform = `translateX(-${this.index * this.liWidth}px)`
       }
       createElement(tag, content, className) {
         const result = document.createElement(tag)
@@ -206,9 +224,7 @@
     }
     // 由于可以使用css的平移属性，降低了代码难度
     // fixme:
-    // 1. 补全autoplay功能 
-    // 2. 精髓是go方法，所以只要把go方法写好直接调用即可
-    // 3. 升级为无缝轮播
+    // 1. 升级为无缝轮播
   </script>
 </body>
 
