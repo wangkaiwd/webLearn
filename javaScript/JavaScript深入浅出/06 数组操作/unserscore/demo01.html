@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /** 
+    * 返回数组的第一项或前n项
+    * @params {Array} array: 要操作的数组
+    * @params {Number} n: 返回数组的前n项，不传参数默认为第一项
+    * @return {Array | Number} 数组的第一项或者操作数组前n项组成的新数组
+    **/
+    function first(array, n) {
+      if (typeof n == undefined) return array[0]
+      if (n < 0) return []
+      return [].slice.call(array, 0, n)
+    }
+
+    function initial(array, n) {
+      // const len = array.length
+      // if (typeof n === undefined) {
+      //   return [].slice.call(array, 0, len - 1)
+      // }
+      // if (n < 0) {
+      //   return []
+      // }
+      // return [].slice.call(array, 0, len - n)
+      return [].slice.call(array, 0, Math.max(0, array.length - (n == null ? 1 : n)))
+    }
+  </script>
+</body>
+
+</html>
