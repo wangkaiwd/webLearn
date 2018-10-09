@@ -48,7 +48,7 @@
    */
   function last (array, n) {
     const len = array.length
-    if (typeof n === undefined) {
+    if (typeof n === 'undefined') {
       return array[len - 1]
     }
     // len-n 如果小于0的取0，返回空数组([].slice.call(array,0,0)返回值为[]空数组)
