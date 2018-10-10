@@ -1,45 +1,111 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
 </head>
+
 <body>
-<script>
-  // _.rest([5, 4, 3, 2, 1]);
-  // => [4, 3, 2, 1]
-  function rest (array, n) {
-    // typeof操作符返回一个字符串，表示未经计算的操作数的类型
-    // typeof n === 'undefined'
-    if (n === undefined) {
-      return [].slice.call(array, 1);
+  <script>
+    // _.rest([5, 4, 3, 2, 1]);
+    // => [4, 3, 2, 1]
+    function rest(array, n) {
+      // typeof操作符返回一个字符串，表示未经计算的操作数的类型
+      // typeof n === 'undefined'
+      if (n === undefined) {
+        return [].slice.call(array, 1);
+      }
+      return [].slice.call(array, n - 1);
     }
-    return [].slice.call(array, n - 1);
-  }
 
-  // _.flatten([1, [2], [3, [[4]]]]);
-  // => [1, 2, 3, 4];
-  //
-  // _.flatten([1, [2], [3, [[4]]]], true);
-  // => [1, 2, 3, [[4]]];
+    // _.flatten([1, [2], [3, [[4]]]]);
+    // => [1, 2, 3, 4];
+    //
+    // _.flatten([1, [2], [3, [[4]]]], true);
+    // => [1, 2, 3, [[4]]];
 
-  function flatten (array, shallow) {
-    const result = [];
-    (function () {
-      array.map(item => {
-        getType(item) === 'Array' ? flatten(item) : result.push(item);
-      });
-    })();
-    return result;
-  }
 
-  function getType (data) {
-    const string = Object.prototype.toString.call(data);
-    return string.slice(8, string.length - 1);
-  }
-</script>
+    // function flatten(array, shallow) {
+    //   const result = [];
+    //   const _flatten = (array, shallow) => {
+    //     if (shallow) {
+    //       array.map(item => {
+    //         if (getType(item) === 'Array') {
+    //           item.map(subItem => result.push(subItem))
+    //           return
+    //         }
+    //         result.push(item)
+    //       })
+    //       return
+    //     }
+    //     array.map(item => {
+    //       getType(item) === 'Array' ? _flatten(item, shallow) : result.push(item);
+    //     })
+    //   }
+    //   _flatten(array, shallow)
+    //   return result
+    // }
+
+    // function getType(data) {
+    //   const string = Object.prototype.toString.call(data);
+    //   return string.slice(8, string.length - 1);
+    // }
+    // // flatten([1, [2], [3, [[4]]]], true)
+    // console.log(flatten([1, [2], [3, [[4]]]], true).toString());
+
+    // follow is underscore flatten source code
+    var nativeIsArray = Array.isArray,
+      nativeKeys = Object.keys,
+      nativeCreate = Object.create;
+
+    var has = function (obj, path) {
+      return obj != null && hasOwnProperty.call(obj, path);
+    }
+
+    _.isArguments = function (obj) {
+      return has(obj, 'callee');
+    };
+
+    _.isArray = nativeIsArray || function (obj) {
+      return toString.call(obj) === '[object Array]';
+    };
+
+    var shallowProperty = function (key) {
+      return function (obj) {
+        return obj == null ? void 0 : obj[key];
+      };
+    };
+
+    var getLength = shallowProperty('length');
+
+    var isArrayLike = function (collection) {
+      var length = getLength(collection);
+      return typeof length == 'number' && length >= 0 && length <= MAX_ARRAY_INDEX;
+    };
+
+    var flatten1 = function (input, shallow, strict, output) {
+      output = output || [];
+      var idx = output.length;
+      for (var i = 0, length = getLength(input); i < length; i++) {
+        var value = input[i];
+        if (isArrayLike(value) && (_.isArray(value) || _.isArguments(value))) {
+          if (shallow) {
+            var j = 0, len = value.length;
+            while (j < len) output[idx++] = value[j++];
+          } else {
+            flatten(value, shallow, strict, output);
+            idx = output.length;
+          }
+        } else if (!strict) {
+          output[idx++] = value;
+        }
+      }
+      return output;
+    };
+  </script>
 </body>
+
 </html>
