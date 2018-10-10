@@ -20,8 +20,25 @@
     return [].slice.call(array, n - 1);
   }
 
-  function flatten (array) {
- 
+  // _.flatten([1, [2], [3, [[4]]]]);
+  // => [1, 2, 3, 4];
+  //
+  // _.flatten([1, [2], [3, [[4]]]], true);
+  // => [1, 2, 3, [[4]]];
+
+  function flatten (array, shallow) {
+    const result = [];
+    (function () {
+      array.map(item => {
+        getType(item) === 'Array' ? flatten(item) : result.push(item);
+      });
+    })();
+    return result;
+  }
+
+  function getType (data) {
+    const string = Object.prototype.toString.call(data);
+    return string.slice(8, string.length - 1);
   }
 </script>
 </body>
