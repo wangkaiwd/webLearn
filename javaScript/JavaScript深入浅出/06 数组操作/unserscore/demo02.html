@@ -61,15 +61,20 @@
       nativeKeys = Object.keys,
       nativeCreate = Object.create;
 
+    // hasOwnProperty
     var has = function (obj, path) {
       return obj != null && hasOwnProperty.call(obj, path);
     }
 
-    _.isArguments = function (obj) {
+    // 是否是arguments对象
+    var isArguments = function (obj) {
+      // arguments对象带有一个callee属性，返回它所对应的原函数
       return has(obj, 'callee');
     };
 
-    _.isArray = nativeIsArray || function (obj) {
+    // 通过Object.prototype.toString.call()方法来判断数据类型
+    var isArray = nativeIsArray || function (obj) {
+      // => window.toString.call(obj),由于window上有toString方法，所以可以直接调用
       return toString.call(obj) === '[object Array]';
     };
 
@@ -81,9 +86,10 @@
 
     var getLength = shallowProperty('length');
 
+    // length 属性是0并且>=0(伪数组)
     var isArrayLike = function (collection) {
       var length = getLength(collection);
-      return typeof length == 'number' && length >= 0 && length <= MAX_ARRAY_INDEX;
+      return typeof length == 'number' && length >= 0;
     };
 
     var flatten1 = function (input, shallow, strict, output) {
@@ -91,12 +97,13 @@
       var idx = output.length;
       for (var i = 0, length = getLength(input); i < length; i++) {
         var value = input[i];
-        if (isArrayLike(value) && (_.isArray(value) || _.isArguments(value))) {
+        // 1. 伪数组 2. 数组 3. arguments对象
+        if (isArrayLike(value) && (isArray(value) || isArguments(value))) {
           if (shallow) {
             var j = 0, len = value.length;
             while (j < len) output[idx++] = value[j++];
           } else {
-            flatten(value, shallow, strict, output);
+            flatten1(value, shallow, strict, output);
             idx = output.length;
           }
         } else if (!strict) {
@@ -105,6 +112,8 @@
       }
       return output;
     };
+    // flatten1([1, [2], [3, [[4]]]], true)
+    console.log(flatten1([1, [2], [3, [[4]]]]))
   </script>
 </body>
 
