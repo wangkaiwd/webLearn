@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const underScoreFlatten = (array, shallow, output = []) => {
+      array.map(item => {
+        if (toString.call(item) === '[object Array]') {
+          if (shallow) {
+            item.map(subItem => output.push(subItem))
+            return
+          }
+          return underScoreFlatten(item, shallow, output)
+        }
+        output.push(item)
+      })
+      return output
+    }
+    console.log(underScoreFlatten([1, [2], [3, [[4]]]], true))
+
+    const myFlatten = () => {
+
+    }
+  </script>
+</body>
+
+</html>
