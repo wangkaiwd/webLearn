@@ -12,6 +12,7 @@
   <script>
     const underScoreFlatten = (array, shallow, output = []) => {
       array.map(item => {
+        // 这里的数组其实有三种：1. 伪数组， 2. 真实数组 3. arguments对象
         if (toString.call(item) === '[object Array]') {
           if (shallow) {
             item.map(subItem => output.push(subItem))
@@ -25,9 +26,25 @@
     }
     console.log(underScoreFlatten([1, [2], [3, [[4]]]], true))
 
-    const myFlatten = () => {
-
+    const getType = (value) => {
+      return toString.call(value).slice(8, -1)
     }
+
+    const myFlatten = (array, shallow) => {
+      const result = []
+      const _faltten = (array, shallow) => {
+        array.map(item => {
+          if (getType(item) === 'Array') {
+            if (shallow) { return item.map(item => result.push(item)) }
+            return _faltten(item)
+          }
+          result.push(item)
+        })
+      }
+      _faltten(array, shallow)
+      return result
+    }
+    console.log(myFlatten([1, [2], [3, [[4]]]], true))
   </script>
 </body>
 
