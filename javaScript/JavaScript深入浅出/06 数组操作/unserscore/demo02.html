@@ -27,32 +27,32 @@
     // _.flatten([1, [2], [3, [[4]]]], true);
     // => [1, 2, 3, [[4]]];
 
+    // 函数内部定义一个新函数来进行递归调用，外层函数来保存调用结果并返回
+    function flatten(array, shallow) {
+      const result = [];
+      const _flatten = (array, shallow) => {
+        if (shallow) {
+          array.map(item => {
+            if (getType(item) === 'Array') {
+              item.map(subItem => result.push(subItem))
+              return
+            }
+            result.push(item)
+          })
+          return
+        }
+        array.map(item => {
+          getType(item) === 'Array' ? _flatten(item, shallow) : result.push(item);
+        })
+      }
+      _flatten(array, shallow)
+      return result
+    }
 
-    // function flatten(array, shallow) {
-    //   const result = [];
-    //   const _flatten = (array, shallow) => {
-    //     if (shallow) {
-    //       array.map(item => {
-    //         if (getType(item) === 'Array') {
-    //           item.map(subItem => result.push(subItem))
-    //           return
-    //         }
-    //         result.push(item)
-    //       })
-    //       return
-    //     }
-    //     array.map(item => {
-    //       getType(item) === 'Array' ? _flatten(item, shallow) : result.push(item);
-    //     })
-    //   }
-    //   _flatten(array, shallow)
-    //   return result
-    // }
-
-    // function getType(data) {
-    //   const string = Object.prototype.toString.call(data);
-    //   return string.slice(8, string.length - 1);
-    // }
+    function getType(data) {
+      const string = Object.prototype.toString.call(data);
+      return string.slice(8, string.length - 1);
+    }
     // // flatten([1, [2], [3, [[4]]]], true)
     // console.log(flatten([1, [2], [3, [[4]]]], true).toString());
 
@@ -74,6 +74,7 @@
 
     // 通过Object.prototype.toString.call()方法来判断数据类型
     var isArray = nativeIsArray || function (obj) {
+      // 使用toString()检测对象类型
       // => window.toString.call(obj),由于window上有toString方法，所以可以直接调用
       return toString.call(obj) === '[object Array]';
     };
@@ -84,6 +85,7 @@
       };
     };
 
+    // 获取length属性
     var getLength = shallowProperty('length');
 
     // length 属性是0并且>=0(伪数组)
@@ -113,7 +115,32 @@
       return output;
     };
     // flatten1([1, [2], [3, [[4]]]], true)
-    console.log(flatten1([1, [2], [3, [[4]]]]))
+    // console.log(flatten1([1, [2], [3, [[4]]]]))
+
+    const dataType = (data) => {
+      return toString.call(data).slice(8, -1);
+    }
+    const flatten2 = (array, shallow, output) => {
+      const result = output || [];
+      const len = array.length;
+      let index = result.length;
+      for (let i = 0; i < len; i++) {
+        if (dataType(array[i]) === 'Array') {
+          if (shallow) {
+            let j = 0;
+            while (j < array[i].length) {
+              result[index++] = array[i][j++];
+            }
+          } else {
+            flatten2(array[i], shallow, result);
+          }
+        } else {
+          result[index++] = array[i];
+        }
+      }
+      return result;
+    }
+    console.log(flatten2([1, [2], [3, [[4]]]]))
   </script>
 </body>
 
