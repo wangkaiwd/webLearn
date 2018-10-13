@@ -46,9 +46,31 @@
     }
     console.log(myFlatten([1, [2], [3, [[4]]]], true))
 
-    // es5方法实现
+    // es5方法实现 underscore.js中的flatten
     function flatten(array, shallow, output) {
+      var output = output || [];
+      var idx = output.length;
+      for (var i = 0; i < array.length; i++) {
+        var value = array[i];
+        if (toString.call(value) === '[object Array]') {
+          // 如果传入shallow的话，只对数组中的内容遍历一次
+          if (shallow) {
+            var j = 0, len = value.length;
+            while (j < len) {
+              // 这里在赋值的时候已经分别进行了idx++(结果数组的长度),j++
+              output[idx++] = value[j++];
+            }
+          } else {
+            // 这里的output是操作数组后的新的output,相当于将上一次的运行结果传入新的递归函数中，用来保存上以一次的运行结果数组
+            flatten(value, shallow, output);
+          }
+        } else {
+          output[idx++] = value;
+        }
+      }
+      return output;
     }
+    console.log(flatten([1, [2], [3, [[4]]]], true))
   </script>
 </body>
 
