@@ -73,12 +73,15 @@
     };
 
     // 通过Object.prototype.toString.call()方法来判断数据类型
+    // Array.isArray(array) || Object.prototype.toString.call(array) === '[object Array]'来判断是否为数组
     var isArray = nativeIsArray || function (obj) {
       // 使用toString()检测对象类型
       // => window.toString.call(obj),由于window上有toString方法，所以可以直接调用
       return toString.call(obj) === '[object Array]';
     };
 
+    // 要使用typeof undefined === 'undefined' 或者 void 0
+    // 因为undefined是挂载到window上的一个全局对象，可以在局部进行重写
     var shallowProperty = function (key) {
       return function (obj) {
         return obj == null ? void 0 : obj[key];
