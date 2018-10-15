@@ -10,38 +10,51 @@
 
 <body>
   <script>
-    var optimizeCb = function(func, context, argCount) {
-    if (context === void 0) return func;
-    switch (argCount == null ? 3 : argCount) {
-      case 1: return function(value) {
-        return func.call(context, value);
+    var shallowProperty = function (key) {
+      return function (obj) {
+        return obj == null ? void 0 : obj[key];
       };
-      case 3: return function(value, index, collection) {
-        return func.call(context, value, index, collection);
-      };
-      case 4: return function(accumulator, value, index, collection) {
-        return func.call(context, accumulator, value, index, collection);
-      };
-    }
-    return function() {
-      return func.apply(context, arguments);
     };
-  };
-    //   _.each = _.forEach = function(obj, iteratee, context) {
-    //   iteratee = optimizeCb(iteratee, context)
-    //   var i, length
-    //   if (isArrayLike(obj)) {
-    //     for (i = 0, length = obj.length; i < length; i++) {
-    //       iteratee(obj[i], i, obj)
-    //     }
-    //   } else {
-    //     var keys = _.keys(obj)
-    //     for (i = 0, length = keys.length; i < length; i++) {
-    //       iteratee(obj[keys[i]], keys[i], obj)
-    //     }
-    //   }
-    //   return obj
-    // }
+    var getLength = shallowProperty('length');
+    // 判断是否为伪数组
+    var isArrayLike = function (collection) {
+      var length = getLength(collection);
+      // return typeof length == 'number' && length >= 0 && length <= MAX_ARRAY_INDEX;
+      return typeof length == 'number' && length >= 0;
+    };
+    var optimizeCb = function (func, context, argCount) {
+      if (context === void 0) return func;
+      switch (argCount == null ? 3 : argCount) {
+        case 1: return function (value) {
+          return func.call(context, value);
+        };
+        case 3: return function (value, index, collection) {
+          return func.call(context, value, index, collection);
+        };
+        case 4: return function (accumulator, value, index, collection) {
+          return func.call(context, accumulator, value, index, collection);
+        };
+      }
+      return function () {
+        return func.apply(context, arguments);
+      };
+    };
+    var copyEach = function (obj, iteratee, context) {
+      iteratee = optimizeCb(iteratee, context)
+      var i, length
+      if (isArrayLike(obj)) {
+        for (i = 0, length = obj.length; i < length; i++) {
+          iteratee(obj[i], i, obj)
+        }
+      } else {
+        var keys = _.keys(obj)
+        for (i = 0, length = keys.length; i < length; i++) {
+          iteratee(obj[keys[i]], keys[i], obj)
+        }
+      }
+      return obj
+    }
+    copyEach([1, 2, 3], alert)
   </script>
 </body>
 
