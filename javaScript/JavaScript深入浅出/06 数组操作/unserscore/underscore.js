@@ -185,6 +185,11 @@
   // The cornerstone, an `each` implementation, aka `forEach`.
   // Handles raw objects in addition to array-likes. Treats all
   // sparse array-likes as if they were dense.
+  // example   support chain
+  //   _.each([1, 2, 3], alert);
+  // => alerts each number in turn...
+  // _.each({one: 1, two: 2, three: 3}, alert);
+  // => alerts each number value in turn...
   _.each = _.forEach = function(obj, iteratee, context) {
     iteratee = optimizeCb(iteratee, context)
     var i, length
