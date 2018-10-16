@@ -20,17 +20,36 @@
 
 用来判断一个变量的值是否为`undefined`有三种方法：
 
-- 严格相等
-  ```js
-  var x
-  if (x === undefined) {
-    // execulate some code
-  } else {
-    // execulate some code
-  }
-  ```
-- `typeof`操作符
-- `void`操作符
+1. 严格相等
+
+   ```js
+   var x
+   if (x === undefined) {
+   	// execulate some code
+   } else {
+   	// execulate some code
+   }
+   ```
+
+2. `typeof`操作符
+
+   > typeof 不会在一个变量没有被声明的时候抛出一个错误
+
+   ```js
+   var x
+   if (typeof x === 'undefined') {
+   	// execulate this code
+   }
+   ```
+
+3. `void`操作符
+
+   ```js
+   var x
+   if (x === void 0) {
+   	// execulate this code
+   }
+   ```
 
 ## 自己实现`underscore.js`中的一些方法
 
@@ -40,19 +59,19 @@
 
 ```js
 const flatten = (array, shallow, output = []) => {
-  array.map(item => {
-    // 这里的数组其实有三种：1. 伪数组， 2. 真实数组 3. arguments对象
-    // 判断是否是数组： 1. Array.isArray(item) === true 2. Object.prototype.toString.call(item) === '[object Array]'
-    if (toString.call(item) === '[object Array]') {
-      if (shallow) {
-        item.map(subItem => output.push(subItem))
-        return
-      }
-      return flatten(item, shallow, output)
-    }
-    output.push(item)
-  })
-  return output
+	array.map(item => {
+		// 这里的数组其实有三种：1. 伪数组， 2. 真实数组 3. arguments对象
+		// 判断是否是数组： 1. Array.isArray(item) === true 2. Object.prototype.toString.call(item) === '[object Array]'
+		if (toString.call(item) === '[object Array]') {
+			if (shallow) {
+				item.map(subItem => output.push(subItem))
+				return
+			}
+			return flatten(item, shallow, output)
+		}
+		output.push(item)
+	})
+	return output
 }
 console.log(flatten([1, [2], [3, [[4]]]], true))
 ```
