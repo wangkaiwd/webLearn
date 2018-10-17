@@ -194,6 +194,7 @@
     // 改变传入函数的this指向，如果没传的话，直接返回传入的函数本身
     iteratee = optimizeCb(iteratee, context)
     var i, length
+    // 如果传入obj是数组的话
     if (isArrayLike(obj)) {
       for (i = 0, length = obj.length; i < length; i++) {
         // 这里调用传入的函数：obj[i]:每一项，i:该项对应的索引, obj：调用回调函数的数组
@@ -1400,8 +1401,11 @@
     }
 
   // Is a given variable an object?
+  // 传入的内容是否是一个对象
   _.isObject = function (obj) {
     var type = typeof obj
+    // 如果是函数的话返回true
+    // 如果传入的内容为复杂数据类型 && !!obj 返回true
     return type === 'function' || (type === 'object' && !!obj)
   }
 
