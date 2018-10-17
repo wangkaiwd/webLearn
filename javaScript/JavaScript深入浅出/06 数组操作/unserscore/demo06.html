@@ -19,22 +19,40 @@
       return toString.call(array) === '[object Array]'
     }
     // 实现underscore.js的_.each方法
-    const myEach = (element, fn) => {
+    const myEach = (element, iterate) => {
       if (isArray(element)) {
         for (let i = 0; i < element.length; i++) {
-          fn(element[i], i, element)
+          iterate(element[i], i, element)
         }
       } else {
         for (let key in element) {
           if (element.hasOwnProperty(key)) {
-            fn(element[k], key, element)
+            iterate(element[k], key, element)
           }
         }
       }
       // 方便链式调用
       return element
     }
+    myEach([1, 2, 3, 4], function (ele, i, array) {
+      console.log(ele, i, array)
+    })
+    const nativeArray = Array.isArray
+    // 为什么这里的 || 运算符之后要加()?
+    const underScoreIsArray = nativeArray || ((ele) => {
+      return toString.call(ele)
+    })
 
+    // 自己实现Object.keys()方法
+    const myKeys = obj => {
+      const keys = []
+      for (let key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          keys.push(key)
+        }
+      }
+      return keys
+    }
   </script>
 </body>
 
