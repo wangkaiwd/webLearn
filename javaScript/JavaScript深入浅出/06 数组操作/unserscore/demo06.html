@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const isObject = obj => {
+      const type = typeof obj
+      return type === 'function' || (type === 'object' && !!obj)
+    }
+    const isArray = array => {
+      // return Array.isArray(array)
+      return toString.call(array) === '[object Array]'
+    }
+    // 实现underscore.js的_.each方法
+    const myEach = (element, fn) => {
+      if (isArray(element)) {
+        for (let i = 0; i < element.length; i++) {
+          fn(element[i], i, element)
+        }
+      } else {
+        for (let key in element) {
+          if (element.hasOwnProperty(key)) {
+            fn(element[k], key, element)
+          }
+        }
+      }
+      // 方便链式调用
+      return element
+    }
+
+  </script>
+</body>
+
+</html>
