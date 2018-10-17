@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
 </head>
+
 <body>
   <script>
-    
+    // 可以将细数数组处理成正常数组
+    const compact = (array) => {
+      return array.filter(item => !!item)
+    }
+    // compact: 把...弄紧密，把...弄结实
+    console.log(compact([0, 1, false, 2, '', 3]));
+    // 要找出来最底层没有嵌套调用或者是有很少嵌套调用的函数来先学习，这样在之后会比较轻松
   </script>
 </body>
+
 </html>
