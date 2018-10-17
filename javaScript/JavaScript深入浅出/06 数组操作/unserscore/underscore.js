@@ -1407,6 +1407,9 @@
 
 	// Is a given value an array?
 	// Delegates to ECMA5's native Array.isArray
+	// 浏览器如果支持Array.isArray方法的话使用这个方法
+	// 否则通过Object.prototype.toString.call()方法来判断数据类型
+	// 这里是通过window.toString.call()，原理一样，但是代码较短
 	_.isArray =
 		nativeIsArray ||
 		function(obj) {
