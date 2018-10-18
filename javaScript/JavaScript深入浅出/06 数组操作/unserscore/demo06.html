@@ -10,10 +10,13 @@
 
 <body>
   <script>
+    // typeof结果为function或者object，并且obj不为null或undefined
     const isObject = obj => {
       const type = typeof obj
       return type === 'function' || (type === 'object' && !!obj)
     }
+
+    // 可以根据Array.isArray(array)或者Object.prototype.toString()方法来进行判断内容是否为数组
     const isArray = array => {
       // return Array.isArray(array)
       return toString.call(array) === '[object Array]'

@@ -22,14 +22,14 @@
 
 1. 严格相等
 
-   ```js
-   var x
-   if (x === undefined) {
-   	// execulate some code
-   } else {
-   	// execulate some code
-   }
-   ```
+    ```js
+    var x
+    if (x === undefined) {
+      // execulate some code
+    } else {
+      // execulate some code
+    }
+    ```
 
 2. `typeof`操作符
 
@@ -50,6 +50,17 @@
       // execulate this code
     }
     ```
+
+一般我们常用的可能是第一种方法，然而第一种方法忽略了一个问题：**`undefined`是一个全局对象的属性**。这说明它可以在局部作用域内进行修改  
+```js
+function fn() {
+  var undefined = 'xxx';
+  console.log(typeof undefined,undefined)
+}
+fn() //  'string' 'xxx'
+```
+在`underscore.js`中通过第三种方法`void 0`来实现`undefined`,既简单又避免了`undefined`在局部被修改的情况。  
+> `void`:运算符对给定的表达式求值，然后返回`undefined`。`void`运算符通常**只用来获取`undefined`的原始值，一般使用`void(0)`(等同`void 0`)。
 
 ## 自己实现`underscore.js`中的一些方法
 

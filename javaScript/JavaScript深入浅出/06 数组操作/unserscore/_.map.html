@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var map = function (obj, iteratee, context) {
+      iteratee = cb(iteratee, context)
+      var keys = !isArrayLike(obj) && _.keys(obj),
+        length = (keys || obj).length,
+        results = Array(length)
+      for (var index = 0; index < length; index++) {
+        var currentKey = keys ? keys[index] : index
+        results[index] = iteratee(obj[currentKey], currentKey, obj)
+      }
+      return results
+    }
+
+  </script>
+</body>
+
+</html>
