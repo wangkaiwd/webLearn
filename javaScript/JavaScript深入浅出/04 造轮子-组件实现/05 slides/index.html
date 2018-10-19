@@ -140,6 +140,14 @@
         this.element.style.height = this.liHeight + 'px'
         this.element.style.width = this.liWidth + 'px'
         this.ol.style.height = this.liHeight + 'px'
+        // Node.cloneNode():克隆一个节点。它接受一个布尔值作为参数，表示是否同时克隆子节点。它的返回值是一个克隆出来的新节点
+        // Node.insertBefore():将某个节点插入父节点内部的指定位置
+        const first = this.ol.lastElementChild.cloneNode(true)
+        const last = this.ol.firstElementChild
+        this.ol.insertBefore(first, this.lis[0]);
+        this.ol.appendChild(last.cloneNode(true));
+        // 获取到最新的li列表
+        this.lis = this.element.querySelectorAll('li')
       }
       createDirection() {
         this.prev = this.createElement('button', '前一张', 'wk-slide-prev')
@@ -186,15 +194,23 @@
       autoPlay() {
         this.timer = setInterval(() => {
           this.index++
+          console.log('index', this.index)
           this.go(this.index)
         }, 1000)
       }
       go(index) {
-        if (index > 2) {
-          index = 0
+        const { liWidth, lis } = this
+        if (index > lis.length - 1) {
+          this.ol.style.transition = 'initial'
+          this.ol.style.transform = `translateX(-${liWidth}px)`
+          index = 2
+          this.ol.style.transition = 'all 1s'
         }
         if (index < 0) {
-          index = 2
+          this.ol.style.transition = 'initial'
+          this.ol.style.transform = `translateX(-${lis.length - 1}*${liWidth}px)`
+          index = lis.length - 2
+          this.ol.style.transition = 'all 1s'
         }
         this.index = index
         this.ol.style.transform = `translateX(-${this.index * this.liWidth}px)`
