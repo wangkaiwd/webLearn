@@ -42,7 +42,6 @@
       left: 0;
       height: 100%;
       display: flex;
-      transition: all 1s;
     }
 
     .wk-slide .wk-slide-prev,
@@ -108,13 +107,13 @@
         this.element = document.querySelector(options.element)
         // 自己单独添加一个比较独特的class来写自己的样式，可以防止样式冲突，也方便自己样式的书写
         this.element.classList.add('wk-slide')
-        this.index = 0
+        this.index = 1
         this.timer = null
         this.initHtml()
         this.bindEvent()
       }
       initHtml() {
-        this.calcHeight()
+        this.createTemplate()
         // 要通过left来控制ol的位移的话需要计算高度，如果是通过margin-left或者transform:translate平移的话就不需要
         this.createDirection()
         this.options.controls && this.createControls()
@@ -129,7 +128,7 @@
           })
         }
       }
-      calcHeight() {
+      createTemplate() {
         this.ol = this.element.querySelector('ol')
         this.lis = this.element.querySelectorAll('li')
         this.liHeight = this.lis[0].children[0].offsetHeight
@@ -148,6 +147,8 @@
         this.ol.appendChild(last.cloneNode(true));
         // 获取到最新的li列表
         this.lis = this.element.querySelectorAll('li')
+        // 根据索引值初始化初始位置
+        this.ol.style.transform = `translateX(-${this.index * this.liWidth}px)`
       }
       createDirection() {
         this.prev = this.createElement('button', '前一张', 'wk-slide-prev')
@@ -194,26 +195,25 @@
       autoPlay() {
         this.timer = setInterval(() => {
           this.index++
-          console.log('index', this.index)
           this.go(this.index)
         }, 1000)
       }
       go(index) {
         const { liWidth, lis } = this
         if (index > lis.length - 1) {
-          this.ol.style.transition = 'initial'
-          this.ol.style.transform = `translateX(-${liWidth}px)`
-          index = 2
-          this.ol.style.transition = 'all 1s'
-        }
-        if (index < 0) {
-          this.ol.style.transition = 'initial'
-          this.ol.style.transform = `translateX(-${lis.length - 1}*${liWidth}px)`
+          index = 1
+          this.ol.style.transition = 'none'
+          this.ol.style.transform = `translateX(-${index * liWidth}px)`
+          index++
+        } else if (index < 0) {
           index = lis.length - 2
-          this.ol.style.transition = 'all 1s'
+          this.ol.style.transition = 'none'
+          this.ol.style.transform = `translateX(-${index * liWidth}px)`
+          index--
         }
         this.index = index
         this.ol.style.transform = `translateX(-${index * liWidth}px)`
+        this.ol.style.transition = 'all 1s'
       }
       createElement(tag, content, className) {
         const result = document.createElement(tag)
@@ -238,9 +238,6 @@
         pagination: false
       })
     }
-    // 由于可以使用css的平移属性，降低了代码难度
-    // fixme:
-    // 1. 升级为无缝轮播
   </script>
 </body>
 
