@@ -200,20 +200,20 @@
       }
       go(index) {
         const { liWidth, lis } = this
+        this.ol.style.transition = 'all 1s'
         if (index > lis.length - 1) {
           index = 1
           this.ol.style.transition = 'none'
-          this.ol.style.transform = `translateX(-${index * liWidth}px)`
-          index++
+          // this.ol.style.transform = `translateX(-${index * liWidth}px)`
+          // index++
         } else if (index < 0) {
           index = lis.length - 2
           this.ol.style.transition = 'none'
-          this.ol.style.transform = `translateX(-${index * liWidth}px)`
-          index--
+          // this.ol.style.transform = `translateX(-${index * liWidth}px)`
+          // index--
         }
         this.index = index
         this.ol.style.transform = `translateX(-${index * liWidth}px)`
-        this.ol.style.transition = 'all 1s'
       }
       createElement(tag, content, className) {
         const result = document.createElement(tag)
