@@ -159,17 +159,18 @@
       createControls() {
         this.controls = this.createElement('div', '', 'wk-slide-controls')
         // 当使用css的transform: translate属性的时候，高度不需要计算
-        for (let i = 0; i < this.lis.length; i++) {
-          const button = this.createElement('button', i + 1)
+        for (let i = 1; i < this.lis.length - 1; i++) {
+          const button = this.createElement('button', i)
           this.controls.appendChild(button)
         }
-        this.buttons = this.controls.querySelectorAll('button')
         this.element.appendChild(this.controls)
+        this.buttons = this.controls.querySelectorAll('button')
+        console.log('button', this.buttons)
       }
       bindEvent() {
         this.handlePrev()
         this.handleNext()
-        this.options.controls && handleControls()
+        this.options.controls && this.handleControls()
       }
       handleNext() {
         this.next.addEventListener('click', () => {
@@ -182,13 +183,13 @@
         })
       }
       handleControls(index) {
-        if (typeof index !== undefined) {
-          this.go(index - 1)
+        if (typeof index !== 'undefined') {
+          this.go(index)
           return
         }
         for (let i = 0; i < this.buttons.length; i++) {
           this.buttons[i].addEventListener('click', () => {
-            this.go(i)
+            this.go(i + 1)
           })
         }
       }
@@ -199,26 +200,30 @@
         }, 1000)
       }
       go(index) {
-        const { liWidth, lis } = this
-        this.ol.style.transition = 'all 1s'
+        const { liWidth, lis, ol } = this
         if (index > lis.length - 1) {
           index = 1
-          this.ol.style.transition = 'none'
-          // this.ol.style.transform = `translateX(-${index * liWidth}px)`
-          // index++
+          ol.style.transition = 'none'
+          ol.style.transform = `translateX(-${index * liWidth}px)`
+          // 这行代码的作用能保证动画的准确执行，否则会直接执行从倒数第二张到第一张的图片的动画
+          ol.offsetWidth
+          index++
         } else if (index < 0) {
           index = lis.length - 2
-          this.ol.style.transition = 'none'
-          // this.ol.style.transform = `translateX(-${index * liWidth}px)`
-          // index--
+          ol.style.transition = 'none'
+          ol.style.transform = `translateX(-${index * liWidth}px)`
+          // 这行代码同上
+          ol.offsetWidth
+          index--
         }
+        ol.style.transition = 'all 1s'
         this.index = index
-        this.ol.style.transform = `translateX(-${index * liWidth}px)`
+        ol.style.transform = `translateX(-${index * liWidth}px)`
       }
       createElement(tag, content, className) {
         const result = document.createElement(tag)
         result.innerHTML = content
-        if (typeof className === undefined) {
+        if (typeof className === 'undefined') {
           return result
         }
         if (result.classList.contains(className)) {
@@ -234,7 +239,7 @@
       const slide = new Slide({
         element: '.slide',
         autoPlay: true,
-        controls: false,
+        controls: true,
         pagination: false
       })
     }
