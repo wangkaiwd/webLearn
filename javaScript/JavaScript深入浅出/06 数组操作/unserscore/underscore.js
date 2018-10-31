@@ -221,8 +221,12 @@
 
   // Return the results of applying the iteratee to each element.
   // 大体实现思路：
-  //    判断传入的内容是否是数组： 1. 数组：
+  //    判断传入的内容是否是数组： 
+  //      1. 数组：回调函数参数：数组的对应项，当前的索引值，当前数组
+  //      2. 对象：回调函数形参：对象的属性值，对象的属性名，当前对象
+  //      最后返回：return 函数的执行结果组成的数组
   _.map = _.collect = function (obj, iteratee, context) {
+    // 是否改变函数的this指向(context:上下文；背景；环境；语境)
     iteratee = cb(iteratee, context)
     // keys: false或者传入对象obj的键值组成的数组
     // length: 
@@ -236,6 +240,8 @@
       // 三元运算符的优先级要高于赋值运算符=
       // 当keys为false的时候，currentKey = index, 否则currentKey = keys[index]
       var currentKey = keys ? keys[index] : index
+      // 在这里掉用传入的回调函数iteratee: obj[currentKey]:对象属性值， currentKey：对象属性 obj：当前对象
+      // 将函数执行的返回值放入到results数组中
       results[index] = iteratee(obj[currentKey], currentKey, obj)
     }
     return results
