@@ -97,6 +97,7 @@
 		if (_.iteratee !== builtinIteratee) return _.iteratee(value, context)
 		if (value == null) return _.identity
 		// _.isFunction: 判断typeof === 'function'
+		// optimize: 改变value的this指向，如果context没有传的话，返回原函数
 		if (_.isFunction(value)) return optimizeCb(value, context, argCount)
 		if (_.isObject(value) && !_.isArray(value)) return _.matcher(value)
 		return _.property(value)
@@ -280,9 +281,18 @@
 	_.reduceRight = _.foldr = createReduce(-1)
 
 	// Return the first value which passes a truth test. Aliased as `detect`.
+	// 当callback返回值为true时，方法立即返回这个元素的值，否则返回undefined
+	// 参考： Array.prototype.find() 方法
+	// example: const result = _.find([1,2,3,4,5,6],function(num){return num%2===0});  // 2
+	// 返回满足条件的第一个元素
 	_.find = _.detect = function(obj, predicate, context) {
+		// 如果是数组的话调用_.findIndex方法
 		var keyFinder = isArrayLike(obj) ? _.findIndex : _.findKey
+		// 执行_.findIndex 或 _.findKey中返回的函数数
+		// _.findIndex: 返回函数返回值为true的数组元素的索引，不满足条件返回-1
+		// _.findKey: 返回函数返回值为true的对象元素的属性名
 		var key = keyFinder(obj, predicate, context)
+		// 返回数组对应索引元素，或者对应属性名的属性值
 		if (key !== void 0 && key !== -1) return obj[key]
 	}
 
@@ -730,6 +740,7 @@
 			var length = getLength(array)
 			var index = dir > 0 ? 0 : length - 1
 			for (; index >= 0 && index < length; index += dir) {
+				// 如果函数的操作结果是true，返回对应的索引
 				if (predicate(array[index], index, array)) return index
 			}
 			return -1
@@ -1193,11 +1204,13 @@
 
 	// Returns the first key on an object that passes a predicate test.
 	_.findKey = function(obj, predicate, context) {
+		// cb: predicate为函数的话,根据context来改变predicate的this指向
 		predicate = cb(predicate, context)
 		var keys = _.keys(obj),
 			key
 		for (var i = 0, length = keys.length; i < length; i++) {
 			key = keys[i]
+			// 如果执行结果是true的话，返回对象的属性值
 			if (predicate(obj[key], key, obj)) return key
 		}
 	}
