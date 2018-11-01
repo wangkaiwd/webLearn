@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 自己实现myFind方法，能同时支持数组和对象
+    const myFind = (element, fn) => {
+      const result = []
+      const keys = !Array.isArray(element) && Object.keys(element)
+      const len = (keys || element).length
+      for (let i = 0; i < len; i++) {
+        const key = keys ? keys[i] : i
+        if (fn(element[key], key, element)) return element[key]
+      }
+    }
+    const result1 = myFind([1, 2, 3, 4, 5, 6], function (num) { return num % 2 == 0; })
+    const result2 = myFind({ name: 1, age: 18 }, function (val) { return val % 2 == 0; })
+    console.log(result1, result2);
+  </script>
+</body>
+
+</html>
