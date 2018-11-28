@@ -9,74 +9,74 @@
 </head>
 
 <body>
-<script>
-  // 为什么要这样写并不是很清楚
-  // 明明可以通过.或者[]的形式来获取对象的属性
+  <script>
+    // 为什么要这样写并不是很清楚
+    // 明明可以通过.或者[]的形式来获取对象的属性
 
-  var nativeIsArray = Array.isArray,
-    nativeKeys = Object.keys,
-    nativeCreate = Object.create;
+    var nativeIsArray = Array.isArray,
+      nativeKeys = Object.keys,
+      nativeCreate = Object.create;
 
-  // 先传入键值，然后在传入对象，并获取对象对应键值的属性值
-  var shallowProperty = function (key) {
-    return function (obj) {
-      return obj == null ? void 0 : obj[key];
-    };
-  };
-
-  /**
-   * 通过数组来获取对象的属性值
-   * @param obj 操作对象
-   * @param path 数组
-   * @returns {*}
-   */
-  var deepGet = function (obj, path) {
-    var length = path.length;
-    for (var i = 0; i < length; i++) {
-      if (obj == null) return void 0;
-      obj = obj[path[i]];
-    }
-    return length ? obj : void 0;
-  };
-  var isArray =
-    nativeIsArray ||
-    function (obj) {
-      return toString.call(obj) === '[object Array]';
+    // 先传入键值，然后再传入对象，并获取对象对应键值的属性值
+    var shallowProperty = function (key) {
+      return function (obj) {
+        return obj == null ? void 0 : obj[key];
+      };
     };
 
-
-  // path: Array | String 数组或者字符串
-  // 如果传入数组的话，要按数组来选择对象的对应key值来返回
-  // 如果传入字符串，获取到对象对应的key值为path的对象属性值
-  // example:
-  //  1. var stooge = {name: 'moe'}
-  //    'moe' === property('name')(stooge) // true
-  //  2. var stooges = {moe:{fears:{worst:'Spiders'}},curly:{fears:{worst:'Moe'}}}
-  //     stooges.curly.fears.worst
-  //     var curlysWorstFear = property(['curly','fears','worst'])
-  //     curlysWorstFear(stooges)  // 'Moe'
-
-  // 获取对应key为path的对象的属性值
-  var property = function (path) {
-    // path不是数组的逻辑
-    if (!isArray(path)) {
-      return shallowProperty(path);
-    }
-    // path是数组的逻辑
-    return function (obj) {
-      return deepGet(obj, path);
+    /**
+     * 通过数组来获取对象的属性值
+     * @param obj 操作对象
+     * @param path 数组
+     * @returns {*}
+     */
+    var deepGet = function (obj, path) {
+      var length = path.length;
+      for (var i = 0; i < length; i++) {
+        if (obj == null) return void 0;
+        obj = obj[path[i]];
+      }
+      return length ? obj : void 0;
     };
-  };
+    var isArray =
+      nativeIsArray ||
+      function (obj) {
+        return toString.call(obj) === '[object Array]';
+      };
 
-  const myDeepGet = (obj, array) => {
-    const len = array.length;
-    for (let i = 0; i < len; i++) {
-      obj = obj[array[i]];
-    }
-    // 如果传入空数组返回undefined
-    return len ? obj : void 0;
-  };
-</script>
+
+    // path: Array | String 数组或者字符串
+    // 如果传入数组的话，要按数组来选择对象的对应key值来返回
+    // 如果传入字符串，获取到对象对应的key值为path的对象属性值
+    // example:
+    //  1. var stooge = {name: 'moe'}
+    //    'moe' === property('name')(stooge) // true
+    //  2. var stooges = {moe:{fears:{worst:'Spiders'}},curly:{fears:{worst:'Moe'}}}
+    //     stooges.curly.fears.worst
+    //     var curlysWorstFear = property(['curly','fears','worst'])
+    //     curlysWorstFear(stooges)  // 'Moe'
+
+    // 获取对应key为path的对象的属性值
+    var property = function (path) {
+      // path不是数组的逻辑
+      if (!isArray(path)) {
+        return shallowProperty(path);
+      }
+      // path是数组的逻辑
+      return function (obj) {
+        return deepGet(obj, path);
+      };
+    };
+
+    const myDeepGet = (obj, array) => {
+      const len = array.length;
+      for (let i = 0; i < len; i++) {
+        obj = obj[array[i]];
+      }
+      // 如果传入空数组返回undefined
+      return len ? obj : void 0;
+    };
+  </script>
 </body>
 
 </html>

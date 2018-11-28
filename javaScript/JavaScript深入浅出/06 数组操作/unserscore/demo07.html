@@ -32,6 +32,7 @@
     const underScoreMap = (element, fn) => {
       const result = []
       const keys = !Array.isArray(element) && Object.keys(element)
+      // 传入为数组的话是数组的长度，传入为对象的话是对象键值组成的函数
       const len = (keys || element).length
       for (let i = 0; i < len; i++) {
         const currentKey = keys ? keys[i] : i
@@ -39,6 +40,8 @@
       }
       return result
     }
+    // 原生的使用方法：
+    // Array.prototype.map(): 创建一个新数组，其结果是该数组中的每个元素都调用一个提供的函数后返回的结果
     // 传入对象
     console.log(underScoreMap({ one: 1, two: 2, three: 3 }, function (num, key) { return num * 3; }))
     // 传入数组
