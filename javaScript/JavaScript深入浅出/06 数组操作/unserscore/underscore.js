@@ -1171,7 +1171,14 @@
   // An internal function for creating assigner functions.
   var createAssigner = function (keysFunc, defaults) {
     return function (obj) {
-      // 这里
+      // 这里要使用arguments来获取传入的参数，因为在_.where()函数中调用_.matcher()再调用_.extendOwn()
+      // 的时候传入了2个参数
+
+      // 函数复习： 
+      // arguments对象：由于javascript允许函数有不定数目的参数，所以需要一种机制，可以再函数体内部读取所有参数
+      // arguments对象包含了函数运行时的所有参数，这个对象只有在函数体内部，才可以使用
+      // length属性：函数的length属性返回函数预期传入的参数个数，即函数定义之中的参数个数
+      // arguments对象的length属性，可以判断函数调用时到底带几个参数
       var length = arguments.length
       if (defaults) obj = Object(obj)
       if (length < 2 || obj == null) return obj

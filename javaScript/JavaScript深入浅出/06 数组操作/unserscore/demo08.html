@@ -10,11 +10,31 @@
 
 <body>
   <script>
-    // list的类型
-    // item的类型
+    // list的类型：数组对象
+    // item的类型：对象
+    /**
+     * 模拟实现_.where
+    */
     const where = (list, item) => {
-      
+      return list.filter(one => {
+        const keys = Object.keys(item)
+        let isValid = true
+        for (let i = 0; i < keys.length; i++) {
+          const key = keys[i]
+          if (one[key] !== item[key]) {
+            isValid = false
+            return
+          }
+        }
+        return isValid
+      })
     }
+    const listOfPlays = [
+      { title: "Cymbeline", author: "Shakespeare", year: 1611 },
+      { title: "Cymbeline1", author: "Shakespeare", year: 1611 },
+      { title: "Cymbeline2", author: "Shakespeare1", year: 1611 },
+    ]
+    console.log(where(listOfPlays, { author: "Shakespeare", year: 1611 }))
   </script>
 </body>
 
