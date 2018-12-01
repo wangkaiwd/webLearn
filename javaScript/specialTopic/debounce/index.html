@@ -64,7 +64,8 @@
       let timerId = null
       return () => { timerId = setTimeout(cb, await) }
     }
-    container.addEventListener('mousemove', debounce(getUser))
+    // 当执行内容比较复杂或者需要进行ajax请求时，就会有卡顿效果产生
+    container.addEventListener('mousemove', debounce(getUserAction))
   </script>
 </body>
 

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #container {
+      width: 100%;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      color: #fff;
+      background-color: #444;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container">
+    0
+  </div>
+  <button id="button">cancel debounce</button>
+  <script>
+    var container = document.getElementById('container')
+    var button = document.getElementById('button')
+    var count = 1;
+    function getUserAction(e) {
+      // 这里的e是从debounce函数内部传来的，而并不能说明它就是事件调用函数
+      console.log(e);
+      container.innerHTML = count++
+      return 1
+    }
+    // 解决的问题：
+    // 1. this指向
+    // 2. event事件对象
+    // 原需求：等到停止触发await后才执行函数
+    // immediate: 先立即执行，等停止触发await后再立即执行，重复之前的步骤
+    function debounce(cb, await, immediate) {
+      var timerId = null
+      var callNow = true
+      var result
+      // 这里才是真正调用的事件函数
+      function debounced(e) {
+        clearTimeout(timerId)
+        if (immediate) {
+          // 如果执行过就置为false，知道定时器执行完毕之后才设置为true
+          if (callNow) {
+            result = cb.call(this, e)
+            callNow = false
+          }
+          timerId = setTimeout(function () {
+            callNow = true
+          }, await)
+          // 优化: 巧妙的通过timerId的特性来进行优化
+          // timerId: 要取消定时器的标识符。该ID由相应的setTimeout()调用返回
+          // if (!timerId) cb.call(this, e)
+          // clearTimeout(timerId)
+          // timerId = setTimeout(function () {
+          //   timerId = null
+          // }, await)
+        } else {
+          // clearTimeout：会取消通过setTimeout建立的定时器，但是不会取消后面函数内容的执行
+          // 即：会取消setTimeout()函数的执行，但是不会影响当前函数的执行
+          // 在await时间内再次触发就会取消之前的定时器（定时器里的函数不会再执行）
+          // 通过bind改变this指向
+          // timerId = setTimeout(cb.bind(this, arguments[0]), await);
+          // timerId = setTimeout(cb.bind(this, ...arguments), await);
+          var context = this
+          timerId = setTimeout(function () {
+            result = cb.call(context, e)
+          }, await);
+          // 通过call改变this指向
+          // var context = this
+          // timerId = setTimeout(function () {
+          //   cb.call(context)
+          //   // 或者也可以使用apply，因为这里并没有传入参数
+          //   // apply:参数为数组
+          //   // cb.apply(context) 
+          // }, await);
+        }
+        console.log('result', result);
+        // 问题： 在获取返回值的时候，当immediate是false的时候，result在函数第一次执行之前由于异步，是获取不到返回值的
+        return result
+      }
+      debounced.cancel = function () {
+        clearTimeout(timerId)
+        timerId = null
+        callNow = true
+      }
+      return debounced
+    }
+    // function debounce(func, wait, immediate) {
+    //   var timeout;
+    //   return function () {
+    //     var context = this;
+    //     var args = arguments;
+
+    //     clearTimeout(timeout);
+    //     if (immediate) {
+    //       // 如果已经执行过，不再执行
+    //       var callNow = !timeout; // 一开始由于timeout为定义,所以callNow = !undefined = true
+    //       // 之后开始触发定时器，timeout为定时器的ID,知道定时器执行完成, timeout = null 此时 callNow=true
+    //       timeout = setTimeout(function () {
+    //         timeout = null;
+    //       }, wait)
+    //       if (callNow) func.apply(context, args)
+    //     }
+    //     else {
+    //       timeout = setTimeout(function () {
+    //         func.apply(context, args)
+    //       }, wait);
+    //     }
+    //   }
+    // }
+    const debounced = debounce(getUserAction, 10000, true)
+    container.addEventListener('mousemove', debounced)
+    button.addEventListener('click', debounced.cancel)
+  </script>
+</body>
+
+</html>
