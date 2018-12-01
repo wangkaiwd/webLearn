@@ -11,15 +11,20 @@
 <body>
   <script src="./underscore.js"></script>
   <script>
-    // 传入对象
-    console.log(_.map({ one: 1, two: 2, three: 3 }, function (num, key) { return num * 3; }))
-    // 传入数组
-    console.log(_.map([1, 2, 3], function (num) { return num * 3; }))
-    // 传入二维数组
-    console.log(_.map([[1, 2], [3, 4]], _.first))
-    // 传入数组
-    // var even = _.find({ name: 1, age: 18 }, function (val) { return val % 2 == 0;});
-    // console.log('find', even);
+    // // 传入对象
+    // console.log(_.map({ one: 1, two: 2, three: 3 }, function (num, key) { return num * 3; }))
+    // // 传入数组
+    // console.log(_.map([1, 2, 3], function (num) { return num * 3; }))
+    // // 传入二维数组
+    // console.log(_.map([[1, 2], [3, 4]], _.first))
+    const listOfPlays = [
+      { title: "Cymbeline", author: "Shakespeare", year: 1611 },
+      { title: "Cymbeline1", author: "Shakespeare", year: 1611 },
+      { title: "Cymbeline2", author: "Shakespeare1", year: 1611 },
+    ]
+    console.log('array', _.where(listOfPlays, { author: "Shakespeare", year: 1611 }))
+    // => [{title: "Cymbeline", author: "Shakespeare", year: 1611},
+    //     {title: "Cymbeline1", author: "Shakespeare", year: 1611}]
   </script>
 </body>
 

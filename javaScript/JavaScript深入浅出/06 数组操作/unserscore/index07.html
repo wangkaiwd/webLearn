@@ -17,7 +17,11 @@
       nativeKeys = Object.keys,
       nativeCreate = Object.create;
 
+<<<<<<< HEAD
     // 先传入键值，然后在传入对象，并获取对象对应键值的属性值
+=======
+    // 先传入键值，然后再传入对象，并获取对象对应键值的属性值
+>>>>>>> 75061771acf2853e846a2f9301926a59d76d75b5
     var shallowProperty = function (key) {
       return function (obj) {
         return obj == null ? void 0 : obj[key];
