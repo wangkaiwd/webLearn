@@ -24,48 +24,41 @@
   <div id="container">
     0
   </div>
+  <button id="button">cancel debounce</button>
   <script>
     const container = document.getElementById('container')
+    const button = document.getElementById('button')
     let count = 1;
-    const getUserAction = () => {
+    const getUserAction = (e) => {
+      console.log('e', e)
       container.innerHTML = count++
     }
-    // 一些频繁触发的事件:
-    //    1. window的resize,scroll
-    //    2. mousedown、mousemove
-    //    mousedown: 按下鼠标键时触发(这个事件会频繁触发吗？保持怀疑)
-    // 解决方法：
-    //   1. debounce 防抖
-    //   2. throttle 节流
-
-    //  防抖的原理： 要等你触发完事件n秒内不再触发事件，我才执行
-
-    // 创建了全局变量
-    // let timerId = null
-    // const debounce = () => {
-    //   timerId = setTimeout(() => {
-    //     // getUserAction()
-    //     cb()
-    //   }, 1000)
-    // }
-
-    // 问题：1. 延迟时间不能写死  
-    //      2. 定时器位置可以直接设置函数
-    // const debounce = (cb) => {
-    //   let timerId = null
-    //   return () => {
-    //     timerId = setTimeout(() => {
-    //       cb()
-    //     }, 2000)
-    //   }
-    // }
-
-    const debounce = (cb, await = 2000) => {
+    // 传入immediate，可以让函数立即执行，之后等await ms后再次立即执行
+    // 添加取消功能
+    const debounce = (cb, await = 2000, immediate) => {
       let timerId = null
-      return () => { timerId = setTimeout(cb, await) }
+      const debounced = (e) => {
+        // 传入一个错误的ID给clearTimeout()不会有任何影响；也不会跑出异常
+        clearTimeout(timerId) // 只是取消了当前timerId对应的逻辑(函数)的执行
+        if (immediate) {
+          // 第一次立即执行，之后会等timerId再置为null的时候再执行
+          if (!timerId) cb(e)
+
+          timerId = setTimeout(() => timerId = null, await)
+        } else {
+          timerId = setTimeout(() => cb(e), await)
+        }
+      }
+      debounced.cancel = () => {
+        clearTimeout(timerId)
+        timerId = null // 去报回调立即执行
+      }
+      return debounced
     }
+    const debounced = debounce(getUserAction, 10000, true)
     // 当执行内容比较复杂或者需要进行ajax请求时，就会有卡顿效果产生
-    container.addEventListener('mousemove', debounce(getUserAction))
+    container.addEventListener('mousemove', debounced)
+    button.addEventListener('click', debounced.cancel)
   </script>
 </body>
 
