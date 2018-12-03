@@ -114,6 +114,12 @@
   // on. This helper accumulates all remaining arguments past the function’s
   // argument length (or an explicit `startIndex`), into an array that becomes
   // the last argument. Similar to ES6’s "rest parameter".
+  // 剩余参数：将一个不定数量的参数表示为一个数组
+  // arguments和剩余参数的区别：
+  //    1. 剩余参数只包含那些没有对应形参的实参，而arguments对象包含了传给函数的所有实参
+  //    2. arguments对象不是一个真正的数组，而剩余参数是真正的Array实例
+  //    3. arguments对象还有一些附加的属性(如callee属性)
+  // 函数的length属性：返回函数形参的个数
   var restArguments = function (func, startIndex) {
     startIndex = startIndex == null ? func.length - 1 : +startIndex
     return function () {
@@ -971,6 +977,8 @@
   // be triggered. The function will be called after it stops being called for
   // N milliseconds. If `immediate` is passed, trigger the function on the
   // leading edge, instead of the trailing.
+  // 传入immediate的意义： 不小心点了提交按钮俩下而发俩次
+  // 
   _.debounce = function (func, wait, immediate) {
     var timeout, result
 

@@ -25,9 +25,12 @@
     0
   </div>
   <button id="button">cancel debounce</button>
+  <script src="../../JavaScript深入浅出/06 数组操作/unserscore/underscore.js">
+  </script>
   <script>
     const container = document.getElementById('container')
     const button = document.getElementById('button')
+
     let count = 1;
     const getUserAction = (e) => {
       console.log('e', e)
@@ -55,7 +58,7 @@
       }
       return debounced
     }
-    const debounced = debounce(getUserAction, 10000, true)
+    const debounced = _.debounce(getUserAction, 10000, true)
     // 当执行内容比较复杂或者需要进行ajax请求时，就会有卡顿效果产生
     container.addEventListener('mousemove', debounced)
     button.addEventListener('click', debounced.cancel)
