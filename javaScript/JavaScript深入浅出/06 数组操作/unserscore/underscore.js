@@ -121,8 +121,18 @@
   //    3. arguments对象还有一些附加的属性(如callee属性)
   // 函数的length属性：返回函数形参的个数
   var restArguments = function (func, startIndex) {
+    console.log('rest')
+    // 自动转换：对非数值类型的值使用一元运算符(即+和-),这里的+startIndex应该是进行了数据类型转换
     startIndex = startIndex == null ? func.length - 1 : +startIndex
     return function () {
+      // 巧妙使用原生js提供的一些方法，可以减少一些判断以及三元运算符的使用
+      // 常用的Math对象方法： 
+      //    Math.max(x,[,y[,...]]): 返回0个到多个数值中的最大值
+      //    Math.min(x,[,y[,...]]): 返回0个到多个数值中的最小值
+      //    Math.random: 返回0到1之间的伪随机数
+      //    Math.round: 返回四舍五入后的整数
+      //    Math.ceil(x): 返回x向上取整后的值
+      //    Math.floor(x): 返回x向下取整后的值
       var length = Math.max(arguments.length - startIndex, 0),
         rest = Array(length),
         index = 0
@@ -986,7 +996,7 @@
       timeout = null
       if (args) result = func.apply(context, args)
     }
-
+    console.log('debounce')
     var debounced = restArguments(function (args) {
       if (timeout) clearTimeout(timeout)
       if (immediate) {
