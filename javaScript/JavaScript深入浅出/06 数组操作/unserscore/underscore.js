@@ -109,7 +109,11 @@
     // function (ele) {return typeof ele === 'function'}
     // 如果传入的iteratee是函数，执行optimizeCb()函数
     if (_.isFunction(value)) return optimizeCb(value, context, argCount)
+    // value是非数组对象
+    // var result = _.map([{name:'Kevin'}, {name: 'Daisy', age: 18}], {name: 'Daisy'}); // [false, true]
     if (_.isObject(value) && !_.isArray(value)) return _.matcher(value)
+    // 处理value是基本类型值得时候，返回元素对应的属性值的情况
+    // var result = _.map([{name: 'Kevin'}, {name: 'Daisy'}], 'name'); // ['Kevin', 'daisy']
     return _.property(value)
   }
 
@@ -1311,13 +1315,21 @@
   }
 
   // Returns whether an object has a given set of `key:value` pairs.
+  // 该函数判断attr对象中的键值是否在object中有并且相等
+  // var stooge = {name: 'moe',age:32}
+  // _.isMatch(stooge,{age:32}) => true
   _.isMatch = function (object, attrs) {
+    // _.keys()方法用原生实现Object.keys()方法，并且在传入内容不是Object的时候返回空数组[]
     var keys = _.keys(attrs),
       length = keys.length
     if (object == null) return !length
     var obj = Object(object)
     for (var i = 0; i < length; i++) {
       var key = keys[i]
+      // key：attr的键值
+      // attrs[key] !== obj[key]  attr和obj相同key值对影的value不相等
+      // 或者attr的键值key在obj中不存在
+      // 返回false
       if (attrs[key] !== obj[key] || !(key in obj)) return false
     }
     return true
