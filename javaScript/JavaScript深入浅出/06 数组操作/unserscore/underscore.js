@@ -94,9 +94,16 @@
   // element in a collection, returning the desired result — either `identity`,
   // an arbitrary callback, a property matcher, or a property accessor.
   var cb = function (value, context, argCount) {
+    // _.iteratee = builtinIteratee
+    // 在正常情况下_.iteratee !== builtinIteratee 并不会执行
+    // 如果我们自己重新定义了_.iteratee,会重新执行cb,来根据自己定义的value,context来进行执行
     if (_.iteratee !== builtinIteratee) return _.iteratee(value, context)
+    // 以_.map()为例：第二个参数应该是一个函数，但是在不传的时候，会返回本身
+    // 即相当于:  Array.prototype.map(item => item) // 相当于进行过了一层浅拷贝
     if (value == null) return _.identity
     // _.isFunction: 判断typeof === 'function'
+    // function (ele) {return typeof ele === 'function'}
+    // 如果传入的iteratee是函数，执行optimizeCb()函数
     if (_.isFunction(value)) return optimizeCb(value, context, argCount)
     if (_.isObject(value) && !_.isArray(value)) return _.matcher(value)
     return _.property(value)
@@ -1570,6 +1577,7 @@
   }
 
   // Keep the identity function around for default iteratees.
+  // iteratees的默认函数，返回元素自己，相当于进行了一层浅拷贝
   _.identity = function (value) {
     return value
   }
