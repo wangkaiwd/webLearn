@@ -67,13 +67,17 @@
   // of the passed-in callback, to be repeatedly applied in other Underscore
   // functions.
   var optimizeCb = function (func, context, argCount) {
+    // 通过context来改变this指向，如果没有传的话，返回原函数
     if (context === void 0) return func
+    // 这里进行判断的原因是为了避免使用argCount来提高性能，如果不是一个库的话没有必要这样写
     switch (argCount == null ? 3 : argCount) {
       case 1:
         return function (value) {
           return func.call(context, value)
         }
+      // 2个参数的情况没有做，因为我们没有用到它
       // The 2-argument case is omitted because we’re not using it.
+      // 一般_.map(),_.filter(),_.find()等函数会用到case 3的情况
       case 3:
         return function (value, index, collection) {
           return func.call(context, value, index, collection)
