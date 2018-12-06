@@ -70,6 +70,7 @@
     // 通过context来改变this指向，如果没有传的话，返回原函数
     if (context === void 0) return func
     // 这里进行判断的原因是为了避免使用argCount来提高性能，如果不是一个库的话没有必要这样写
+    // 加判断的原因：call比apply快很多,.apply在运行前要对作为参数的数组进行一系列检验和深拷贝，.call则没有这些步骤
     switch (argCount == null ? 3 : argCount) {
       case 1:
         return function (value) {
