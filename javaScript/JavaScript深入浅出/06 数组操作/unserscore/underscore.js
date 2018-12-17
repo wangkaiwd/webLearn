@@ -98,6 +98,10 @@
   // An internal function to generate callbacks that can be applied to each
   // element in a collection, returning the desired result — either `identity`,
   // an arbitrary callback, a property matcher, or a property accessor.
+  // 这个函数使_.map()可以：
+  //  1. _.map([1,2,3]) // 什么也不传：[1,2,3]
+  //  2. _.map([{name:'Kevin'},{name: 'Daisy', age: 18}],{name:'Daisy'}) // [false,true]
+  //  3. _.map([{name: 'Kevin'}, {name: 'Daisy'}], 'name'); // 传入字符串 ['Kevin','daisy']
   var cb = function (value, context, argCount) {
     // _.iteratee = builtinIteratee
     // 在正常情况下_.iteratee !== builtinIteratee 并不会执行
@@ -259,6 +263,7 @@
   //      最后返回：return 函数的执行结果组成的数组
   _.map = _.collect = function (obj, iteratee, context) {
     // 是否改变函数的this指向(context:上下文；背景；环境；语境)
+    // iteratee是要执行的函数
     iteratee = cb(iteratee, context)
     // keys: false或者传入对象obj的键值组成的数组
     // length:
