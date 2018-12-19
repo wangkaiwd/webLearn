@@ -37,7 +37,10 @@
 
 <body>
   <div class="wrapper">
-    <!-- 关键点：container容器不能设置宽高，否则会整体移动，而不是随着负margin而进行容器的宽高变化 -->
+    <!-- 关键点：
+            1. container容器不能设置宽高，否则会整体移动，而不是随着负margin而进行容器的宽高变化 
+            2. 通过为父元素（宽高不能写死）负margin-top，margin-right，位子元素设置正margin-top和margin-right来完美实现列表
+    -->
     <div class='container'>
       <div class='item'>两个才能成一行呀</div>
       <div class='item'>两个才能成一行呀</div>
