@@ -83,12 +83,23 @@
         return function (value, index, collection) {
           return func.call(context, value, index, collection)
         }
-      case 4:
+      case 4: // reduce会用到情况4
         return function (accumulator, value, index, collection) {
           return func.call(context, accumulator, value, index, collection)
         }
     }
-    return function () {
+    return function () { // 不满足上述参数，以传入的参数为主，通过apply方法进行this指向改变，参数为arguments
+      // arguments对象: 包含了函数运行时(函数执行时的参数，和函数定义时的参数无关)的所有参数 
+      // arguments对象： 是一个对应于传递给函数的参数的类数组对象
+      // 将arguments对象转换为真正的数组：
+      // slice(): slice方法返回一个新的数组对象，这一对象是一个由begin和end(不包括end)决定的原数组的浅拷贝。原始数组不会被改变
+      // arr.slice(): [0,end] 不传参数默认从开始截取到结尾
+      // const args = [].slice.call(arguments)
+
+      // es6
+      // const args = [...arguments]
+      // const args = Array.from(arguments)
+
       return func.apply(context, arguments)
     }
   }
@@ -102,6 +113,7 @@
   //  1. _.map([1,2,3]) // 什么也不传：[1,2,3]
   //  2. _.map([{name:'Kevin'},{name: 'Daisy', age: 18}],{name:'Daisy'}) // [false,true]
   //  3. _.map([{name: 'Kevin'}, {name: 'Daisy'}], 'name'); // 传入字符串 ['Kevin','daisy']
+  // 以_.map方法为例： value:传入的回调函数， context: this指向， argCount: 参数的个数
   var cb = function (value, context, argCount) {
     // _.iteratee = builtinIteratee
     // 在正常情况下_.iteratee !== builtinIteratee 并不会执行
@@ -126,6 +138,8 @@
   // `_.iteratee` if they want additional predicate/iteratee shorthand styles.
   // This abstraction hides the internal-only argCount argument.
   _.iteratee = builtinIteratee = function (value, context) {
+    // Infinity: 全局属性，是一个数值，表示无穷大
+    // argCount传入Infinity,就会执行 optimizeCb中的func.apply(context,arguments)
     return cb(value, context, Infinity)
   }
 
@@ -1321,7 +1335,8 @@
   }
 
   // Returns whether an object has a given set of `key:value` pairs.
-  // 该函数判断attr对象中的键值是否在object中有并且相等
+  // 谷歌翻译：返回对象是否具有给定的键值对集合
+  // 该函数判断attrs对象中的键值是否在object中有并且相等
   // var stooge = {name: 'moe',age:32}
   // _.isMatch(stooge,{age:32}) => true
   _.isMatch = function (object, attrs) {
@@ -1333,7 +1348,7 @@
     for (var i = 0; i < length; i++) {
       var key = keys[i]
       // key：attr的键值
-      // attrs[key] !== obj[key]  attr和obj相同key值对影的value不相等
+      // attrs[key] !== obj[key]  attr和obj相同key值对应的value不相等
       // 或者attr的键值key在obj中不存在
       // 返回false
       if (attrs[key] !== obj[key] || !(key in obj)) return false
