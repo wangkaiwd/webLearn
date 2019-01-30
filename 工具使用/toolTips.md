@@ -37,7 +37,8 @@
 4. 其它操作(自己设置的快捷键)：
     1. `ctrl+w`: 关闭当前的代码窗口
     2. `ctrl+o`: 选中一个词（类似于双击）
-
+    3. `alt+j`: 添加下次出现的选择(add selection for next occurrence)
+    4. `ctrl+l`: 格式化代码
 #### [常用设置](https://juejin.im/entry/599ad8f26fb9a0249174ef09)
 1. `Allow unsigned requests`:允许为签名的请求  
   ![allowUnsignedRequest](./images/allowUnsignedRequest.png)

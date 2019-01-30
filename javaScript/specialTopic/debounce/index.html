@@ -21,88 +21,88 @@
 </head>
 
 <body>
-  <div id="container">
-    0
-  </div>
-  <button id="button">cancel debounce</button>
-  <script src="../../JavaScript深入浅出/06 数组操作/unserscore/underscore.js">
-  </script>
-  <script>
-    const container = document.getElementById('container')
-    const button = document.getElementById('button')
+<div id="container">
+  0
+</div>
+<button id="button">cancel debounce</button>
+<script src="../../JavaScript深入浅出/06 数组操作/unserscore/underscore.js">
+</script>
+<script>
+  const container = document.getElementById('container');
+  const button = document.getElementById('button');
 
-    let count = 1;
-    const getUserAction = (e) => {
-      console.log('e', e)
-      container.innerHTML = count++
-    }
-    // 传入immediate，可以让函数立即执行，之后等await ms后再次立即执行
-    // 添加取消功能
-    const debounce = (cb, await = 2000, immediate) => {
-      let timerId = null, result
-      const debounced = (e) => {
-        // 传入一个错误的ID给clearTimeout()不会有任何影响；也不会跑出异常
-        clearTimeout(timerId) // 只是取消了当前timerId对应的逻辑(函数)的执行
-        if (immediate) {
-          // 第一次立即执行，之后会等timerId再置为null的时候再执行
-          if (!timerId) result = cb(e)
+  let count = 1;
+  const getUserAction = (e) => {
+    console.log('e', e);
+    container.innerHTML = count++;
+  };
+  // 传入immediate，可以让函数立即执行，之后等await ms后再次立即执行
+  // 添加取消功能
+  const debounce = (cb, await = 2000, immediate) => {
+    let timerId = null, result;
+    const debounced = (e) => {
+      // 传入一个错误的ID给clearTimeout()不会有任何影响；也不会跑出异常
+      clearTimeout(timerId); // 只是取消了当前timerId对应的逻辑(函数)的执行
+      if (immediate) {
+        // 第一次立即执行，之后会等timerId再置为null的时候再执行
+        if (!timerId) result = cb(e);
 
-          timerId = setTimeout(() => timerId = null, await)
-        } else {
-          timerId = setTimeout(() => cb(e), await)
-        }
+        timerId = setTimeout(() => timerId = null, await);
+      } else {
+        timerId = setTimeout(() => cb(e), await);
       }
-      debounced.cancel = () => {
-        clearTimeout(timerId)
-        timerId = null // 去报回调立即执行
+    };
+    debounced.cancel = () => {
+      clearTimeout(timerId);
+      timerId = null; // 去报回调立即执行
+    };
+    return debounced;
+  };
+  const debounced = _.debounce(getUserAction, 10000, true);
+  // 当执行内容比较复杂或者需要进行ajax请求时，就会有卡顿效果产生
+  container.addEventListener('mousemove', debounced);
+  button.addEventListener('click', debounced.cancel);
+
+  var restArguments = function (func, startIndex) {
+    console.log('rest');
+    // 自动转换：对非数值类型的值使用一元运算符(即+和-),这里的+startIndex应该是进行了数据类型转换
+    startIndex = startIndex == null ? func.length - 1 : +startIndex;
+    return function () {
+      // 巧妙使用原生js提供的一些方法，可以减少一些判断以及三元运算符的使用
+      // 常用的Math对象方法：
+      //    Math.max(x,[,y[,...]]): 返回0个到多个数值中的最大值
+      //    Math.min(x,[,y[,...]]): 返回0个到多个数值中的最小值
+      //    Math.random: 返回0到1之间的伪随机数
+      //    Math.round: 返回四舍五入后的整数
+      //    Math.ceil(x): 返回x向上取整后的值
+      //    Math.floor(x): 返回x向下取整后的值
+
+      // 当通过_.debounce来进行调用的时候，由于是事件对象，arguments[0]则为事件对象
+      var length = Math.max(arguments.length - startIndex, 0),
+        rest = Array(length),
+        index = 0;
+
+      //  这里的for循环是将循环初始条件放到了全局
+      for (; index < length; index++) {
+        rest[index] = arguments[index + startIndex];
       }
-      return debounced
-    }
-    const debounced = _.debounce(getUserAction, 10000, true)
-    // 当执行内容比较复杂或者需要进行ajax请求时，就会有卡顿效果产生
-    container.addEventListener('mousemove', debounced)
-    button.addEventListener('click', debounced.cancel)
-
-    var restArguments = function (func, startIndex) {
-      console.log('rest')
-      // 自动转换：对非数值类型的值使用一元运算符(即+和-),这里的+startIndex应该是进行了数据类型转换
-      startIndex = startIndex == null ? func.length - 1 : +startIndex
-      return function () {
-        // 巧妙使用原生js提供的一些方法，可以减少一些判断以及三元运算符的使用
-        // 常用的Math对象方法： 
-        //    Math.max(x,[,y[,...]]): 返回0个到多个数值中的最大值
-        //    Math.min(x,[,y[,...]]): 返回0个到多个数值中的最小值
-        //    Math.random: 返回0到1之间的伪随机数
-        //    Math.round: 返回四舍五入后的整数
-        //    Math.ceil(x): 返回x向上取整后的值
-        //    Math.floor(x): 返回x向下取整后的值
-
-        // 当通过_.debounce来进行调用的时候，由于是事件对象，arguments[0]则为事件对象
-        var length = Math.max(arguments.length - startIndex, 0),
-          rest = Array(length),
-          index = 0
-
-        //  这里的for循环是将循环初始条件放到了全局
-        for (; index < length; index++) {
-          rest[index] = arguments[index + startIndex]
-        }
-        switch (startIndex) {
-          case 0:
-            return func.call(this, rest)
-          case 1:
-            return func.call(this, arguments[0], rest)
-          case 2:
-            return func.call(this, arguments[0], arguments[1], rest)
-        }
-        var args = Array(startIndex + 1)
-        for (index = 0; index < startIndex; index++) {
-          args[index] = arguments[index]
-        }
-        args[startIndex] = rest
-        return func.apply(this, args)
+      switch (startIndex) {
+        case 0:
+          return func.call(this, rest);
+        case 1:
+          return func.call(this, arguments[0], rest);
+        case 2:
+          return func.call(this, arguments[0], arguments[1], rest);
       }
-    }
-  </script>
+      var args = Array(startIndex + 1);
+      for (index = 0; index < startIndex; index++) {
+        args[index] = arguments[index];
+      }
+      args[startIndex] = rest;
+      return func.apply(this, args);
+    };
+  };
+</script>
 </body>
 
 </html>
