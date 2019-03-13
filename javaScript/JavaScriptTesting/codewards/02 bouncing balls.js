@@ -43,6 +43,7 @@ const bouncingBall2 = (h, bounce, window) => {
 console.log(bouncingBall2(3, 0.66, 1.5))
 
 // 通过递归调用定义的函数: 类似于斐波那契数列
+// 这里的-1设计的很巧妙，刚好可以用来做最初使的递归值
 const bouncingBall3 = (h, bounce, window) => {
   // 最终会由于 h < window 而return -1
   // 之后会
