@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function find(array, key, val) {
+      var result;
+      array.some(o => {
+        var temp;
+        if (o[key] === val) {
+          return (result = o);
+        }
+        temp = find(o.tree || [], key, val);
+        if (temp) {
+          // console.log('temp', temp, o)
+          o.tree = temp;
+          return (result = o);
+        }
+      });
+      return result;
+    }
+    var datas = {
+      tree: [
+        {
+          name: "name1",
+          tree: [
+            { name: "name2" },
+            { name: "name3" },
+            { name: "name4", tree: [{ name: "name5" }, { name: "name6" }] },
+            { name: "name7" }
+          ]
+        },
+        { name: "name8", tree: [{ name: "name9" }] }
+      ]
+    };
+    console.log(find(JSON.parse(JSON.stringify(datas.tree)), 'name', "name5"));
+    console.log(datas.tree);
+  </script>
+</body>
+
+</html>
