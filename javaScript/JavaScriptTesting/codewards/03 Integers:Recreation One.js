@@ -21,7 +21,7 @@ const listSquared = (m, n) => {
         if (sqrt === parseInt(sqrt, 10)) {
           const index = result.findIndex(item => item[0] === j);
           if (index === -1) {
-            result.push([i, sum]);
+            result.push([j, sum]);
           }
         }
       }
