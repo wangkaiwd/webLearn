@@ -11,20 +11,20 @@
 
 const listSquared = (m, n) => {
   // 首先找出所有可以被m整除的数
-  const x = [];
   const result = [];
-  let sum = 0;
-  for (let i = 1; i < m.length; i++) {
-    if (m % i === 0) {
-      x.push(i);
-    }
-  }
-  const y = x.filter(item => item <= n);
-  for (let i = 0; i < y.length; i++) {
-    sum += Math.pow(y[i], 2);
-    const sqrt = Math.sqrt(sum);
-    if (sqrt === parseInt(sqrt, 10)) {
-      result.push([y[i], sum]);
+  for (let i = m; i < n; i++) {
+    let sum = 0;
+    for (let j = m; j <= i; j++) {
+      if (i % j === 0) {
+        sum += Math.pow(j, 2);
+        const sqrt = Math.sqrt(sum);
+        if (sqrt === parseInt(sqrt, 10)) {
+          const index = result.findIndex(item => item[0] === j);
+          if (index === -1) {
+            result.push([i, sum]);
+          }
+        }
+      }
     }
   }
   return result;
