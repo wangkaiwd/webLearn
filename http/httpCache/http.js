@@ -10,10 +10,12 @@ const absolutePath = dir => path.resolve(__dirname, `./public${dir}`);
 const app = http.createServer((req, res) => {
   const { url } = req;
   fs.readFile(absolutePath(url), (err, data) => {
-    res.writeHead(200, { 'Content-Type': 'text/html' });
     if (err) {
+      res.writeHead(404, 'Not Found');
       res.end('Not Found');
     } else {
+      // 要根据不同的MIME类型进行区分加载
+      res.writeHead(200, 'OK');
       res.end(data);
     }
   });

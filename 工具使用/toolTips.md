@@ -75,3 +75,18 @@
 6. 当前文件内替换: `ctrl+h`
 7. 全局替换: `ctrl+shift+h`
 8. 全局搜索：`ctrl+shift+f`
+
+### 常用命令行工具
+> 以下操作适用于`mac`笔记本
+
+* `oh my zsh`: 终端功能提升工具
+* `z`：`-jump around`(可以直接跳转到你去过的目录)
+  ```text
+   curl -l https://raw.githubusercontent.com/rupa/z/master/z.sh > z.sh
+   vi ~/.zshrc
+   # 通过vi模式在.zshrc中添加如下一行代码，然后保存退出
+   source /your/path/to/z.sh
+   # 保存后执行如下命令
+   source ~/.zshrc
+   # 通过z命令查看是否安装成功
+  ```
