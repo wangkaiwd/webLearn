@@ -90,3 +90,4 @@
    source ~/.zshrc
    # 通过z命令查看是否安装成功
   ```
+* [`tldr`](https://github.com/tldr-pages/tldr): 可以快速查看一个工具的常用命令
